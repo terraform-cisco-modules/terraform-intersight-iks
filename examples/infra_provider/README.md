@@ -1,6 +1,6 @@
-# Complete IKS required infrastructure deployment
+# Infrastructure Provider for IKS
 
-This example creates addons and addon policies based on the information provided in the module.
+This example creates an Infrastructure Provider policy based on the information provided in the module.
 
 ## Usage
 

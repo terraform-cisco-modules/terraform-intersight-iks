@@ -3,7 +3,7 @@
 ## Usage
 
 ```hcl
-module "iks_addon" {
+module "iks_addon_policy" {
 
   source = "../../modules/addon_policy"
 

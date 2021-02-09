@@ -4,22 +4,18 @@ data "intersight_organization_organization" "organization" {
 }
 #Importing the Kubernetes Version available
 data "intersight_kubernetes_version" "version" {
-  for_each           = { for version in var.k8s_version_list : version.version => version }
-  kubernetes_version = each.value.version
+
+  kubernetes_version = join("", ["v", var.k8s_version])
 }
 resource "intersight_kubernetes_version_policy" "iks_version" {
 
-  for_each = { for version in var.k8s_version_list : version.version => version }
-  name     = each.value.name
-  dynamic "nr_version" {
-    for_each = data.intersight_kubernetes_version.version
-    content {
-      object_type = "kubernetes.Version"
-      moid        = data.intersight_kubernetes_version.version[each.value.version].moid
-    }
+  name = var.k8s_version_name
+  nr_version {
+
+    object_type = "kubernetes.Version"
+    moid        = data.intersight_kubernetes_version.version.moid
+
   }
-
-
 
   dynamic "tags" {
     for_each = var.tags

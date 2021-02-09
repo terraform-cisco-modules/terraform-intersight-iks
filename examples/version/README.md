@@ -1,6 +1,6 @@
-# K8s Network Policies
+# Kubernetes Version Policy
 
-This example create Kubernetes Network and System policies based on the information provided in the module.
+This example creates an IKS Version Policy based on the information provided in the module.
 
 ## Usage
 
@@ -13,6 +13,8 @@ $ terraform apply
 ```
 
 Note that this example may create resources which are consumed for IKS clusters.  Please make sure to undeploy and delete the cluster before destroying these resources with `terraform destroy`.
+
+Current supported Version is 1.18.12
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 

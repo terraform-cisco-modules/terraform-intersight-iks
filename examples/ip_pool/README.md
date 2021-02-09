@@ -1,6 +1,6 @@
-# K8s Network Policies
+# IP Pool
 
-This example create Kubernetes Network and System policies based on the information provided in the module.
+This example creates an IP Pool based on the information provided in the module.
 
 ## Usage
 
