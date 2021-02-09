@@ -4,16 +4,14 @@ provider "intersight" {
   endpoint  = var.endpoint
 }
 
-module "prod_vcenter" {
-  source           = "terraform-cisco-modules/iks/intersight//modules/modules/infra_provider"
-  name             = "wakanda_vc"
-  device_name      = "wakanda-vcenter.rich.ciscolabs.com"
-  vc_portgroup     = ["panther|ccp|control"]
-  vc_datastore     = "iks"
-  vc_cluster       = "tchalla"
-  vc_resource_pool = ""
-  vc_password      = ""
-  org_name         = var.organization
-  tags             = var.tags
+module "prod_network" {
+  source      = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
+  name        = "prod"
+  dns_servers = ["10.101.128.15", "10.101.128.16"]
+  ntp_servers = ["10.101.128.15", "10.101.128.16"]
+  domain_name = "rich.ciscolabs.com"
+  timezone    = "Americas/New_York"
+  org_name    = var.organization
+  tags        = var.tags
 }
 
