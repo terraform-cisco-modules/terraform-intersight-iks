@@ -9,7 +9,7 @@ data "intersight_asset_target" "infra_target" {
 }
 
 resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "infra_provider" {
-
+  name = var.name
   infra_config {
     object_type = "kubernetes.EsxiVirtualMachineInfraConfig"
     interfaces  = var.vc_portgroup
