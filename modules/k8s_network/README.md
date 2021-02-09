@@ -5,7 +5,7 @@
 ```hcl
 module "iks_network_policies" {
 
-  source = "../../modules/network"
+  source = "../../modules/k8s_network"
 
   # omitted...
 }

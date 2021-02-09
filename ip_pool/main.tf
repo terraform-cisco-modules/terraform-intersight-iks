@@ -5,17 +5,16 @@ data "intersight_organization_organization" "organization" {
 
 # Supports IPV4 today.
 resource "intersight_ippool_pool" "ip_pool" {
-  for_each = { for pool in var.ip_pool_list : pool.name => pool }
-  name     = each.value.name
+  name = var.name
   ip_v4_blocks {
-    from = each.value.starting_address
-    size = each.value.size
+    from = var.starting_address
+    size = var.pool_size
   }
   ip_v4_config {
-    netmask       = each.value.netmask
-    gateway       = each.value.gateway
-    primary_dns   = each.value.dns1
-    secondary_dns = each.value.dns2
+    netmask       = var.netmask
+    gateway       = var.gateway
+    primary_dns   = var.primary_dns
+    secondary_dns = var.secondary_dns
   }
 
   organization {

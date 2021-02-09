@@ -1,6 +1,6 @@
-# Complete IKS required infrastructure deployment
+# Create Addons
 
-This example creates addons and addon policies based on the information provided in the module.
+This example creates addons and based on the information provided in the module.
 
 ## Usage
 

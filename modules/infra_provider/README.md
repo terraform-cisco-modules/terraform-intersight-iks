@@ -5,7 +5,7 @@
 ```hcl
 module "iks_infra_provider" {
 
-  source = "../../modules/infra"
+  source = "../../modules/infra_provider"
 
   # omitted...
 }
