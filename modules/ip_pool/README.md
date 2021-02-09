@@ -5,7 +5,7 @@
 ```hcl
 module "ip_pool" {
 
-  source = "../../ip_pool"
+  source = "terraform-cisco-modules/iks/intersight//modules/ip_pool"
 
   # omitted...
 }

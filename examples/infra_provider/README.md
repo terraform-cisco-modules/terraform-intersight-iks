@@ -34,6 +34,7 @@ No provider.
 | organization | Organization Name | `string` | `"default"` | no |
 | secretkey | Secret Key or file location | `string` | n/a | yes |
 | tags | n/a | `list(map(string))` | `[]` | no |
+| vc\_password | Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight. | `string` | n/a | yes |
 
 ## Outputs
 
