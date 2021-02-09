@@ -5,7 +5,7 @@ provider "intersight" {
 }
 
 module "prod_vcenter" {
-  source           = "../../modules/infra_provider"
+  source           = "terraform-cisco-modules/iks/intersight//modules/modules/infra_provider"
   name             = "wakanda_vc"
   device_name      = "wakanda-vcenter.rich.ciscolabs.com"
   vc_portgroup     = ["panther|ccp|control"]

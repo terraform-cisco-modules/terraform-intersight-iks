@@ -5,7 +5,7 @@
 ```hcl
 module "iks_version" {
 
-  source = "../../modules/version"
+  source = "terraform-cisco-modules/iks/intersight//modules/modules/version"
 
   # omitted...
 }
