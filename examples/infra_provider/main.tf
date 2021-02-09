@@ -12,7 +12,7 @@ module "prod_vcenter" {
   vc_datastore     = "iks"
   vc_cluster       = "tchalla"
   vc_resource_pool = ""
-  vc_password      = ""
+  vc_password      = var.vc_password
   org_name         = var.organization
   tags             = var.tags
 }
