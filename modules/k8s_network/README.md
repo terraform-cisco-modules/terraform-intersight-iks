@@ -5,7 +5,7 @@
 ```hcl
 module "iks_network_policies" {
 
-  source = "../../modules/k8s_network"
+  source = "terraform-cisco-modules/iks/intersight//modules/modules/k8s_network"
 
   # omitted...
 }

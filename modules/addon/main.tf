@@ -5,8 +5,7 @@ data "intersight_organization_organization" "organization" {
 data "intersight_kubernetes_addon_definition" "addon_def" {
   # Current available addons check documentation for updates
   # kubernetes-dashboard
-  # CCP-Monitor
-  # EFK
+  # ccp-monitor
 
   name = var.addon_name
 }

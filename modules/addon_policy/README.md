@@ -5,7 +5,7 @@
 ```hcl
 module "iks_addon_policy" {
 
-  source = "../../modules/addon_policy"
+  source = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
 
   # omitted...
 }
