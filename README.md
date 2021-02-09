@@ -1,4 +1,4 @@
-# intersight-terraform-modules
+# Terraform Intersight Kubernetes Service Module
 
 The Cisco Intersight Terraform Provider is available in the Terraform Registry at https://registry.terraform.io/providers/CiscoDevNet/intersight/latest.  This repository contains example modules that use the provider to create 
 
