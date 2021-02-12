@@ -13,10 +13,12 @@ data "intersight_kubernetes_addon" "addon" {
 # Creating addon Policy by from the addons in the addon list 
 resource "intersight_kubernetes_addon_policy" "addon_policy" {
   name = var.addon_policy_name
+
   dynamic "addons" {
     for_each = data.intersight_kubernetes_addon.addon
     content {
-      moid = addons.value["id"]
+      moid = addons.value["moid"]
+
     }
   }
   dynamic "tags" {
