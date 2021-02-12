@@ -1,3 +1,22 @@
+# worker_profile - Intersight IKS Worker Profile Policy Terraform Module
+
+## Usage
+
+```hcl
+module "iks_worker_profile" {
+
+  source = "../../modules/worker_profile"
+
+  # omitted...
+}
+```
+
+This module will create a VM Instance Policy for IKS.  This policy can then be used to create IKS clusters.
+
+
+These resources are created
+* [VM Instance Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_instance_type)
+
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -6,19 +25,22 @@
 | Name | Version |
 |------|---------|
 | terraform | >= 0.14.5 |
-| intersight | =0.1.5 |
+| intersight | =1.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =0.1.5 |
+| intersight | =1.0.0 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| instance\_type | n/a | <pre>list(object({<br>    name   = string,<br>    cpu    = number,<br>    memory = number,<br>    disk   = string<br>  }))</pre> | n/a | yes |
+| cpu | Number of CPU allocated to the virtual machine. | `number` | `4` | no |
+| disk\_size | Amount of disk to be assigned to the virtual machine in GiB. | `number` | `40` | no |
+| memory | Amount of memory assigned to the virtual machine in MiB. | `number` | `16384` | no |
+| name | Name of the Worker Profile to be created.  i.e small | `string` | n/a | yes |
 | org\_name | Intersight Organization name | `string` | n/a | yes |
 | tags | n/a | `list(map(string))` | `[]` | no |
 
