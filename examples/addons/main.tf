@@ -20,8 +20,8 @@ module "iks_addon_monitor" {
   tags             = var.tags
 }
 module "iks_addon_policy_default" {
-  depends_on        = [module.iks_addon_dashboard, module.iks_addon_monitor]
-  source            = "../../modules/addon_policy"
+  depends_on        = [module.iks_addon_monitor, module.iks_addon_dashboard]
+  source            = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
   addon_policy_name = "default"
   addons            = ["ccp-monitor", "kubernetes-dashboard"]
   org_name          = var.organization
