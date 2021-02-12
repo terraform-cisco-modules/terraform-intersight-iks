@@ -6,13 +6,12 @@ data "intersight_kubernetes_addon_definition" "addon_def" {
   # Current available addons check documentation for updates
   # kubernetes-dashboard
   # ccp-monitor
-
   name = var.addon_name
 }
 # Creating addons
 resource "intersight_kubernetes_addon" "addon" {
 
-  name             = data.intersight_kubernetes_addon_definition.addon_def.name
+  name             = var.addon_name
   upgrade_strategy = var.upgrade_strategy
   install_strategy = var.install_strategy
   addon_definition {

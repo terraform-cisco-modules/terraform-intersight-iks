@@ -12,13 +12,13 @@ module "iks_addon_dashboard" {
   tags             = var.tags
 }
 
-module "iks_addon_monitor" {
-  source           = "terraform-cisco-modules/iks/intersight//modules/addon"
-  addon_name       = "ccp-monitor"
-  upgrade_strategy = "UpgradeOnly"
-  org_name         = var.organization
-  tags             = var.tags
-}
+# module "iks_addon_monitor" {
+#   source           = "terraform-cisco-modules/iks/intersight//modules/addon"
+#   addon_name       = "ccp-monitor"
+#   upgrade_strategy = "UpgradeOnly"
+#   org_name         = var.organization
+#   tags             = var.tags
+# }
 module "iks_addon_policy_default" {
   source            = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
   addon_policy_name = "default"
