@@ -24,7 +24,7 @@ These resources are created
 
 | Name | Version |
 |------|---------|
-| terraform | =0.14.5 |
+| terraform | >=0.14.5 |
 | intersight | =1.0.0 |
 
 ## Providers
@@ -44,6 +44,8 @@ These resources are created
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| version\_policy\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
