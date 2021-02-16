@@ -46,6 +46,8 @@ These resources are created
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| worker\_profile\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
