@@ -21,6 +21,12 @@ resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "infra_
     })
   }
 
+  instance_type {
+    object_type = "kubernetes.VirtualMachineInstanceType"
+
+    moid = var.instance_type_moid
+  }
+
   target {
     object_type = "asset.DeviceRegistration"
 
