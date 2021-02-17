@@ -5,7 +5,7 @@
 ```hcl
 module "iks_infra_provider" {
 
-  source = "terraform-cisco-modules/iks/intersight//modules/modules/infra_provider"
+  source = "terraform-cisco-modules/iks/intersight//modules/infra_provider"
 
   # omitted...
 }

@@ -5,7 +5,7 @@
 ```hcl
 module "iks_worker_profile" {
 
-  source = "../../modules/worker_profile"
+  source = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
 
   # omitted...
 }
