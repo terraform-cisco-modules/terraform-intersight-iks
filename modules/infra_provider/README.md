@@ -38,6 +38,7 @@ These resources are created
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | device\_name | Name of the Virtual Machine Provider you wish to add.  i.e vCenter | `string` | n/a | yes |
+| instance\_type\_moid | MOID of the Instance type mapped to this provider | `string` | `""` | no |
 | name | Name of the Infrastructure Provider to be created | `string` | n/a | yes |
 | org\_name | Intersight Organization name | `string` | n/a | yes |
 | tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |

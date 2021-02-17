@@ -33,6 +33,11 @@ variable "vc_resource_pool" {
   description = "Name of the resource pool to be used with this provider."
   default     = ""
 }
+variable "instance_type_moid" {
+  type        = string
+  description = "MOID of the Instance type mapped to this provider"
+  default     = ""
+}
 variable "tags" {
   type        = list(map(string))
   default     = []
