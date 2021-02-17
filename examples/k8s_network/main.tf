@@ -6,11 +6,11 @@ provider "intersight" {
 
 module "prod_network" {
   source      = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
-  name        = "prod"
+  policy_name = "prod"
   dns_servers = ["10.101.128.15", "10.101.128.16"]
   ntp_servers = ["10.101.128.15", "10.101.128.16"]
   domain_name = "rich.ciscolabs.com"
-  timezone    = "Americas/New_York"
+  timezone    = "America/New_York"
   org_name    = var.organization
   tags        = var.tags
 }
