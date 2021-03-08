@@ -28,7 +28,7 @@ This platform is currently in Early Access and comes with no support.  Please co
 | Name | Version |
 |------|---------|
 | terraform | =0.14.5 |
-| intersight | =1.0.0 |
+| intersight | =1.0.2 |
 
 ## Providers
 
