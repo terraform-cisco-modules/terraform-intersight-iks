@@ -16,7 +16,6 @@ variable "organization" {
   description = "Organization Name"
   default     = "default"
 }
-
 variable "tags" {
   type    = list(map(string))
   default = []
