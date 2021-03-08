@@ -41,6 +41,6 @@ resource "intersight_kubernetes_cluster_profile" "cluster" {
   }
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.moid
+    moid        = data.intersight_organization_organization.organization.results.0.moid
   }
 }

@@ -30,7 +30,7 @@ resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "infra_
   target {
     object_type = "asset.DeviceRegistration"
 
-    moid = data.intersight_asset_target.infra_target.registered_device[0].moid
+    moid = data.intersight_asset_target.infra_target.results.0.registered_device.0.moid
 
   }
 
@@ -43,6 +43,6 @@ resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "infra_
   }
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.moid
+    moid        = data.intersight_organization_organization.organization.results[0].moid
   }
 }

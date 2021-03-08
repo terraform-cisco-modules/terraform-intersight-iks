@@ -19,7 +19,7 @@ resource "intersight_ippool_pool" "ip_pool" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.moid
+    moid        = data.intersight_organization_organization.organization.results.0.moid
   }
 
   dynamic "tags" {
