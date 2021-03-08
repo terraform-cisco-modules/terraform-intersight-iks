@@ -43,16 +43,3 @@ variable "tags" {
   default     = []
   description = "Tags to be associated with this object in Intersight."
 }
-
-# variable "infra_list" {
-#   # sensitive = true
-#   type = list(object({
-#     name          = string
-#     cluster       = string
-#     interfaces    = list(string)
-#     datastore     = string
-#     passphrase    = string
-#     resource_pool = string
-
-#   }))
-# }
