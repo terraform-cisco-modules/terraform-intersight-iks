@@ -21,8 +21,11 @@ resource "intersight_kubernetes_cluster_profile" "cluster" {
   }
 
   addons {
-    # object_type = "kubernetes.AddonPolicy"
     moid = var.addon_policy_moid
+  }
+
+  trusted_registries {
+    moid = var.trusted_registries
   }
 
   net_config {

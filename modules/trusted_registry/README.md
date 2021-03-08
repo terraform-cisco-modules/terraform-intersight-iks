@@ -48,6 +48,6 @@ These resources are created
 
 | Name | Description |
 |------|-------------|
-| trusted\_registry | n/a |
+| trusted\_registry\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

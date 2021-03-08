@@ -47,6 +47,7 @@ These resources are created
 | ssh\_user | SSH Username for node login. | `string` | n/a | yes |
 | sys\_config\_moid | MOID derived from the System Config Policy that is being consumed. | `string` | n/a | yes |
 | tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
+| trusted\_registry\_policy\_moid | MOID derived from the Trusted Registry Policy that is being consumed. | `string` | n/a | yes |
 
 ## Outputs
 
