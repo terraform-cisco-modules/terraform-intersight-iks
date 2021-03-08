@@ -25,7 +25,7 @@ resource "intersight_kubernetes_cluster_profile" "cluster" {
   }
 
   trusted_registries {
-    moid = var.trusted_registries
+    moid = var.trusted_registry_policy_moid
   }
 
   net_config {

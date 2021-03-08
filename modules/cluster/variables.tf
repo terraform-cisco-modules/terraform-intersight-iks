@@ -34,6 +34,7 @@ variable "addon_policy_moid" {
 variable "trusted_registry_policy_moid" {
   type        = string
   description = "MOID derived from the Trusted Registry Policy that is being consumed."
+  default     = ""
 }
 
 variable "net_config_moid" {
