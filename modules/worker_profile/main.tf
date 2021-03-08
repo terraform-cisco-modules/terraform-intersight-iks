@@ -9,7 +9,7 @@ resource "intersight_kubernetes_virtual_machine_instance_type" "instance" {
   memory    = var.memory
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.organization.moid
   }
   dynamic "tags" {
     for_each = var.tags

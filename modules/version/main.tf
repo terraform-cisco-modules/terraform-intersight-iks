@@ -13,7 +13,7 @@ resource "intersight_kubernetes_version_policy" "iks_version" {
   nr_version {
 
     object_type = "kubernetes.Version"
-    moid        = data.intersight_kubernetes_version.version.results.0.moid
+    moid        = data.intersight_kubernetes_version.version.moid
 
   }
 
@@ -27,6 +27,6 @@ resource "intersight_kubernetes_version_policy" "iks_version" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.organization.moid
   }
 }

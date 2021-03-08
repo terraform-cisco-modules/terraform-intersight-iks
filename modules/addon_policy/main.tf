@@ -17,7 +17,7 @@ resource "intersight_kubernetes_addon_policy" "addon_policy" {
   dynamic "addons" {
     for_each = data.intersight_kubernetes_addon.addon
     content {
-      moid = addons.value.results.0["moid"]
+      moid = addons.value["moid"]
 
     }
   }
@@ -31,6 +31,6 @@ resource "intersight_kubernetes_addon_policy" "addon_policy" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.organization.moid
   }
 }
