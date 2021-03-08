@@ -12,7 +12,7 @@ resource "intersight_kubernetes_network_policy" "k8s_network_pod_policy" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.organization.moid
   }
 
   dynamic "tags" {
@@ -34,7 +34,7 @@ resource "intersight_kubernetes_sys_config_policy" "k8s_system_config_policy" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.organization.moid
   }
 
   dynamic "tags" {

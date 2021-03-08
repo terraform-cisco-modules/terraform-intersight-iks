@@ -21,7 +21,7 @@ Current supported Version is 1.18.12
 | Name | Version |
 |------|---------|
 | terraform | =0.14.5 |
-| intersight | =1.0.2 |
+| intersight | =1.0.0 |
 
 ## Providers
 
@@ -39,6 +39,8 @@ No provider.
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| version\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

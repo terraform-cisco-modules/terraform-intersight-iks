@@ -15,7 +15,7 @@ resource "intersight_kubernetes_addon" "addon" {
   upgrade_strategy = var.upgrade_strategy
   install_strategy = var.install_strategy
   addon_definition {
-    moid = data.intersight_kubernetes_addon_definition.addon_def.results.0.moid
+    moid = data.intersight_kubernetes_addon_definition.addon_def.moid
   }
   dynamic "tags" {
     for_each = var.tags
@@ -26,6 +26,6 @@ resource "intersight_kubernetes_addon" "addon" {
   }
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.organization.moid
   }
 }
