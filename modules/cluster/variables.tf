@@ -31,6 +31,11 @@ variable "addon_policy_moid" {
   description = "MOID derived from the Addon Policy that is being consumed."
 }
 
+variable "trusted_registry_policy_moid" {
+  type        = string
+  description = "MOID derived from the Trusted Registry Policy that is being consumed."
+}
+
 variable "net_config_moid" {
   type        = string
   description = "MOID derived from the Network Config Policy that is being consumed."
