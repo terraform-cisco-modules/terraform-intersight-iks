@@ -36,15 +36,22 @@ These resources are created
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| addon\_policy\_name | Name of the Addon Policy to be created. | `string` | n/a | yes |
-| addons | List of addons to be added to the policy. | `list(string)` | `[]` | no |
+| action | Ation for cluster. i.e 'Deploy' 'Unassign' | `string` | `""` | no |
+| addon\_policy\_moid | MOID derived from the Addon Policy that is being consumed. | `string` | n/a | yes |
+| ip\_pool\_moid | MOID derived from the IP Pool that is being consumed. | `string` | n/a | yes |
+| load\_balancer | Number of load balancer addresses to deploy. | `number` | n/a | yes |
+| name | Name of the IKS Cluster to be deployed. | `string` | n/a | yes |
+| net\_config\_moid | MOID derived from the Network Config Policy that is being consumed. | `string` | n/a | yes |
 | org\_name | Intersight Organization name | `string` | n/a | yes |
+| ssh\_key | SSH Public Key to be used to node login. | `string` | n/a | yes |
+| ssh\_user | SSH Username for node login. | `string` | n/a | yes |
+| sys\_config\_moid | MOID derived from the System Config Policy that is being consumed. | `string` | n/a | yes |
 | tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| addon\_policy\_moid | n/a |
+| cluster\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

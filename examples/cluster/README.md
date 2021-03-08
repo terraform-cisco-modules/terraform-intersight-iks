@@ -23,7 +23,9 @@ Note that this example may create resources which are consumed for IKS clusters.
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| terraform | n/a |
 
 ## Inputs
 

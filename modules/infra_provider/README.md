@@ -25,13 +25,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.0 |
+| intersight | =1.0.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.0 |
+| intersight | =1.0.2 |
 
 ## Inputs
 

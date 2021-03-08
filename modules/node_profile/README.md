@@ -5,7 +5,7 @@
 ```hcl
 module "iks_worker_profile" {
 
-  source = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
+  source = "../../modules/worker_profile"
 
   # omitted...
 }
@@ -37,17 +37,19 @@ These resources are created
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| cpu | Number of CPU allocated to the virtual machine. | `number` | `4` | no |
-| disk\_size | Amount of disk to be assigned to the virtual machine in GiB. | `number` | `40` | no |
-| memory | Amount of memory assigned to the virtual machine in MiB. | `number` | `16384` | no |
-| name | Name of the Worker Profile to be created.  i.e small | `string` | n/a | yes |
+| cluster\_moid | MOID derived from the Cluster that is being consumed. | `string` | n/a | yes |
+| description | Descripton of the Node Profile. | `string` | `""` | no |
+| desired\_size | Desired size for node profile.  For master profiles values an be 1 or 3 | `number` | `1` | no |
+| infra\_moid | MOID derived from the Infrastructure Provider that is being consumed. | `string` | n/a | yes |
+| ip\_pool\_moid | MOID derived from the IP Pool that is being consumed. | `string` | n/a | yes |
+| name | Name of the Node Profile to be created. | `string` | n/a | yes |
 | org\_name | Intersight Organization name | `string` | n/a | yes |
+| profile\_type | Type of profile to be created. i.e Master or Worker | `string` | `""` | no |
 | tags | n/a | `list(map(string))` | `[]` | no |
+| version\_moid | MOID derived from the Version Policy that is being consumed. | `string` | n/a | yes |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| worker\_profile\_moid | n/a |
+No output.
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
