@@ -25,19 +25,19 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.0 |
+| intersight | =1.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.0 |
+| intersight | =1.0.4 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| description | Description to be used to describe the infrastructure provider policy | `string` | `""` | no |
+| description | Description to be used to describe the infrastructure configuration policy | `string` | `""` | no |
 | device\_name | Name of the Virtual Machine Provider you wish to add.  i.e vCenter | `string` | n/a | yes |
 | instance\_type\_moid | MOID of the Instance type mapped to this provider | `string` | `""` | no |
 | name | Name of the Infrastructure Provider to be created | `string` | n/a | yes |

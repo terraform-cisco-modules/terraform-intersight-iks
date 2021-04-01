@@ -1,6 +1,6 @@
-# Worker Profile
+# Container Runtime Policy
 
-This example creates a worker profile based on the information provided in the module.
+This example creates a container runtime policy based on the information provided in the module.
 
 ## Usage
 

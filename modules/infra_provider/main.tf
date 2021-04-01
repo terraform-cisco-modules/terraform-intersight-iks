@@ -9,20 +9,21 @@ data "intersight_asset_target" "infra_target" {
 }
 
 resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "infra_provider" {
-  name = var.name
-  infra_config {
-    object_type = "kubernetes.EsxiVirtualMachineInfraConfig"
-    interfaces  = var.vc_portgroup
-    additional_properties = jsonencode({
-      Datastore    = var.vc_datastore
-      Cluster      = var.vc_cluster
-      Passphrase   = var.vc_password
-      ResourcePool = var.vc_resource_pool
-    })
-  }
+  name        = var.name
+  description = var.description
+  # infra_config {
+  #   # object_type = "kubernetes.EsxiVirtualMachineInfraConfig"
+  #   interfaces  = var.vc_portgroup
+  #   additional_properties = jsonencode({
+  #     Datastore    = var.vc_datastore
+  #     Cluster      = var.vc_cluster
+  #     Passphrase   = var.vc_password
+  #     ResourcePool = var.vc_resource_pool
+  #   })
+  # }
 
   instance_type {
-    object_type = "kubernetes.VirtualMachineInstanceType"
+    # object_type = "kubernetes.VirtualMachineInstanceType"
 
     moid = var.instance_type_moid
   }

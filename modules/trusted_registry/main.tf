@@ -10,7 +10,7 @@ resource "intersight_kubernetes_trusted_registries_policy" "registries" {
   unsigned_registries = var.unsigned_registries
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.moid
+    moid        = data.intersight_organization_organization.organization.results.0.moid
   }
 
   dynamic "tags" {

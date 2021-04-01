@@ -6,7 +6,11 @@ variable "name" {
   type        = string
   description = "Name of the IKS Cluster to be deployed."
 }
-
+variable "description" {
+  type        = string
+  default     = ""
+  description = "Description to be used to describe the cluster profile."
+}
 variable "ip_pool_moid" {
   type        = string
   description = "MOID derived from the IP Pool that is being consumed."
@@ -28,29 +32,32 @@ variable "ssh_key" {
 
 variable "addon_policy_moid" {
   type        = string
-  description = "MOID derived from the Addon Policy that is being consumed."
+  description = "MOID for the Addon Policy that is being consumed."
 }
-
+variable "runtime_policy_moid" {
+  type        = string
+  description = "MOID for the Runtime Policy that is being consumed."
+}
 variable "trusted_registry_policy_moid" {
   type        = string
-  description = "MOID derived from the Trusted Registry Policy that is being consumed."
+  description = "MOID for the Trusted Registry Policy that is being consumed."
   default     = ""
 }
 
 variable "net_config_moid" {
   type        = string
-  description = "MOID derived from the Network Config Policy that is being consumed."
+  description = "MOID for the Network Config Policy that is being consumed."
 }
 
 variable "sys_config_moid" {
   type        = string
-  description = "MOID derived from the System Config Policy that is being consumed."
+  description = "MOID for the System Config Policy that is being consumed."
 }
 
 variable "action" {
   type        = string
-  description = "Ation for cluster. i.e 'Deploy' 'Unassign'"
-  default     = ""
+  description = "Action for cluster. i.e 'Deploy' 'Unassign'"
+  default     = "Unassign"
 }
 
 

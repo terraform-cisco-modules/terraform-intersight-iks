@@ -3,27 +3,6 @@ provider "intersight" {
   secretkey = var.secretkey
   endpoint  = var.endpoint
 }
-# terraform {
-#   backend "remote" {
-#     organization = "Cisco-ITS-TigerTeam"
-
-#     workspaces {
-#       name = "cl21-test"
-#     }
-#   }
-# }
-
-data "terraform_remote_state" "dev_infra" {
-  backend = "remote"
-
-  config = {
-    organization = "Cisco-ITS-TigerTeam"
-    workspaces = {
-      name = "richfield-iks-infra-dev"
-    }
-  }
-}
-
 
 # module "dev_cluster" {
 #   source = "terraform-cisco-modules/iks/intersight//modules/cluster"

@@ -14,7 +14,7 @@ variable "name" {
 variable "description" {
   type        = string
   default     = ""
-  description = "Description to be used to describe the infrastructure provider policy"
+  description = "Description to be used to describe the infrastructure configuration policy"
 }
 variable "vc_cluster" {
   type        = string

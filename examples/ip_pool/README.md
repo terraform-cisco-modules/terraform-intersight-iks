@@ -18,8 +18,8 @@ Note that this example may create resources which are consumed for IKS clusters.
 
 | Name | Version |
 |------|---------|
-| terraform | =0.14.5 |
-| intersight | =1.0.0 |
+| terraform | >=0.14.5 |
+| intersight | =1.0.4 |
 
 ## Providers
 
