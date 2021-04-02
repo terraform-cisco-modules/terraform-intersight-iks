@@ -26,13 +26,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.0 |
+| intersight | =1.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.0 |
+| intersight | =1.0.4 |
 
 ## Inputs
 
@@ -44,7 +44,7 @@ These resources are created
 | org\_name | Intersight Organization name | `string` | n/a | yes |
 | pool\_size | Number of IPs you want this pool to contain. | `string` | n/a | yes |
 | primary\_dns | Primary DNS Server for this pool. | `string` | n/a | yes |
-| secondary\_dns | Secondary DNS Server for this pool. | `string` | n/a | yes |
+| secondary\_dns | Secondary DNS Server for this pool. | `string` | `""` | no |
 | starting\_address | Starting IP Address you want for this pool. | `string` | n/a | yes |
 | tags | n/a | `list(map(string))` | `[]` | no |
 

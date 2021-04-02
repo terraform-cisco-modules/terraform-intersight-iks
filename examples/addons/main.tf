@@ -3,27 +3,23 @@ provider "intersight" {
   secretkey = var.secretkey
   endpoint  = var.endpoint
 }
-
 module "iks_addon_dashboard" {
-  source           = "terraform-cisco-modules/iks/intersight//modules/addon"
-  addon_name       = "kubernetes-dashboard"
-  upgrade_strategy = "UpgradeOnly"
-  org_name         = var.organization
-  tags             = var.tags
-}
 
-module "iks_addon_monitor" {
-  source           = "terraform-cisco-modules/iks/intersight//modules/addon"
-  addon_name       = "ccp-monitor"
-  upgrade_strategy = "UpgradeOnly"
-  org_name         = var.organization
-  tags             = var.tags
-}
-module "iks_addon_policy_default" {
-  depends_on        = [module.iks_addon_monitor, module.iks_addon_dashboard]
   source            = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
-  addon_policy_name = "default"
-  addons            = ["ccp-monitor", "kubernetes-dashboard"]
+  addon_policy_name = "dashboard"
+  addons            = "kubernetes-dashboard"
+  upgrade_strategy  = "AlwaysReinstall"
+  install_strategy  = "InstallOnly"
+  org_name          = var.organization
+  tags              = var.tags
+}
+module "iks_addon_monitor" {
+
+  source            = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
+  addon_policy_name = "monitor"
+  addons            = "ccp-monitor"
+  upgrade_strategy  = "AlwaysReinstall"
+  install_strategy  = "InstallOnly"
   org_name          = var.organization
   tags              = var.tags
 }

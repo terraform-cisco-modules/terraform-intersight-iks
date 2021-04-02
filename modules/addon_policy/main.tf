@@ -2,25 +2,23 @@
 data "intersight_organization_organization" "organization" {
   name = var.org_name
 }
-
-
-data "intersight_kubernetes_addon" "addon" {
-  # Loops through addons list to get the Moid to add to the policy
-  count = length(var.addons)
-  name  = var.addons[count.index]
+data "intersight_kubernetes_addon_definition" "addon" {
+  name = var.addons
 }
-
-# Creating addon Policy by from the addons in the addon list 
+# Creating addon Policy
 resource "intersight_kubernetes_addon_policy" "addon_policy" {
-  name = var.addon_policy_name
+  name        = var.addon_policy_name
+  description = var.description
 
-  dynamic "addons" {
-    for_each = data.intersight_kubernetes_addon.addon
-    content {
-      moid = addons.value["moid"]
-
-    }
+  addon_configuration {
+    install_strategy = var.install_strategy
+    upgrade_strategy = var.upgrade_strategy
   }
+
+  addon_definition {
+    moid = data.intersight_kubernetes_addon_definition.addon.results.0.moid
+  }
+
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -31,6 +29,6 @@ resource "intersight_kubernetes_addon_policy" "addon_policy" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.moid
+    moid        = data.intersight_organization_organization.organization.results.0.moid
   }
 }
