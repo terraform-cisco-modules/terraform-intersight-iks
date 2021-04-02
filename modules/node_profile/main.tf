@@ -1,6 +1,3 @@
-data "intersight_organization_organization" "organization" {
-  name = var.org_name
-}
 resource "intersight_kubernetes_node_group_profile" "iks_node_profile" {
 
   name        = var.name
