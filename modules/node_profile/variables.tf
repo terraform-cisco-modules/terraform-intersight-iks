@@ -23,11 +23,16 @@ variable "desired_size" {
   description = "Desired size for node profile.  For master profiles values an be 1 or 3"
   default     = 1
 }
-
-variable "infra_moid" {
-  type        = string
-  description = "MOID derived from the Infrastructure Provider that is being consumed."
+variable "max_size" {
+  type        = number
+  description = "Maximum size for node profile."
+  default     = 1
 }
+
+# variable "infra_moid" {
+#   type        = string
+#   description = "MOID derived from the Infrastructure Provider that is being consumed."
+# }
 variable "ip_pool_moid" {
   type        = string
   description = "MOID derived from the IP Pool that is being consumed."

@@ -4,18 +4,15 @@ provider "intersight" {
   endpoint  = var.endpoint
 }
 
+
 module "prod_vcenter" {
-  source             = "terraform-cisco-modules/iks/intersight//modules/infra_provider"
-  name               = "wakanda_vc"
-  device_name        = "wakanda-vcenter.rich.ciscolabs.com"
-  vc_portgroup       = ["panther|ccp|control"]
-  vc_datastore       = "iks"
-  vc_cluster         = "tchalla"
-  vc_resource_pool   = ""
-  instance_type_moid = module.k8s_worker_small.worker_profile_moid
-  vc_password        = var.vc_password
-  org_name           = var.organization
-  tags               = var.tags
+  source                   = "../../modules/infra_provider"
+  name                     = "wakanda_vc_worker_3"
+  instance_type_moid       = "6062fa977a6f722d3081e949"
+  node_group_moid          = "606606627a6f722d30bcd0d8"
+  infra_config_policy_moid = "6062fa7e7a6f722d3081e701"
+  org_name                 = var.organization
+  tags                     = var.tags
 }
 
 

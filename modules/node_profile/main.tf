@@ -1,19 +1,13 @@
 data "intersight_organization_organization" "organization" {
   name = var.org_name
 }
-resource "intersight_kubernetes_node_group_profile" "iks-master_nodepool-1master" {
+resource "intersight_kubernetes_node_group_profile" "iks_node_profile" {
 
   name        = var.name
   description = var.description
   node_type   = var.profile_type
   desiredsize = var.desired_size
-
-  infra_provider {
-    object_type = "kubernetes.VirtualMachineInfrastructureProvider"
-    moid        = var.infra_moid
-
-  }
-
+  maxsize     = var.max_size
   ip_pools {
     object_type = "ippool.Pool"
     moid        = var.ip_pool_moid

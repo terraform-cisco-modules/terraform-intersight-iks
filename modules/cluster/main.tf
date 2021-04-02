@@ -6,14 +6,15 @@ data "intersight_organization_organization" "organization" {
 # Creating cluster policy
 resource "intersight_kubernetes_cluster_profile" "cluster" {
 
-  name        = var.name
-  description = var.description
-  action      = var.action
+  name                = var.name
+  description         = var.description
+  action              = var.action
+  wait_for_completion = var.wait_for_completion
   cluster_ip_pools {
     moid = var.ip_pool_moid
   }
   container_runtime_config {
-    moid = var.runtime_moid
+    moid = var.runtime_policy_moid
   }
   management_config {
     load_balancer_count = var.load_balancer
@@ -22,9 +23,9 @@ resource "intersight_kubernetes_cluster_profile" "cluster" {
     ]
     ssh_user = var.ssh_user
   }
-  addons {
-    moid = var.addon_policy_moid
-  }
+  # addons {
+  #   moid = var.addon_policy_moid
+  # }
   trusted_registries {
     moid = var.trusted_registry_policy_moid
   }

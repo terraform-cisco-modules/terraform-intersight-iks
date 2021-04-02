@@ -16,7 +16,13 @@ variable "organization" {
   description = "Organization Name"
   default     = "default"
 }
+
 variable "tags" {
   type    = list(map(string))
   default = []
+}
+variable "vc_password" {
+  sensitive   = true
+  type        = string
+  description = "Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight."
 }

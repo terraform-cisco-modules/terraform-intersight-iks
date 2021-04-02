@@ -3,10 +3,10 @@ data "intersight_organization_organization" "organization" {
   name = var.org_name
 }
 # Looking up Asset Target MOID
-data "intersight_asset_target" "infra_target" {
+# data "intersight_asset_target" "infra_target" {
 
-  name = var.device_name
-}
+#   name = var.device_name
+# }
 
 resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "infra_provider" {
   name        = var.name
@@ -21,19 +21,23 @@ resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "infra_
   #     ResourcePool = var.vc_resource_pool
   #   })
   # }
-
+  node_group {
+    moid = var.node_group_moid
+  }
   instance_type {
-    # object_type = "kubernetes.VirtualMachineInstanceType"
 
     moid = var.instance_type_moid
   }
-
-  target {
-    object_type = "asset.DeviceRegistration"
-
-    moid = data.intersight_asset_target.infra_target.registered_device[0].moid
-
+  infra_config_policy {
+    moid = var.infra_config_policy_moid
   }
+
+  # target {
+  #   object_type = "asset.DeviceRegistration"
+
+  #   moid = data.intersight_asset_target.infra_target.results.0.registered_device[0].moid
+
+  # }
 
   dynamic "tags" {
     for_each = var.tags
@@ -41,9 +45,5 @@ resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "infra_
       key   = tags.value["key"]
       value = tags.value["value"]
     }
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.moid
   }
 }

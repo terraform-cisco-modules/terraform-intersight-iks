@@ -29,14 +29,20 @@ variable "ssh_key" {
   type        = string
   description = "SSH Public Key to be used to node login."
 }
-
+variable "wait_for_completion" {
+  type        = bool
+  default     = false
+  description = "Wait for cluster completion true/false"
+}
 variable "addon_policy_moid" {
   type        = string
   description = "MOID for the Addon Policy that is being consumed."
+  default     = ""
 }
 variable "runtime_policy_moid" {
   type        = string
   description = "MOID for the Runtime Policy that is being consumed."
+  default     = ""
 }
 variable "trusted_registry_policy_moid" {
   type        = string

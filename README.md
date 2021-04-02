@@ -27,8 +27,8 @@ This platform is currently in Early Access and comes with no support.  Please co
 
 | Name | Version |
 |------|---------|
-| terraform | =0.14.5 |
-| intersight | =1.0.2 |
+| terraform | >=0.14.5 |
+| intersight | =1.0.4 |
 
 ## Providers
 
@@ -36,7 +36,31 @@ No provider.
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| cluster\_name | Name to be given to the cluster.  This will also prefix all attributes created by this module. | `string` | n/a | yes |
+| cni | Supported CNI type. Currently we only support Calico.\* Calico - Calico CNI plugin as described in https://github.com/projectcalico/cni-plugin. | `string` | `"Calico"` | no |
+| domain\_name | Domain Name information for DNS search. | `string` | n/a | yes |
+| ip\_gateway | Default gateway for this pool. | `string` | n/a | yes |
+| ip\_netmask | Subnet Mask for this pool. | `string` | n/a | yes |
+| ip\_pool\_size | Number of IPs you want this pool to contain. | `string` | n/a | yes |
+| ip\_primary\_dns | Primary DNS Server for this pool. | `string` | n/a | yes |
+| ip\_secondary\_dns | Secondary DNS Server for this pool. | `string` | `""` | no |
+| ip\_starting\_address | Starting IP Address you want for this pool. | `string` | n/a | yes |
+| organization | Organization Name | `string` | `"default"` | no |
+| pod\_cidr | Pod CIDR Block to be used to assign POD IP Addresses. | `string` | `"100.65.0.0/16"` | no |
+| root\_ca\_registries | List of root CA certificates. | `list(string)` | `[]` | no |
+| service\_cidr | Service CIDR Block used to assign cluster service IP addresses. | `string` | `"100.64.0.0/24"` | no |
+| tags | n/a | `list(map(string))` | `[]` | no |
+| timezone | The timezone of the node's system clock.  Check Terraform documentation for correct format.  Example America/New\_York | `string` | n/a | yes |
+| unsigned\_registries | List of unsigned registries to be supported. | `list(string)` | `[]` | no |
+| vc\_cluster | Name of the cluster you wish to make part of this provider within vCenter. | `string` | n/a | yes |
+| vc\_datastore | Name of the datastore to be used with this provider. | `string` | n/a | yes |
+| vc\_password | Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight. | `string` | n/a | yes |
+| vc\_portgroup | Name of the portgroup(s) to be used in this provider | `list(string)` | n/a | yes |
+| vc\_resource\_pool | Name of the resource pool to be used with this provider. | `string` | `""` | no |
+| vc\_target\_name | Target name as referenced in Intersight.  vCenter is currently the only supported target. | `string` | n/a | yes |
+| worker\_size | Worker size attribute for worker nodes | `string` | n/a | yes |
 
 ## Outputs
 

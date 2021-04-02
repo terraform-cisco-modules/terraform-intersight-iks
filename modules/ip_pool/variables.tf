@@ -29,6 +29,7 @@ variable "primary_dns" {
 variable "secondary_dns" {
   type        = string
   description = "Secondary DNS Server for this pool."
+  default     = ""
 }
 
 variable "tags" {

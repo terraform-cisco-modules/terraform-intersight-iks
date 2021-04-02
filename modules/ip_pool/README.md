@@ -44,7 +44,7 @@ These resources are created
 | org\_name | Intersight Organization name | `string` | n/a | yes |
 | pool\_size | Number of IPs you want this pool to contain. | `string` | n/a | yes |
 | primary\_dns | Primary DNS Server for this pool. | `string` | n/a | yes |
-| secondary\_dns | Secondary DNS Server for this pool. | `string` | n/a | yes |
+| secondary\_dns | Secondary DNS Server for this pool. | `string` | `""` | no |
 | starting\_address | Starting IP Address you want for this pool. | `string` | n/a | yes |
 | tags | n/a | `list(map(string))` | `[]` | no |
 

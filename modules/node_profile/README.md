@@ -25,13 +25,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >= 0.14.5 |
-| intersight | =1.0.0 |
+| intersight | =1.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.0 |
+| intersight | =1.0.4 |
 
 ## Inputs
 
@@ -40,8 +40,8 @@ These resources are created
 | cluster\_moid | MOID derived from the Cluster that is being consumed. | `string` | n/a | yes |
 | description | Descripton of the Node Profile. | `string` | `""` | no |
 | desired\_size | Desired size for node profile.  For master profiles values an be 1 or 3 | `number` | `1` | no |
-| infra\_moid | MOID derived from the Infrastructure Provider that is being consumed. | `string` | n/a | yes |
 | ip\_pool\_moid | MOID derived from the IP Pool that is being consumed. | `string` | n/a | yes |
+| max\_size | Maximum size for node profile. | `number` | `1` | no |
 | name | Name of the Node Profile to be created. | `string` | n/a | yes |
 | org\_name | Intersight Organization name | `string` | n/a | yes |
 | profile\_type | Type of profile to be created. i.e Master or Worker | `string` | `""` | no |
@@ -50,6 +50,8 @@ These resources are created
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| node\_group\_profile\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

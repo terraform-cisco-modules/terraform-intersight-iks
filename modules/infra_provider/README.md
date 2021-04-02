@@ -25,29 +25,25 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.0 |
+| intersight | =1.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.0 |
+| intersight | =1.0.4 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | description | Description to be used to describe the infrastructure provider policy | `string` | `""` | no |
-| device\_name | Name of the Virtual Machine Provider you wish to add.  i.e vCenter | `string` | n/a | yes |
+| infra\_config\_policy\_moid | MOID of the Infra Config Policy mapped to this provider | `string` | `""` | no |
 | instance\_type\_moid | MOID of the Instance type mapped to this provider | `string` | `""` | no |
 | name | Name of the Infrastructure Provider to be created | `string` | n/a | yes |
+| node\_group\_moid | MOID of the Node Group mapped to this provider | `string` | `""` | no |
 | org\_name | Intersight Organization name | `string` | n/a | yes |
 | tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
-| vc\_cluster | Name of the cluster you wish to make part of this provider within vCenter. | `string` | n/a | yes |
-| vc\_datastore | Name of the datastore to be used with this provider. | `string` | n/a | yes |
-| vc\_password | Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight. | `string` | n/a | yes |
-| vc\_portgroup | Name of the portgroup(s) to be used in this provider | `list(string)` | n/a | yes |
-| vc\_resource\_pool | Name of the resource pool to be used with this provider. | `string` | `""` | no |
 
 ## Outputs
 

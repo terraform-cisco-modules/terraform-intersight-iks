@@ -39,7 +39,6 @@ These resources are created
 |------|-------------|------|---------|:--------:|
 | description | Description to be used to describe the infrastructure configuration policy | `string` | `""` | no |
 | device\_name | Name of the Virtual Machine Provider you wish to add.  i.e vCenter | `string` | n/a | yes |
-| instance\_type\_moid | MOID of the Instance type mapped to this provider | `string` | `""` | no |
 | name | Name of the Infrastructure Provider to be created | `string` | n/a | yes |
 | org\_name | Intersight Organization name | `string` | n/a | yes |
 | tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
@@ -53,6 +52,6 @@ These resources are created
 
 | Name | Description |
 |------|-------------|
-| infra\_provider\_moid | n/a |
+| infra\_config\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
