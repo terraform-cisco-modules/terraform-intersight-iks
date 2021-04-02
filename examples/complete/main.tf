@@ -5,7 +5,7 @@ provider "intersight" {
 }
 
 module "terraform-intersight-iks" {
-  source       = ""
+  source       = "terraform-cisco-modules/iks/intersight"
   cluster_name = "complete"
 
   # Infra Config Policy Information
