@@ -27,14 +27,14 @@ module "ip_pool_policy" {
 }
 
 module "network" {
-  source          = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
-  policy_name     = join("-", [var.cluster_name, "network-policy"])
-  dns_servers     = [var.ip_primary_dns, var.ip_secondary_dns]
-  ntp_servers     = [var.ip_primary_dns, var.ip_secondary_dns]
-  timezone        = var.timezone
-  dns_domain_name = var.domain_name
-  org_name        = var.organization
-  tags            = var.tags
+  source      = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
+  policy_name = join("-", [var.cluster_name, "network-policy"])
+  dns_servers = [var.ip_primary_dns, var.ip_secondary_dns]
+  ntp_servers = [var.ip_primary_dns, var.ip_secondary_dns]
+  timezone    = var.timezone
+  domain_name = var.domain_name
+  org_name    = var.organization
+  tags        = var.tags
 }
 
 module "trusted_registry" {
