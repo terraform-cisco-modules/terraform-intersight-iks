@@ -1,8 +1,3 @@
-variable "org_name" {
-  type        = string
-  description = "Intersight Organization name"
-}
-
 variable "name" {
   type        = string
   description = "Name of the Node Profile to be created."
