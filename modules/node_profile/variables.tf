@@ -29,10 +29,6 @@ variable "max_size" {
   default     = 1
 }
 
-# variable "infra_moid" {
-#   type        = string
-#   description = "MOID derived from the Infrastructure Provider that is being consumed."
-# }
 variable "ip_pool_moid" {
   type        = string
   description = "MOID derived from the IP Pool that is being consumed."
