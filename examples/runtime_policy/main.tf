@@ -5,7 +5,7 @@ provider "intersight" {
 }
 
 module "iks_runtime" {
-  source = "../../modules/runtime_policy"
+  source = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
 
   name                 = "tf_runtime"
   proxy_http_hostname  = "test"
