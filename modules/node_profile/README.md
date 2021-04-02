@@ -43,7 +43,6 @@ These resources are created
 | ip\_pool\_moid | MOID derived from the IP Pool that is being consumed. | `string` | n/a | yes |
 | max\_size | Maximum size for node profile. | `number` | `1` | no |
 | name | Name of the Node Profile to be created. | `string` | n/a | yes |
-| org\_name | Intersight Organization name | `string` | n/a | yes |
 | profile\_type | Type of profile to be created. i.e Master or Worker | `string` | `""` | no |
 | tags | n/a | `list(map(string))` | `[]` | no |
 | version\_moid | MOID derived from the Version Policy that is being consumed. | `string` | n/a | yes |
