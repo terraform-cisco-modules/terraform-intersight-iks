@@ -21,7 +21,7 @@ Current supported Version is 1.18.12
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.4 |
+| intersight | =1.0.5 |
 
 ## Providers
 

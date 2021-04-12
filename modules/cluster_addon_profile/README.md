@@ -1,6 +1,6 @@
-# Kubernetes Trusted Registry Policy
+# Worker Profile
 
-This example creates an IKS Trusted Registry Policy based on the information provided in the module.
+This example creates a worker profile based on the information provided in the module.
 
 ## Usage
 
@@ -13,8 +13,6 @@ $ terraform apply
 ```
 
 Note that this example may create resources which are consumed for IKS clusters.  Please make sure to undeploy and delete the cluster before destroying these resources with `terraform destroy`.
-
-Current supported Version is 1.18.12
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
@@ -25,17 +23,19 @@ Current supported Version is 1.18.12
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| intersight | =1.0.5 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| api\_key | API Key | `string` | n/a | yes |
-| endpoint | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
-| organization | Organization Name | `string` | `"default"` | no |
-| secretkey | Secret Key or file location | `string` | n/a | yes |
-| tags | n/a | `list(map(string))` | `[]` | no |
+| addons | List of addons to be added to the policy. | `list(string)` | `[]` | no |
+| cluster\_moid | MOID of the cluster to be associated with this cluster addon profile. | `string` | `""` | no |
+| org\_name | Intersight Organization name | `string` | n/a | yes |
+| profile\_name | Name of the Cluster Addon Policy | `string` | n/a | yes |
+| tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
 
 ## Outputs
 

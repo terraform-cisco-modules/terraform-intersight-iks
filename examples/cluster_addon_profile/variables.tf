@@ -16,19 +16,7 @@ variable "organization" {
   description = "Organization Name"
   default     = "default"
 }
-variable "ssh_user" {
-  type        = string
-  description = "SSH Username for node login."
-}
-variable "ssh_key" {
-  type        = string
-  description = "SSH Public Key to be used to node login."
-}
-variable "vc_password" {
-  sensitive   = true
-  type        = string
-  description = "Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight."
-}
+
 variable "tags" {
   type    = list(map(string))
   default = []
