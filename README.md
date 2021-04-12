@@ -38,6 +38,7 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| cluster\_action | Cluster action wanted (ex. Deploy or Unassign) | `string` | `"Unassign"` | no |
 | cluster\_name | Name to be given to the cluster.  This will also prefix all attributes created by this module. | `string` | n/a | yes |
 | cni | Supported CNI type. Currently we only support Calico.\* Calico - Calico CNI plugin as described in https://github.com/projectcalico/cni-plugin. | `string` | `"Calico"` | no |
 | domain\_name | Domain Name information for DNS search. | `string` | n/a | yes |
@@ -47,10 +48,13 @@ No provider.
 | ip\_primary\_dns | Primary DNS Server for this pool. | `string` | n/a | yes |
 | ip\_secondary\_dns | Secondary DNS Server for this pool. | `string` | `""` | no |
 | ip\_starting\_address | Starting IP Address you want for this pool. | `string` | n/a | yes |
+| master\_count | Number of master nodes | `number` | `1` | no |
 | organization | Organization Name | `string` | `"default"` | no |
 | pod\_cidr | Pod CIDR Block to be used to assign POD IP Addresses. | `string` | `"100.65.0.0/16"` | no |
 | root\_ca\_registries | List of root CA certificates. | `list(string)` | `[]` | no |
 | service\_cidr | Service CIDR Block used to assign cluster service IP addresses. | `string` | `"100.64.0.0/24"` | no |
+| ssh\_key | SSH Public Key to be used to node login. | `string` | n/a | yes |
+| ssh\_user | SSH Username for node login. | `string` | n/a | yes |
 | tags | n/a | `list(map(string))` | `[]` | no |
 | timezone | The timezone of the node's system clock.  Check Terraform documentation for correct format.  Example America/New\_York | `string` | n/a | yes |
 | unsigned\_registries | List of unsigned registries to be supported. | `list(string)` | `[]` | no |
@@ -60,10 +64,15 @@ No provider.
 | vc\_portgroup | Name of the portgroup(s) to be used in this provider | `list(string)` | n/a | yes |
 | vc\_resource\_pool | Name of the resource pool to be used with this provider. | `string` | `""` | no |
 | vc\_target\_name | Target name as referenced in Intersight.  vCenter is currently the only supported target. | `string` | n/a | yes |
+| wait\_for\_completion | Wait for cluster completion true/false | `bool` | `false` | no |
+| worker\_count | Number of worker nodes wanted for the cluster. | `number` | `2` | no |
+| worker\_max | Maximum number of worker nodes in a cluster. | `number` | `50` | no |
 | worker\_size | Worker size attribute for worker nodes | `string` | n/a | yes |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| cluster\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -2,11 +2,34 @@ variable "cluster_name" {
   type        = string
   description = "Name to be given to the cluster.  This will also prefix all attributes created by this module."
 }
+variable "cluster_action" {
+  type        = string
+  description = "Cluster action wanted (ex. Deploy or Unassign)"
+  default     = "Unassign"
+}
 variable "vc_target_name" {
   type        = string
   description = "Target name as referenced in Intersight.  vCenter is currently the only supported target."
 }
-
+variable "worker_count" {
+  type        = number
+  description = "Number of worker nodes wanted for the cluster."
+  default     = 2
+}
+variable "worker_max" {
+  type        = number
+  description = "Maximum number of worker nodes in a cluster."
+  default     = 50
+}
+variable "worker_size" {
+  type        = string
+  description = "Worker size attribute for worker nodes"
+}
+variable "master_count" {
+  type        = number
+  description = "Number of master nodes"
+  default     = 1
+}
 variable "vc_cluster" {
   type        = string
   description = "Name of the cluster you wish to make part of this provider within vCenter."
@@ -77,7 +100,19 @@ variable "cni" {
   description = "Supported CNI type. Currently we only support Calico.* Calico - Calico CNI plugin as described in https://github.com/projectcalico/cni-plugin."
   default     = "Calico"
 }
-
+variable "ssh_user" {
+  type        = string
+  description = "SSH Username for node login."
+}
+variable "ssh_key" {
+  type        = string
+  description = "SSH Public Key to be used to node login."
+}
+variable "wait_for_completion" {
+  type        = bool
+  default     = false
+  description = "Wait for cluster completion true/false"
+}
 variable "root_ca_registries" {
   type        = list(string)
   description = "List of root CA certificates."
@@ -87,10 +122,6 @@ variable "unsigned_registries" {
   type        = list(string)
   description = "List of unsigned registries to be supported."
   default     = []
-}
-variable "worker_size" {
-  type        = string
-  description = "Worker size attribute for worker nodes"
 }
 variable "tags" {
   type    = list(map(string))
