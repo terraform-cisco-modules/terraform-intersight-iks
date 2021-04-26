@@ -11,10 +11,10 @@ module "iks_runtime_policy" {
 }
 ```
 
-This module will create a container runtime policy policy for IKS.  These policies can then be used to create IKS clusters.  This is an optional policy for IKS.
+This module will create a container runtime policy policy for IKS.  These policies can then be used to create IKS clusters.  This is an optional policy for IKS.  The container runtime policy provides for things such as proxy information and custom docker bridge CIDR information.
 
 
-These resources are created
+These resources are created:
 
 * [runtime-policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_container_runtime_policy)
 
@@ -24,13 +24,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Inputs
 

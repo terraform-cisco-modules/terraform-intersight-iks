@@ -5,13 +5,15 @@
 ```hcl
 module "iks_worker_profile" {
 
-  source = "../../modules/worker_profile"
+  source = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
 
   # omitted...
 }
 ```
 
-This module will create a VM Instance Policy for IKS.  This policy can then be used to create IKS clusters.
+This module will create a Node Profiles for building IKS clusters.
+This can be used to create custom IKS cluster modules.  It is used in the complete IKS cluster module define the worker pool desired size.
+
 
 
 These resources are created
@@ -25,13 +27,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >= 0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Inputs
 

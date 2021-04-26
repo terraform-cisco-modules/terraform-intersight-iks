@@ -1,4 +1,4 @@
-resource "intersight_kubernetes_node_group_profile" "iks_node_profile" {
+resource "intersight_kubernetes_node_group_profile" "this" {
 
   name        = var.name
   description = var.description

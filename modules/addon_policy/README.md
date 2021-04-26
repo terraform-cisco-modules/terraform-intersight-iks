@@ -11,7 +11,7 @@ module "iks_addon_policy" {
 }
 ```
 
-This module will loop through all addons in `addons` and add them to the addon policy.  This policy can be used when deploying IKS clusters.
+This module will create an addon policy for the respective addon.  A list of supported addons can be found in the documentation.
 
 
 These resources are created
@@ -24,13 +24,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Inputs
 

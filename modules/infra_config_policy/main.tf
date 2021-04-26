@@ -1,13 +1,13 @@
 # Looking up Organization MOID
-data "intersight_organization_organization" "organization" {
+data "intersight_organization_organization" "this" {
   name = var.org_name
 }
 # Looking up Asset Target MOID
-data "intersight_asset_target" "infra_target" {
+data "intersight_asset_target" "this" {
   name = var.device_name
 }
 
-resource "intersight_kubernetes_virtual_machine_infra_config_policy" "infra_provider" {
+resource "intersight_kubernetes_virtual_machine_infra_config_policy" "this" {
   name        = var.name
   description = var.description
   vm_config {
@@ -22,7 +22,7 @@ resource "intersight_kubernetes_virtual_machine_infra_config_policy" "infra_prov
   }
   target {
     object_type = "asset.DeviceRegistration"
-    moid        = data.intersight_asset_target.infra_target.results.0.registered_device[0].moid
+    moid        = data.intersight_asset_target.this.results.0.registered_device[0].moid
   }
   dynamic "tags" {
     for_each = var.tags
@@ -32,6 +32,6 @@ resource "intersight_kubernetes_virtual_machine_infra_config_policy" "infra_prov
     }
   }
   organization {
-    moid = data.intersight_organization_organization.organization.results.0.moid
+    moid = data.intersight_organization_organization.this.results.0.moid
   }
 }

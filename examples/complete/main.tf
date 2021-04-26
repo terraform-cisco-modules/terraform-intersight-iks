@@ -5,22 +5,22 @@ provider "intersight" {
 }
 
 module "terraform-intersight-iks" {
-  source = "./../.."
+  source = "terraform-cisco-modules/iks/intersight//"
   # Infra Config Policy Information
-  cluster_name = "techfieldday"
-  # cluster_action = "Deploy"
+  cluster_name     = "tn"
+  cluster_action   = "Deploy"
   vc_target_name   = "wakanda-vcenter.rich.ciscolabs.com"
-  vc_portgroup     = ["panther|tfd|iksACI"]
+  vc_portgroup     = ["panther|triggerMesh|tme"]
   vc_datastore     = "iks"
   vc_cluster       = "tchalla"
   vc_resource_pool = ""
   vc_password      = var.vc_password
 
   # IP Pool Information
-  ip_starting_address = "10.139.150.100"
+  ip_starting_address = "10.139.120.220"
   ip_pool_size        = "20"
   ip_netmask          = "255.255.255.0"
-  ip_gateway          = "10.139.150.1"
+  ip_gateway          = "10.139.120.1"
   ip_primary_dns      = "10.101.128.15"
   ip_secondary_dns    = "10.101.128.16"
 
@@ -30,15 +30,16 @@ module "terraform-intersight-iks" {
   # cni = "Calico"
   domain_name         = "rich.ciscolabs.com"
   timezone            = "America/New_York"
-  unsigned_registries = ["10.101.128.118"]
+  unsigned_registries = ["10.101.128.128"]
   # root_ca_registries  = [""]
 
   # Cluster information
-  ssh_user     = var.ssh_user
-  ssh_key      = var.ssh_key
-  worker_size  = "small"
-  worker_count = 4
-  master_count = 1
+  ssh_user       = var.ssh_user
+  ssh_key        = var.ssh_key
+  worker_size    = "small"
+  worker_count   = 4
+  master_count   = 1
+  load_balancers = 3
   # Organization and Tag
   organization = var.organization
   tags         = var.tags

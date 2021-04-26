@@ -11,11 +11,13 @@ module "iks_infra_provider" {
 }
 ```
 
-This module will lookup the infrastructure target (i.e. vCenter) via the target name.  It will then create a Kubernetes Infrastructure Provider using that target and the additional variables defined in infra_list.
+This module will lookup the infrastructure target (i.e. vCenter) via the target name.  It will then create a Kubernetes Infrastructure Configuration Policy for that target.  This can be used to build IKS clusters.  
+
+The variable "device_name" is the target name for the infrastructure provider.  This can be located in Intersight--->Targets
 
 
 These resources are created
-* [infrastructure provider](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_infrastructure_provider)
+* [infrastructure provider](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_infra_config_policy)
 
 
 
@@ -25,13 +27,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Inputs
 
@@ -40,7 +42,7 @@ These resources are created
 | description | Description to be used to describe the infrastructure configuration policy | `string` | `""` | no |
 | device\_name | Name of the Virtual Machine Provider you wish to add.  i.e vCenter | `string` | n/a | yes |
 | name | Name of the Infrastructure Provider to be created | `string` | n/a | yes |
-| org\_name | Intersight Organization name | `string` | n/a | yes |
+| org\_name | Intersight Organization name | `string` | `"default"` | no |
 | tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
 | vc\_cluster | Name of the cluster you wish to make part of this provider within vCenter. | `string` | n/a | yes |
 | vc\_datastore | Name of the datastore to be used with this provider. | `string` | n/a | yes |

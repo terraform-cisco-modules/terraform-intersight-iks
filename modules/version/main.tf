@@ -1,19 +1,19 @@
 #Importing the Organization MOID
-data "intersight_organization_organization" "organization" {
+data "intersight_organization_organization" "this" {
   name = var.org_name
 }
 #Importing the Kubernetes Version available
-data "intersight_kubernetes_version" "version" {
+data "intersight_kubernetes_version" "this" {
 
   kubernetes_version = join("", ["v", var.k8s_version])
 }
-resource "intersight_kubernetes_version_policy" "iks_version" {
+resource "intersight_kubernetes_version_policy" "this" {
 
   name = var.k8s_version_name
   nr_version {
 
     object_type = "kubernetes.Version"
-    moid        = data.intersight_kubernetes_version.version.results.0.moid
+    moid        = data.intersight_kubernetes_version.this.results.0.moid
 
   }
 
@@ -27,6 +27,6 @@ resource "intersight_kubernetes_version_policy" "iks_version" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.this.results.0.moid
   }
 }

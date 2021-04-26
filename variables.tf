@@ -16,6 +16,11 @@ variable "worker_count" {
   description = "Number of worker nodes wanted for the cluster."
   default     = 2
 }
+variable "load_balancers" {
+  type        = number
+  description = "Number of load_balancers for the cluster."
+  default     = 3
+}
 variable "worker_max" {
   type        = number
   description = "Maximum number of worker nodes in a cluster."

@@ -1,10 +1,10 @@
 # Looking up Organization MOID
-data "intersight_organization_organization" "organization" {
+data "intersight_organization_organization" "this" {
   name = var.org_name
 }
 
 # Supports IPV4 today.
-resource "intersight_ippool_pool" "ip_pool" {
+resource "intersight_ippool_pool" "this" {
   name = var.name
   ip_v4_blocks {
     from = var.starting_address
@@ -19,7 +19,7 @@ resource "intersight_ippool_pool" "ip_pool" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.this.results.0.moid
   }
 
   dynamic "tags" {

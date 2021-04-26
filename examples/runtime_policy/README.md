@@ -11,6 +11,29 @@ $ terraform init
 $ terraform plan
 $ terraform apply
 ```
+** Additional ".tf" file examples are located within the GITHUB Repo.  Link Above.
+
+main.tf
+```
+provider "intersight" {
+  apikey    = var.api_key
+  secretkey = var.secretkey
+  endpoint  = var.endpoint
+}
+
+module "iks_runtime" {
+  source = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
+
+  name                 = "tf_runtime"
+  proxy_http_hostname  = "esl.proxy.cisco.com"
+  proxy_https_hostname = "esl.proxy.cisco.com"
+  proxy_http_port      = 80
+  proxy_https_port     = 8080
+
+  org_name             = var.organization
+  tags                 = var.tags
+}
+```
 
 Note that this example may create resources which are consumed for IKS clusters.  Please make sure to undeploy and delete the cluster before destroying these resources with `terraform destroy`.
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -19,7 +42,7 @@ Note that this example may create resources which are consumed for IKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | =1.0.7 |
 
 ## Providers
 

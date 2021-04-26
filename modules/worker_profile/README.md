@@ -11,7 +11,7 @@ module "iks_worker_profile" {
 }
 ```
 
-This module will create a VM Instance Policy for IKS.  This policy can then be used to create IKS clusters.
+This module will create a VM Instance Policy for IKS.  This policy can then be used to create IKS clusters.  This can be used to create "t-shirt" sizes for the worker nodes.  (i.e small, medium, large, x-large, etc...)
 
 
 These resources are created
@@ -25,13 +25,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >= 0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Inputs
 
