@@ -7,8 +7,8 @@ provider "intersight" {
 module "terraform-intersight-iks" {
   source = "terraform-cisco-modules/iks/intersight//"
   # Infra Config Policy Information
-  cluster_name     = "tn"
-  cluster_action   = "Deploy"
+  cluster_name = "test0920"
+  # cluster_action   = "Deploy"
   vc_target_name   = "wakanda-vcenter.rich.ciscolabs.com"
   vc_portgroup     = ["panther|triggerMesh|tme"]
   vc_datastore     = "iks"

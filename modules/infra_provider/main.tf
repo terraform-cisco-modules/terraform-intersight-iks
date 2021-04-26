@@ -1,5 +1,5 @@
 
-resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "infra_provider" {
+resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "this" {
   name        = var.name
   description = var.description
 
