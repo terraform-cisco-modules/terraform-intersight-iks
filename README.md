@@ -6,20 +6,30 @@ A terraform module to create a managed Kubernetes clusters using Intersight Kube
 <!-- Inspired by and adapted from [this doc](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs) -->
 and its [source code](https://github.com/CiscoDevNet/terraform-provider-intersight).
 
+
 ## Assumptions
 
 * You want to create an IKS cluster on your on-premises infrastructure using Intersight.
 * These resources will be provided using Intersight and VMware vCenter 6.7.
 * You've claimed vCenter using the Intersight Assist Appliance.
-* You are a member of the Early Access Pilot.
 
-## Important Note
+## Details
 
-This platform is currently in Early Access and comes with no support.  Please contact your Cisco Sales Representative regarding any issues/feature requests.
+This module creates all of the resources required for IKS.  Those resources are identitified below.  It is designed as a quickstart/example of how to get an IKS cluster running.  More customization is being enabled but currently there are some caveats:
+
+1.  Re-using IP Pools is not available in this module yet.  *this is a work in progress
+2.  Currently 3 "t-shirt" sizes are built
+    1.  Small - 4vcpu, 16GB Memory, 40GB Disk
+    2.  Medium - 8vcpu, 24GB Memory, 60GB Disk
+    3.  Large - 12vcpu, 32GB Memory, 80GB Disk
+3.  2 DNS and 2 NTP servers are required.  If you do not have 2, list the single DNS and NTP server twice.
+4.  The 
+
+## Usage
+
+See the Examples ---> Complete directory for usage of this module.
 
 **Always check [Kubernetes Release Notes](https://kubernetes.io/docs/setup/release/notes/) before updating the major version.**
-
-## Usage Example
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -28,7 +38,7 @@ This platform is currently in Early Access and comes with no support.  Please co
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
@@ -48,6 +58,7 @@ No provider.
 | ip\_primary\_dns | Primary DNS Server for this pool. | `string` | n/a | yes |
 | ip\_secondary\_dns | Secondary DNS Server for this pool. | `string` | `""` | no |
 | ip\_starting\_address | Starting IP Address you want for this pool. | `string` | n/a | yes |
+| load\_balancers | Number of load\_balancers for the cluster. | `number` | `3` | no |
 | master\_count | Number of master nodes | `number` | `1` | no |
 | organization | Organization Name | `string` | `"default"` | no |
 | pod\_cidr | Pod CIDR Block to be used to assign POD IP Addresses. | `string` | `"100.65.0.0/16"` | no |

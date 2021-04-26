@@ -1,12 +1,3 @@
-
-variable "org_name" {
-  type        = string
-  description = "Intersight Organization name"
-}
-# variable "device_name" {
-#   type        = string
-#   description = "Name of the Virtual Machine Provider you wish to add.  i.e vCenter"
-# }
 variable "name" {
   type        = string
   description = "Name of the Infrastructure Provider to be created"

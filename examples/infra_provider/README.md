@@ -19,7 +19,7 @@ Note that this example may create resources which are consumed for IKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | =1.0.7 |
 
 ## Providers
 
@@ -31,7 +31,6 @@ No provider.
 |------|-------------|------|---------|:--------:|
 | api\_key | API Key | `string` | n/a | yes |
 | endpoint | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
-| organization | Organization Name | `string` | `"default"` | no |
 | secretkey | Secret Key or file location | `string` | n/a | yes |
 | tags | n/a | `list(map(string))` | `[]` | no |
 | vc\_password | Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight. | `string` | n/a | yes |

@@ -12,6 +12,7 @@ module "iks_version" {
 ```
 
 This module will create the Kubernetes Version Policy IKS.  This policy can then be used to create IKS clusters.
+Check with the IKS documentation for supported Kubernetes Versions
 
 
 These resources are created
@@ -25,13 +26,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Inputs
 

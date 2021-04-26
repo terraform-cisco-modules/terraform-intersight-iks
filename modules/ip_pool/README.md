@@ -13,8 +13,6 @@ module "ip_pool" {
 
 This module will deploy an IP Pool Policy within Intersight.  This can be used to create IKS clusters or other objects that require an IP Pool.  
 
-* This sub-module will be moved into a different module repository at a future date.
-
 
 These resources are created
 
@@ -26,13 +24,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Inputs
 

@@ -1,10 +1,10 @@
 # Looking up Organization MOID
-data "intersight_organization_organization" "organization" {
+data "intersight_organization_organization" "this" {
   name = var.org_name
 }
 
 # Creating Runtime Policy
-resource "intersight_kubernetes_container_runtime_policy" "runtime_policy" {
+resource "intersight_kubernetes_container_runtime_policy" "this" {
   name        = var.name
   description = var.description
 
@@ -34,6 +34,6 @@ resource "intersight_kubernetes_container_runtime_policy" "runtime_policy" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.this.results.0.moid
   }
 }

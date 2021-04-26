@@ -1,8 +1,8 @@
-data "intersight_organization_organization" "organization" {
+data "intersight_organization_organization" "this" {
   name = var.org_name
 }
 
-resource "intersight_kubernetes_trusted_registries_policy" "registries" {
+resource "intersight_kubernetes_trusted_registries_policy" "this" {
 
 
   name                = var.policy_name
@@ -10,7 +10,7 @@ resource "intersight_kubernetes_trusted_registries_policy" "registries" {
   unsigned_registries = var.unsigned_registries
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.this.results.0.moid
   }
 
   dynamic "tags" {

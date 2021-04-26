@@ -20,9 +20,8 @@ module "ip_pool_policy" {
   gateway          = var.ip_gateway
   primary_dns      = var.ip_primary_dns
   secondary_dns    = var.ip_secondary_dns
-
-  org_name = var.organization
-  tags     = var.tags
+  org_name         = var.organization
+  tags             = var.tags
 }
 
 module "network" {
@@ -40,67 +39,59 @@ module "trusted_registry" {
   source              = "terraform-cisco-modules/iks/intersight//modules/trusted_registry"
   policy_name         = "${var.cluster_name}-trusted-registry"
   unsigned_registries = var.unsigned_registries
-
-  org_name = var.organization
-  tags     = var.tags
+  org_name            = var.organization
+  tags                = var.tags
 }
 
 module "k8s_version" {
   source           = "terraform-cisco-modules/iks/intersight//modules/version"
   k8s_version      = "1.19.5"
   k8s_version_name = "${var.cluster_name}-1.19.5"
-
-  org_name = var.organization
-  tags     = var.tags
+  org_name         = var.organization
+  tags             = var.tags
 }
 
 module "worker_small" {
   source    = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
-  name      = "${var.cluster_name}-worker-small"
+  name      = join("-", [var.cluster_name, "small"])
   cpu       = 4
   memory    = 16384
   disk_size = 40
-
-  org_name = var.organization
-  tags     = var.tags
+  org_name  = var.organization
+  tags      = var.tags
 }
 module "worker_medium" {
   source    = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
-  name      = join("-", [var.cluster_name, "worker_medium"])
+  name      = join("-", [var.cluster_name, "medium"])
   cpu       = 8
   memory    = 24576
   disk_size = 60
-
-  org_name = var.organization
-  tags     = var.tags
+  org_name  = var.organization
+  tags      = var.tags
 }
 module "worker_large" {
   source    = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
-  name      = join("-", [var.cluster_name, "worker_large"])
+  name      = join("-", [var.cluster_name, "large"])
   cpu       = 12
   memory    = 32768
   disk_size = 80
-
-  org_name = var.organization
-  tags     = var.tags
+  org_name  = var.organization
+  tags      = var.tags
 }
-
-
 module "cluster" {
   source                       = "terraform-cisco-modules/iks/intersight//modules/cluster"
-  name                         = "${var.cluster_name}-cluster"
+  name                         = var.cluster_name
   action                       = var.cluster_action
   wait_for_completion          = var.wait_for_completion
   ip_pool_moid                 = module.ip_pool_policy.ip_pool_moid
-  load_balancer                = 2
+  load_balancer                = var.load_balancers
   ssh_key                      = var.ssh_key
   ssh_user                     = var.ssh_user
   net_config_moid              = module.network.network_policy_moid
   sys_config_moid              = module.network.sys_config_policy_moid
   trusted_registry_policy_moid = module.trusted_registry.trusted_registry_moid
-
-  org_name = var.organization
-  tags     = var.tags
+  org_name                     = var.organization
+  tags                         = var.tags
 }
 
 module "control_profile" {
@@ -117,7 +108,7 @@ module "control_profile" {
 
 module "worker_profile" {
   source       = "terraform-cisco-modules/iks/intersight//modules/node_profile"
-  name         = "${var.cluster_name}-worker-profile"
+  name         = "${var.cluster_name}-worker_profile"
   profile_type = "Worker"
   desired_size = var.worker_count
   max_size     = var.worker_max
@@ -137,15 +128,18 @@ module "control_provider" {
   )
   node_group_moid          = module.control_profile.node_group_profile_moid
   infra_config_policy_moid = module.infra_config_policy.infra_config_moid
-  org_name                 = var.organization
   tags                     = var.tags
 }
 module "worker_provider" {
-  source                   = "terraform-cisco-modules/iks/intersight//modules/infra_provider"
-  name                     = "${var.cluster_name}-worker-small"
-  instance_type_moid       = module.worker_small.worker_profile_moid
+  source = "terraform-cisco-modules/iks/intersight//modules/infra_provider"
+  name   = "${var.cluster_name}-worker"
+  instance_type_moid = trimspace(<<-EOT
+  %{if var.worker_size == "small"~}${module.worker_small.worker_profile_moid}%{endif~}
+  %{if var.worker_size == "medium"~}${module.worker_medium.worker_profile_moid}%{endif~}
+  %{if var.worker_size == "large"~}${module.worker_large.worker_profile_moid}%{endif~}
+  EOT
+  )
   node_group_moid          = module.worker_profile.node_group_profile_moid
   infra_config_policy_moid = module.infra_config_policy.infra_config_moid
-  org_name                 = var.organization
   tags                     = var.tags
 }

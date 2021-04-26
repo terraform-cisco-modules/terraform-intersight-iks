@@ -1,10 +1,10 @@
 # Looking up Organization MOID
-data "intersight_organization_organization" "organization" {
+data "intersight_organization_organization" "this" {
   name = var.org_name
 }
 
 # Creating cluster policy
-resource "intersight_kubernetes_cluster_profile" "cluster" {
+resource "intersight_kubernetes_cluster_profile" "this" {
 
   name                = var.name
   description         = var.description
@@ -44,6 +44,6 @@ resource "intersight_kubernetes_cluster_profile" "cluster" {
   }
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.this.results.0.moid
   }
 }

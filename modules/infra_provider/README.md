@@ -11,7 +11,14 @@ module "iks_infra_provider" {
 }
 ```
 
-This module will lookup the infrastructure target (i.e. vCenter) via the target name.  It will then create a Kubernetes Infrastructure Provider using that target and the additional variables defined in infra_list.
+This module creates the infrastructure provider for deploying IKS clusters.  It is not meant to be used standalone, but it can be used for custom IKS cluster modules.
+
+There are 3 values that are looked up. 
+instance_type_moid
+node_group_moid
+infra_config_policy_moid
+
+These values are derived from other module builds or manual object builds within Intersight.
 
 
 These resources are created
@@ -25,13 +32,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Inputs
 
@@ -42,7 +49,6 @@ These resources are created
 | instance\_type\_moid | MOID of the Instance type mapped to this provider | `string` | `""` | no |
 | name | Name of the Infrastructure Provider to be created | `string` | n/a | yes |
 | node\_group\_moid | MOID of the Node Group mapped to this provider | `string` | `""` | no |
-| org\_name | Intersight Organization name | `string` | n/a | yes |
 | tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
 
 ## Outputs

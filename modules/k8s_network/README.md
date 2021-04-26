@@ -13,6 +13,10 @@ module "iks_network_policies" {
 
 This module will create the Network and System Configuration policies for IKS.  These policies can then be used to create IKS clusters.
 
+Currently the DNS and NTP servers requires two values, a primary and a secondary.  If you ONLY have a single DNS or NTP server, add the primary server twice.
+
+*This is a todo to fix.
+
 
 These resources are created
 * [Network Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_network_policy)
@@ -27,13 +31,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | =1.0.5 |
+| intersight | >=1.0.7 |
 
 ## Inputs
 
