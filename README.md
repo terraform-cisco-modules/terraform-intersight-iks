@@ -23,7 +23,7 @@ This module creates all of the resources required for IKS.  Those resources are 
     2.  Medium - 8vcpu, 24GB Memory, 60GB Disk
     3.  Large - 12vcpu, 32GB Memory, 80GB Disk
 3.  2 DNS and 2 NTP servers are required.  If you do not have 2, list the single DNS and NTP server twice.
-4.  The 
+4.  The addons module does not currently function.
 
 ## Usage
 
