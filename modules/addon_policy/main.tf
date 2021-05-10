@@ -1,12 +1,12 @@
 # Looking up Organization MOID
-data "intersight_organization_organization" "organization" {
+data "intersight_organization_organization" "this" {
   name = var.org_name
 }
-data "intersight_kubernetes_addon_definition" "addon" {
+data "intersight_kubernetes_addon_definition" "this" {
   name = var.addons
 }
 # Creating addon Policy
-resource "intersight_kubernetes_addon_policy" "addon_policy" {
+resource "intersight_kubernetes_addon_policy" "this" {
   name        = var.addon_policy_name
   description = var.description
 
@@ -16,7 +16,7 @@ resource "intersight_kubernetes_addon_policy" "addon_policy" {
   }
 
   addon_definition {
-    moid = data.intersight_kubernetes_addon_definition.addon.results.0.moid
+    moid = data.intersight_kubernetes_addon_definition.this.results.0.moid
   }
 
   dynamic "tags" {
@@ -29,6 +29,6 @@ resource "intersight_kubernetes_addon_policy" "addon_policy" {
 
   organization {
     object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.organization.results.0.moid
+    moid        = data.intersight_organization_organization.this.results.0.moid
   }
 }

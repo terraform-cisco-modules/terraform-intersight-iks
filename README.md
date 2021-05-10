@@ -56,7 +56,9 @@ No provider.
 | ip\_netmask | Subnet Mask for this pool. | `string` | n/a | yes |
 | ip\_pool\_size | Number of IPs you want this pool to contain. | `string` | n/a | yes |
 | ip\_primary\_dns | Primary DNS Server for this pool. | `string` | n/a | yes |
+| ip\_primary\_ntp | Primary NTP Server for this pool. | `string` | n/a | yes |
 | ip\_secondary\_dns | Secondary DNS Server for this pool. | `string` | `""` | no |
+| ip\_secondary\_ntp | Secondary NTP Server for this pool. | `string` | `""` | no |
 | ip\_starting\_address | Starting IP Address you want for this pool. | `string` | n/a | yes |
 | load\_balancers | Number of load\_balancers for the cluster. | `number` | `3` | no |
 | master\_count | Number of master nodes | `number` | `1` | no |
