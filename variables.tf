@@ -82,6 +82,15 @@ variable "ip_secondary_dns" {
   description = "Secondary DNS Server for this pool."
   default     = ""
 }
+variable "ip_primary_ntp" {
+  type        = string
+  description = "Primary NTP Server for this pool."
+}
+variable "ip_secondary_ntp" {
+  type        = string
+  description = "Secondary NTP Server for this pool."
+  default     = ""
+}
 variable "timezone" {
   type        = string
   description = "The timezone of the node's system clock.  Check Terraform documentation for correct format.  Example America/New_York"

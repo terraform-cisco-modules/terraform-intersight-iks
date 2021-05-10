@@ -28,7 +28,7 @@ module "network" {
   source      = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
   policy_name = "${var.cluster_name}-network"
   dns_servers = [var.ip_primary_dns, var.ip_secondary_dns]
-  ntp_servers = [var.ip_primary_dns, var.ip_secondary_dns]
+  ntp_servers = [var.ip_primary_ntp, var.ip_secondary_ntp]
   timezone    = var.timezone
   domain_name = var.domain_name
   org_name    = var.organization
