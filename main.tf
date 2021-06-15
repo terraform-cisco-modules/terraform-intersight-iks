@@ -126,7 +126,7 @@ module "addons" {
 }
 module "cluster_addon_profile" {
 
-  source     = "terraform-cisco-modules/iks/intersight//cluster_addon_profile"
+  source     = "terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile"
   count      = var.addons_list != null ? 1 : 0
   depends_on = [module.addons]
   # source       = "terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile"
