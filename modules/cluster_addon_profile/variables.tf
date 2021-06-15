@@ -1,7 +1,3 @@
-# variable "addon_policy_moid" {
-#   type        = string
-#   description = "MOID of the addon policy to be associated with this profile"
-# }
 variable "addons" {
   type        = list(string)
   default     = []

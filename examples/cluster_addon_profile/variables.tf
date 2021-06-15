@@ -1,4 +1,4 @@
-variable "api_key" {
+variable "apikey" {
   type        = string
   description = "API Key"
 }
