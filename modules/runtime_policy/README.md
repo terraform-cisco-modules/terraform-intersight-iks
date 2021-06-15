@@ -44,12 +44,12 @@ These resources are created:
 | proxy\_http\_hostname | HTTP Proxy server FQDN or IP. | `string` | n/a | yes |
 | proxy\_http\_password | The password for the HTTP Proxy. | `string` | `""` | no |
 | proxy\_http\_port | The HTTP Proxy port number.The port number of the HTTP proxy must be between 1 and 65535, inclusive. | `number` | `8080` | no |
-| proxy\_http\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"HTTP"` | no |
+| proxy\_http\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"http"` | no |
 | proxy\_http\_username | The username for the HTTP Proxy. | `string` | `""` | no |
 | proxy\_https\_hostname | HTTPS Proxy server FQDN or IP. | `string` | n/a | yes |
 | proxy\_https\_password | The password for the HTTPS Proxy. | `string` | `""` | no |
 | proxy\_https\_port | The HTTPS Proxy port number.The port number of the HTTPS proxy must be between 1 and 65535, inclusive. | `number` | `8443` | no |
-| proxy\_https\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"HTTPS"` | no |
+| proxy\_https\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"https"` | no |
 | proxy\_https\_username | The username for the HTTPS Proxy. | `string` | `""` | no |
 | tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
 

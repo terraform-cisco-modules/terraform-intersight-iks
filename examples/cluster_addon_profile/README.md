@@ -12,6 +12,20 @@ $ terraform plan
 $ terraform apply
 ```
 
+This module uses the addon policy(s) that have already been created.  
+
+```
+module "cluster_addon_profile" {
+
+  source       = "terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile"
+  profile_name = "test-addon"
+  addons       = ["dashboard"]
+
+  org_name = var.organization
+  tags     = var.tags
+}
+```
+
 Note that this example may create resources which are consumed for IKS clusters.  Please make sure to undeploy and delete the cluster before destroying these resources with `terraform destroy`.
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -19,7 +33,7 @@ Note that this example may create resources which are consumed for IKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.8 |
+| intersight | =1.0.9 |
 
 ## Providers
 
@@ -29,7 +43,7 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| api\_key | API Key | `string` | n/a | yes |
+| apikey | API Key | `string` | n/a | yes |
 | endpoint | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
 | organization | Organization Name | `string` | `"default"` | no |
 | secretkey | Secret Key or file location | `string` | n/a | yes |

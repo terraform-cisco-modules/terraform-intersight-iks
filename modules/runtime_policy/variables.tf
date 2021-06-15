@@ -38,7 +38,7 @@ variable "proxy_http_port" {
 }
 variable "proxy_http_protocol" {
   type        = string
-  default     = "HTTP"
+  default     = "http"
   description = " Protocol to use for the HTTPS Proxy."
 }
 variable "proxy_https_hostname" {
@@ -62,7 +62,7 @@ variable "proxy_https_port" {
 }
 variable "proxy_https_protocol" {
   type        = string
-  default     = "HTTPS"
+  default     = "https"
   description = " Protocol to use for the HTTPS Proxy."
 }
 variable "docker_no_proxy" {

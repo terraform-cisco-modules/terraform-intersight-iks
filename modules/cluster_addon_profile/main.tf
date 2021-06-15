@@ -18,6 +18,7 @@ resource "intersight_kubernetes_cluster_addon_profile" "this" {
       addon_policy {
         moid = addons.value.results.0["moid"]
       }
+      name = addons.value.results.0["name"]
     }
   }
 

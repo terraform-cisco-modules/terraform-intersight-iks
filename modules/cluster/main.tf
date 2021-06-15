@@ -23,9 +23,6 @@ resource "intersight_kubernetes_cluster_profile" "this" {
     ]
     ssh_user = var.ssh_user
   }
-  # addons {
-  #   moid = var.addon_policy_moid
-  # }
   trusted_registries {
     moid = var.trusted_registry_policy_moid
   }
@@ -35,6 +32,7 @@ resource "intersight_kubernetes_cluster_profile" "this" {
   sys_config {
     moid = var.sys_config_moid
   }
+
   dynamic "tags" {
     for_each = var.tags
     content {

@@ -9,6 +9,10 @@ variable "name" {
 variable "starting_address" {
   type        = string
   description = "Starting IP Address you want for this pool."
+  # validation {
+  #   condition = can(regex("^(?:[0-9]{1,3}.){3}[0-9]{1,3}$"))
+  #   error_message = "Must be a valid IP Address X.X.X.X"
+  # }
 }
 variable "pool_size" {
   type        = string

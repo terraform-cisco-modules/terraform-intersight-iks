@@ -22,23 +22,25 @@ provider "intersight" {
   secretkey = var.secretkey
   endpoint  = var.endpoint
 }
-module "iks_addon_dashboard" {
+module "addons" {
 
-  source            = "../../modules/addon_policy"
-  addon_policy_name = "dashboard"
-  addons            = "kubernetes-dashboard"
-  upgrade_strategy  = "AlwaysReinstall"
-  install_strategy  = "InstallOnly"
-  org_name          = var.organization
-  tags              = var.tags
-}
-module "iks_addon_monitor" {
+  source            = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
+  addons = [{
+    addon_policy_name = "dashboard"
+    addon = "kubernetes-dashboard"
+    description = "K8s Dashboard Policy"
+    upgrade_strategy = "AlwaysReinstall"
+    install_strategy = "InstallOnly"
+  },
+  {
+    addon_policy_name = "monitor"
+    addon = "ccp-monitor"
+    description = "Grafana Policy"
+    upgrade_strategy = "AlwaysReinstall"
+    install_strategy = "InstallOnly"
+  }
+  ]
 
-  source            = "../../modules/addon_policy"
-  addon_policy_name = "monitor"
-  addons            = "ccp-monitor"
-  upgrade_strategy  = "AlwaysReinstall"
-  install_strategy  = "InstallOnly"
   org_name          = var.organization
   tags              = var.tags
 }
@@ -53,7 +55,7 @@ Note that this example may create resources which are consumed for IKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.8 |
+| intersight | =1.0.9 |
 
 ## Providers
 
@@ -63,7 +65,7 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| api\_key | API Key | `string` | n/a | yes |
+| apikey | API Key | `string` | n/a | yes |
 | endpoint | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
 | organization | Organization Name | `string` | `"default"` | no |
 | secretkey | Secret Key or file location | `string` | n/a | yes |
@@ -71,6 +73,8 @@ No provider.
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| addon\_policy | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

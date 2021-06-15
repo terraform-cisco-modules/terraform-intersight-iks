@@ -39,6 +39,8 @@ Note that this example may create resources which are consumed for IKS clusters.
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| addon\_profile | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
