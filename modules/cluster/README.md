@@ -37,7 +37,6 @@ These resources are created
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | action | Action for cluster. i.e 'Deploy' 'Unassign' | `string` | `"Unassign"` | no |
-| addon\_policy\_moid | MOID for the Addon Policy that is being consumed. | `string` | `""` | no |
 | description | Description to be used to describe the cluster profile. | `string` | `""` | no |
 | ip\_pool\_moid | MOID derived from the IP Pool that is being consumed. | `string` | n/a | yes |
 | load\_balancer | Number of load balancer addresses to deploy. | `number` | n/a | yes |
@@ -57,5 +56,6 @@ These resources are created
 | Name | Description |
 |------|-------------|
 | cluster\_moid | n/a |
+| k8s\_cluster\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

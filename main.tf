@@ -18,8 +18,8 @@ module "ip_pool_policy" {
   pool_size        = var.ip_pool_size
   netmask          = var.ip_netmask
   gateway          = var.ip_gateway
-  primary_dns      = var.ip_primary_dns
-  secondary_dns    = var.ip_secondary_dns
+  primary_dns      = var.dns_servers[0]
+  secondary_dns    = length(var.dns_servers) > 1 ? var.dns_servers[1] : null
   org_name         = var.organization
   tags             = var.tags
 }
@@ -27,26 +27,48 @@ module "ip_pool_policy" {
 module "network" {
   source      = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
   policy_name = "${var.cluster_name}-network"
-  dns_servers = [var.ip_primary_dns, var.ip_secondary_dns]
-  ntp_servers = [var.ip_primary_ntp, var.ip_secondary_ntp]
+  dns_servers = var.dns_servers
+  ntp_servers = var.ntp_servers
   timezone    = var.timezone
   domain_name = var.domain_name
   org_name    = var.organization
   tags        = var.tags
 }
 
+
 module "trusted_registry" {
+  count               = length(var.unsigned_registries) > 0 || length(var.root_ca_registries) > 0 ? 1 : 0
   source              = "terraform-cisco-modules/iks/intersight//modules/trusted_registry"
   policy_name         = "${var.cluster_name}-trusted-registry"
   unsigned_registries = var.unsigned_registries
+  root_ca_registries  = var.root_ca_registries
   org_name            = var.organization
   tags                = var.tags
 }
 
+module "runtime_policy" {
+  source               = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
+  count                = var.proxy_http_hostname != "" && var.proxy_https_hostname != "" ? 1 : 0
+  name                 = "${var.cluster_name}-runtime"
+  proxy_http_hostname  = var.proxy_http_hostname
+  proxy_https_hostname = var.proxy_https_hostname
+  proxy_http_port      = var.proxy_http_port
+  proxy_https_port     = var.proxy_https_port
+  proxy_http_protocol  = var.proxy_http_protocol
+  proxy_https_protocol = var.proxy_https_protocol
+  proxy_http_username  = var.proxy_http_username
+  proxy_https_username = var.proxy_https_username
+  proxy_http_password  = var.proxy_http_password
+  proxy_https_password = var.proxy_https_password
+  docker_no_proxy      = var.docker_no_proxy
+  org_name             = var.organization
+  tags                 = var.tags
+}
+
 module "k8s_version" {
   source           = "terraform-cisco-modules/iks/intersight//modules/version"
-  k8s_version      = "1.19.5"
-  k8s_version_name = "${var.cluster_name}-1.19.5"
+  k8s_version      = var.k8s_version
+  k8s_version_name = "${var.cluster_name}-${var.k8s_version}"
   org_name         = var.organization
   tags             = var.tags
 }
@@ -78,7 +100,7 @@ module "worker_large" {
   org_name  = var.organization
   tags      = var.tags
 }
-module "cluster" {
+module "cluster_profile" {
   source                       = "terraform-cisco-modules/iks/intersight//modules/cluster"
   name                         = var.cluster_name
   action                       = var.cluster_action
@@ -89,32 +111,57 @@ module "cluster" {
   ssh_user                     = var.ssh_user
   net_config_moid              = module.network.network_policy_moid
   sys_config_moid              = module.network.sys_config_policy_moid
-  trusted_registry_policy_moid = module.trusted_registry.trusted_registry_moid
+  trusted_registry_policy_moid = length(module.trusted_registry) > 0 ? module.trusted_registry[0].trusted_registry_moid : null
+  runtime_policy_moid          = length(module.runtime_policy) > 0 ? module.runtime_policy[0].runtime_policy_moid : null
   org_name                     = var.organization
   tags                         = var.tags
 }
 
+module "addons" {
+
+  source   = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
+  addons   = var.addons_list
+  org_name = var.organization
+  tags     = var.tags
+}
+module "cluster_addon_profile" {
+
+  source     = "terraform-cisco-modules/iks/intersight//cluster_addon_profile"
+  count      = var.addons_list != null ? 1 : 0
+  depends_on = [module.addons]
+  # source       = "terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile"
+  profile_name = "${var.cluster_name}-addon-profile"
+
+  # addons = ["dashboard","monitor"]
+  addons       = keys(module.addons.addon_policy)
+  cluster_moid = module.cluster_profile.k8s_cluster_moid
+  org_name     = var.organization
+  tags         = var.tags
+}
+
 module "control_profile" {
-  source       = "terraform-cisco-modules/iks/intersight//modules/node_profile"
+  source = "terraform-cisco-modules/iks/intersight//modules/node_profile"
+  # source = "/Users/jusbarks/github/terraform-intersight-iks/modules/node_profile"
   name         = "${var.cluster_name}-control"
   profile_type = "ControlPlane"
   desired_size = var.master_count
   max_size     = 3
   ip_pool_moid = module.ip_pool_policy.ip_pool_moid
   version_moid = module.k8s_version.version_policy_moid
-  cluster_moid = module.cluster.cluster_moid
+  cluster_moid = module.cluster_profile.cluster_moid
 
 }
 
 module "worker_profile" {
-  source       = "terraform-cisco-modules/iks/intersight//modules/node_profile"
+  source = "terraform-cisco-modules/iks/intersight//modules/node_profile"
+  # source = "/Users/jusbarks/github/terraform-intersight-iks/modules/node_profile"
   name         = "${var.cluster_name}-worker_profile"
   profile_type = "Worker"
   desired_size = var.worker_count
   max_size     = var.worker_max
   ip_pool_moid = module.ip_pool_policy.ip_pool_moid
   version_moid = module.k8s_version.version_policy_moid
-  cluster_moid = module.cluster.cluster_moid
+  cluster_moid = module.cluster_profile.cluster_moid
 
 }
 module "control_provider" {

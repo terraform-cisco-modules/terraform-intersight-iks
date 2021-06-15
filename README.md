@@ -22,12 +22,81 @@ This module creates all of the resources required for IKS.  Those resources are 
     1.  Small - 4vcpu, 16GB Memory, 40GB Disk
     2.  Medium - 8vcpu, 24GB Memory, 60GB Disk
     3.  Large - 12vcpu, 32GB Memory, 80GB Disk
-3.  2 DNS and 2 NTP servers are required.  If you do not have 2, list the single DNS and NTP server twice.
-4.  The addons module does not currently function.
 
 ## Usage
 
-See the Examples ---> Complete directory for usage of this module.
+See the [Examples](https://github.com/terraform-cisco-modules/terraform-intersight-iks/tree/main/examples) ---> Complete directory for usage of this module.
+
+Sample main.tf file.  Change variables as needed.  See the above Exapmles folder for more information.
+
+```
+provider "intersight" {
+  apikey    = var.apikey
+  secretkey = var.secretkey
+  endpoint  = var.endpoint
+}
+
+module "terraform-intersight-iks" {
+  source = "terraform-cisco-modules/iks/intersight//modules/terraform-intersight-iks/"
+  # source = "terraform-cisco-modules/iks/intersight//"
+  # Infra Config Policy Information
+  cluster_name = "test0614"
+  # cluster_action   = "Deploy"
+  vc_target_name   = "marvel-vcsa.rich.ciscolabs.com"
+  vc_portgroup     = ["panther|triggerMesh|tme"]
+  vc_datastore     = "iks"
+  vc_cluster       = "tchalla"
+  vc_resource_pool = ""
+  vc_password      = var.vc_password
+
+  # IP Pool Information
+  ip_starting_address = "10.139.120.220"
+  ip_pool_size        = "20"
+  ip_netmask          = "255.255.255.0"
+  ip_gateway          = "10.139.120.1"
+  ntp_servers         = ["10.101.128.15"]
+  dns_servers         = ["10.101.128.15"]
+
+  addons_list = [{
+    addon_policy_name = "dashboard"
+    addon             = "kubernetes-dashboard"
+    description       = "K8s Dashboard Policy"
+    upgrade_strategy  = "AlwaysReinstall"
+    install_strategy  = "InstallOnly"
+    },
+    {
+      addon_policy_name = "monitor"
+      addon             = "ccp-monitor"
+      description       = "Grafana Policy"
+      upgrade_strategy  = "AlwaysReinstall"
+      install_strategy  = "InstallOnly"
+    }
+  ]
+  # Network Configuration Settings
+  # pod_cidr = "100.65.0.0/16"
+  # service_cidr = "100.64.0.0/24"
+  # cni = "Calico"
+  domain_name = "rich.ciscolabs.com"
+  timezone    = "America/New_York"
+
+
+  # Trusted Registry Entry
+  # unsigned_registries = ["10.101.128.128"]
+  # root_ca_registries  = [""]
+
+  # Cluster information
+  ssh_user       = var.ssh_user
+  ssh_key        = var.ssh_key
+  worker_size    = "medium"
+  worker_count   = 4
+  master_count   = 1
+  load_balancers = 3
+  # Organization and Tag
+  organization = var.organization
+  tags         = var.tags
+}
+```
+
 
 **Always check [Kubernetes Release Notes](https://kubernetes.io/docs/setup/release/notes/) before updating the major version.**
 
@@ -48,22 +117,33 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| addons\_list | List of objects for each addon to be added. | <pre>list(object({<br>    addon_policy_name = string<br>    addon             = string<br>    description       = string<br>    upgrade_strategy  = string<br>    install_strategy  = string<br>  }))</pre> | `[]` | no |
 | cluster\_action | Cluster action wanted (ex. Deploy or Unassign) | `string` | `"Unassign"` | no |
 | cluster\_name | Name to be given to the cluster.  This will also prefix all attributes created by this module. | `string` | n/a | yes |
 | cni | Supported CNI type. Currently we only support Calico.\* Calico - Calico CNI plugin as described in https://github.com/projectcalico/cni-plugin. | `string` | `"Calico"` | no |
+| dns\_servers | List of DNS Servers to be included in the Network Policy. | `list(string)` | n/a | yes |
+| docker\_no\_proxy | Networks excluded from the proxy. | `list(string)` | `[]` | no |
 | domain\_name | Domain Name information for DNS search. | `string` | n/a | yes |
 | ip\_gateway | Default gateway for this pool. | `string` | n/a | yes |
 | ip\_netmask | Subnet Mask for this pool. | `string` | n/a | yes |
 | ip\_pool\_size | Number of IPs you want this pool to contain. | `string` | n/a | yes |
-| ip\_primary\_dns | Primary DNS Server for this pool. | `string` | n/a | yes |
-| ip\_primary\_ntp | Primary NTP Server for this pool. | `string` | n/a | yes |
-| ip\_secondary\_dns | Secondary DNS Server for this pool. | `string` | `""` | no |
-| ip\_secondary\_ntp | Secondary NTP Server for this pool. | `string` | `""` | no |
 | ip\_starting\_address | Starting IP Address you want for this pool. | `string` | n/a | yes |
+| k8s\_version | Kubernetes Version to be installed | `string` | `"1.19.5"` | no |
 | load\_balancers | Number of load\_balancers for the cluster. | `number` | `3` | no |
 | master\_count | Number of master nodes | `number` | `1` | no |
+| ntp\_servers | List of NTP Servers to be included in the Network Policy. | `list(string)` | n/a | yes |
 | organization | Organization Name | `string` | `"default"` | no |
 | pod\_cidr | Pod CIDR Block to be used to assign POD IP Addresses. | `string` | `"100.65.0.0/16"` | no |
+| proxy\_http\_hostname | HTTP Proxy server FQDN or IP. | `string` | `""` | no |
+| proxy\_http\_password | The password for the HTTP Proxy. | `string` | `""` | no |
+| proxy\_http\_port | The HTTP Proxy port number.The port number of the HTTP proxy must be between 1 and 65535, inclusive. | `number` | `8080` | no |
+| proxy\_http\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"http"` | no |
+| proxy\_http\_username | The username for the HTTP Proxy. | `string` | `""` | no |
+| proxy\_https\_hostname | HTTPS Proxy server FQDN or IP. | `string` | `""` | no |
+| proxy\_https\_password | The password for the HTTPS Proxy. | `string` | `""` | no |
+| proxy\_https\_port | The HTTPS Proxy port number.The port number of the HTTPS proxy must be between 1 and 65535, inclusive. | `number` | `8443` | no |
+| proxy\_https\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"https"` | no |
+| proxy\_https\_username | The username for the HTTPS Proxy. | `string` | `""` | no |
 | root\_ca\_registries | List of root CA certificates. | `list(string)` | `[]` | no |
 | service\_cidr | Service CIDR Block used to assign cluster service IP addresses. | `string` | `"100.64.0.0/24"` | no |
 | ssh\_key | SSH Public Key to be used to node login. | `string` | n/a | yes |

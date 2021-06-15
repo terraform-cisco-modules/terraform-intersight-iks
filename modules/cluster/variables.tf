@@ -34,11 +34,6 @@ variable "wait_for_completion" {
   default     = false
   description = "Wait for cluster completion true/false"
 }
-variable "addon_policy_moid" {
-  type        = string
-  description = "MOID for the Addon Policy that is being consumed."
-  default     = ""
-}
 variable "runtime_policy_moid" {
   type        = string
   description = "MOID for the Runtime Policy that is being consumed."
@@ -59,6 +54,7 @@ variable "sys_config_moid" {
   type        = string
   description = "MOID for the System Config Policy that is being consumed."
 }
+
 
 variable "action" {
   type        = string

@@ -1,3 +1,8 @@
+variable "k8s_version" {
+  type        = string
+  description = "Kubernetes Version to be installed"
+  default     = "1.19.5"
+}
 variable "cluster_name" {
   type        = string
   description = "Name to be given to the cluster.  This will also prefix all attributes created by this module."
@@ -73,23 +78,13 @@ variable "ip_gateway" {
   type        = string
   description = "Default gateway for this pool."
 }
-variable "ip_primary_dns" {
-  type        = string
-  description = "Primary DNS Server for this pool."
+variable "dns_servers" {
+  type        = list(string)
+  description = "List of DNS Servers to be included in the Network Policy."
 }
-variable "ip_secondary_dns" {
-  type        = string
-  description = "Secondary DNS Server for this pool."
-  default     = ""
-}
-variable "ip_primary_ntp" {
-  type        = string
-  description = "Primary NTP Server for this pool."
-}
-variable "ip_secondary_ntp" {
-  type        = string
-  description = "Secondary NTP Server for this pool."
-  default     = ""
+variable "ntp_servers" {
+  type        = list(string)
+  description = "List of NTP Servers to be included in the Network Policy."
 }
 variable "timezone" {
   type        = string
@@ -135,6 +130,72 @@ variable "root_ca_registries" {
 variable "unsigned_registries" {
   type        = list(string)
   description = "List of unsigned registries to be supported."
+  default     = []
+}
+variable "proxy_http_hostname" {
+  type        = string
+  default     = ""
+  description = "HTTP Proxy server FQDN or IP."
+}
+variable "proxy_http_password" {
+  type        = string
+  default     = ""
+  description = "The password for the HTTP Proxy."
+}
+variable "proxy_http_username" {
+  type        = string
+  default     = ""
+  description = "The username for the HTTP Proxy."
+}
+variable "proxy_http_port" {
+  type        = number
+  default     = 8080
+  description = "The HTTP Proxy port number.The port number of the HTTP proxy must be between 1 and 65535, inclusive."
+}
+variable "proxy_http_protocol" {
+  type        = string
+  default     = "http"
+  description = " Protocol to use for the HTTPS Proxy."
+}
+variable "proxy_https_hostname" {
+  type        = string
+  default     = ""
+  description = "HTTPS Proxy server FQDN or IP."
+}
+variable "proxy_https_password" {
+  type        = string
+  default     = ""
+  description = "The password for the HTTPS Proxy."
+}
+variable "proxy_https_username" {
+  type        = string
+  default     = ""
+  description = "The username for the HTTPS Proxy."
+}
+variable "proxy_https_port" {
+  type        = number
+  default     = 8443
+  description = "The HTTPS Proxy port number.The port number of the HTTPS proxy must be between 1 and 65535, inclusive."
+}
+variable "proxy_https_protocol" {
+  type        = string
+  default     = "https"
+  description = " Protocol to use for the HTTPS Proxy."
+}
+variable "docker_no_proxy" {
+  type        = list(string)
+  default     = []
+  description = "Networks excluded from the proxy."
+}
+variable "addons_list" {
+  type = list(object({
+    addon_policy_name = string
+    addon             = string
+    description       = string
+    upgrade_strategy  = string
+    install_strategy  = string
+  }))
+  description = "List of objects for each addon to be added."
   default     = []
 }
 variable "tags" {
