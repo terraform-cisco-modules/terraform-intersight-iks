@@ -107,7 +107,7 @@ module "terraform-intersight-iks" {
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | >=1.0.7 |
+| intersight | >=1.0.11 |
 
 ## Providers
 
