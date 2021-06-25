@@ -158,7 +158,7 @@ No provider.
 | vc\_resource\_pool | Name of the resource pool to be used with this provider. | `string` | `""` | no |
 | vc\_target\_name | Target name as referenced in Intersight.  vCenter is currently the only supported target. | `string` | n/a | yes |
 | wait\_for\_completion | Wait for cluster completion true/false | `bool` | `false` | no |
-| worker\_count | Number of worker nodes wanted for the cluster. | `number` | `2` | no |
+| worker\_count | Number of worker nodes wanted to deploy in the cluster. | `number` | `2` | no |
 | worker\_max | Maximum number of worker nodes in a cluster. | `number` | `50` | no |
 | worker\_size | Worker size attribute for worker nodes | `string` | n/a | yes |
 
