@@ -18,7 +18,7 @@ variable "vc_target_name" {
 }
 variable "worker_count" {
   type        = number
-  description = "Number of worker nodes wanted for the cluster."
+  description = "Number of worker nodes wanted to deploy in the cluster."
   default     = 2
 }
 variable "load_balancers" {
