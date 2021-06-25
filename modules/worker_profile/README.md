@@ -20,34 +20,5 @@ These resources are created
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
-
-| Name | Version |
-|------|---------|
-| terraform | >= 0.14.5 |
-| intersight | >=1.0.11 |
-
-## Providers
-
-| Name | Version |
-|------|---------|
-| intersight | >=1.0.11 |
-
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| cpu | Number of CPU allocated to the virtual machine. | `number` | `4` | no |
-| disk\_size | Amount of disk to be assigned to the virtual machine in GiB. | `number` | `40` | no |
-| memory | Amount of memory assigned to the virtual machine in MiB. | `number` | `16384` | no |
-| name | Name of the Worker Profile to be created.  i.e small | `string` | n/a | yes |
-| org\_name | Intersight Organization name | `string` | n/a | yes |
-| tags | n/a | `list(map(string))` | `[]` | no |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| worker\_profile\_moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
