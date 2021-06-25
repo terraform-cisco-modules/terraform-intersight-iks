@@ -1,6 +1,6 @@
 
 # Required Varilables
-apikey      = ""
+apikey       = ""
 vc_password  = ""
 ssh_user     = "iksadmin"
 ssh_key      = ""
