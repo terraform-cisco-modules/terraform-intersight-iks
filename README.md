@@ -27,8 +27,13 @@ This module creates all of the resources required for IKS.  Those resources are 
 
 See the [Examples](https://github.com/terraform-cisco-modules/terraform-intersight-iks/tree/main/examples) ---> Complete directory for usage of this module.
 
-Sample main.tf file.  Change variables as needed.  See the above Exapmles folder for more information.
+There are 4 example files below that are needed to use this module.  Create these files in the same directory, run terraform init.  You will then be ready to run terraform plan or terraform apply.
 
+Change the variables in the terraform.tfvars file and the main.tf as needed.
+See the above Examples folder for more information.
+
+
+Sample main.tf file.  
 ```
 provider "intersight" {
   apikey    = var.apikey
@@ -96,7 +101,78 @@ module "terraform-intersight-iks" {
   tags         = var.tags
 }
 ```
+Sample terraform.tfvars file.
+```
+# Required Varilables
+apikey       = ""
+vc_password  = ""
+ssh_user     = "iksadmin"
+ssh_key      = ""
+# Optional Variables
+tags = [
+  {
+    "key" : "key-1"
+    "value" : "value-1"
+  },
+  {
+    "key" : "key-2"
+    "value" : "value-2"
+  }
+]
+organization = "default" # Change this if a different org is required.  Default org is set to "default"
+```
 
+Sample versions.tf file
+```
+terraform {
+  required_version = ">=0.14.5"
+
+  required_providers {
+    intersight = {
+      source  = "CiscoDevNet/intersight"
+      version = "=1.0.11"
+    }
+  }
+}
+```
+Sample variables.tf file.
+```
+variable "apikey" {
+  type        = string
+  description = "API Key"
+}
+variable "secretkey" {
+  type        = string
+  description = "Secret Key or file location"
+}
+variable "endpoint" {
+  type        = string
+  description = "API Endpoint URL"
+  default     = "https://www.intersight.com"
+}
+variable "organization" {
+  type        = string
+  description = "Organization Name"
+  default     = "default"
+}
+variable "ssh_user" {
+  type        = string
+  description = "SSH Username for node login."
+}
+variable "ssh_key" {
+  type        = string
+  description = "SSH Public Key to be used to node login."
+}
+variable "vc_password" {
+  sensitive   = true
+  type        = string
+  description = "Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight."
+}
+variable "tags" {
+  type    = list(map(string))
+  default = []
+}
+```
 
 **Always check [Kubernetes Release Notes](https://kubernetes.io/docs/setup/release/notes/) before updating the major version.**
 
