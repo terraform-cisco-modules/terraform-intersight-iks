@@ -7,7 +7,6 @@ resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "this" 
     moid = var.node_group_moid
   }
   instance_type {
-
     moid = var.instance_type_moid
   }
   infra_config_policy {

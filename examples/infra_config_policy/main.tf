@@ -1,13 +1,13 @@
 provider "intersight" {
-  apikey    = var.api_key
+  apikey    = var.apikey
   secretkey = var.secretkey
   endpoint  = var.endpoint
 }
 
 module "prod_vcenter" {
   source           = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
-  name             = "wakanda_vc"
-  device_name      = "wakanda-vcenter.rich.ciscolabs.com"
+  name             = "marvel_vc"
+  device_name      = "marvel-vcsa.rich.ciscolabs.com"
   vc_portgroup     = ["panther|iks|tme"]
   vc_datastore     = "iks"
   vc_cluster       = "tchalla"
