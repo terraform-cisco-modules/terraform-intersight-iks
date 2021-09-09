@@ -43,6 +43,7 @@ variable "cluster" {
 variable "runtime_policy" {
   type = object({
     use_existing         = bool
+    create_new           = bool
     name                 = optional(string)
     http_proxy_hostname  = optional(string)
     http_proxy_port      = optional(number)
@@ -102,6 +103,7 @@ variable "k8s_network" {
 variable "tr_policy" {
   type = object({
     use_existing        = bool
+    create_new          = bool
     name                = string
     root_ca_registries  = optional(list(string))
     unsigned_registries = optional(list(string))

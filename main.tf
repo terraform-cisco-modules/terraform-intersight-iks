@@ -125,20 +125,34 @@ module "instance_type" {
   tags      = var.tags
 }
 module "cluster_profile" {
-  source                       = "terraform-cisco-modules/iks/intersight//modules/cluster"
-  name                         = var.cluster.name
-  action                       = var.cluster.action
-  wait_for_completion          = var.cluster.wait_for_completion
-  ip_pool_moid                 = var.ip_pool.use_existing == true ? data.intersight_ippool_pool.this.0.results.0.moid : module.ip_pool_policy.0.ip_pool_moid
-  load_balancer                = var.cluster.load_balancers
-  ssh_key                      = var.cluster.ssh_public_key
-  ssh_user                     = var.cluster.ssh_user
-  net_config_moid              = var.k8s_network.use_existing == true ? data.intersight_kubernetes_network_policy.this.0.results.0.moid : module.k8s_network.0.network_policy_moid
-  sys_config_moid              = var.sysconfig.use_existing == true ? data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid : module.k8s_sysconfig.0.sys_config_policy_moid
-  trusted_registry_policy_moid = var.tr_policy.use_existing == true ? data.intersight_kubernetes_trusted_registries_policy.this.0.results.0.moid : module.trusted_registry.0.trusted_registry_moid
-  runtime_policy_moid          = var.runtime_policy.use_existing == true ? data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid : module.runtime_policy.0.runtime_policy_moid
-  org_name                     = var.organization
-  tags                         = var.tags
+  source              = "terraform-cisco-modules/iks/intersight//modules/cluster"
+  name                = var.cluster.name
+  action              = var.cluster.action
+  wait_for_completion = var.cluster.wait_for_completion
+  ip_pool_moid        = var.ip_pool.use_existing == true ? data.intersight_ippool_pool.this.0.results.0.moid : module.ip_pool_policy.0.ip_pool_moid
+  load_balancer       = var.cluster.load_balancers
+  ssh_key             = var.cluster.ssh_public_key
+  ssh_user            = var.cluster.ssh_user
+  net_config_moid     = var.k8s_network.use_existing == true ? data.intersight_kubernetes_network_policy.this.0.results.0.moid : module.k8s_network.0.network_policy_moid
+  sys_config_moid     = var.sysconfig.use_existing == true ? data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid : module.k8s_sysconfig.0.sys_config_policy_moid
+  # trusted_registry_policy_moid = var.tr_policy.use_existing == true ? data.intersight_kubernetes_trusted_registries_policy.this.0.results.0.moid : module.trusted_registry.0.trusted_registry_moid
+  trusted_registry_policy_moid = trimspace(<<-EOT
+  %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == false~}${null}%{endif~}
+  %{if var.tr_policy.use_existing == true~}${data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid}%{endif~}
+  %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == true~}${null}%{endif~}
+  %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == true~}${module.trusted_registry.0.trusted_registry_moid}%{endif~}
+  EOT
+  )
+  # runtime_policy_moid          = var.runtime_policy.use_existing == true ? data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid : module.runtime_policy.0.runtime_policy_moid
+  runtime_policy_moid = trimspace(<<-EOT
+  %{if var.runtime_policy.use_existing == false && var.tr_policy.create_new == false~}${null}%{endif~}
+  %{if var.runtime_policy.use_existing == true~}${data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid}%{endif~}
+  %{if var.runtime_policy.use_existing == true && var.tr_policy.create_new == true~}${null}%{endif~}
+  %{if var.runtime_policy.use_existing == false && var.tr_policy.create_new == true~}${module.runtime_policy.0.runtime_policy_moid}%{endif~}
+  EOT
+  )
+  org_name = var.organization
+  tags     = var.tags
 }
 module "addons" {
 

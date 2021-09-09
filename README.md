@@ -27,7 +27,11 @@ Set
 ```
 use_existing = false
 ```
-
+For the runtime_policies and the Trusted registry, if you DO NOT want to use this policy in your cluster build you need to set the following variable combination in EACH object block.
+```
+  use_existing         = false
+  create_new           = false
+```
 
 ## Usage
 
@@ -185,7 +189,7 @@ terraform {
   required_providers {
     intersight = {
       source  = "CiscoDevNet/intersight"
-      version = "=1.0.11"
+      version = "=1.0.13"
     }
   }
 }
@@ -259,10 +263,10 @@ variable "tags" {
 | k8s\_network | n/a | <pre>object({<br>    use_existing = bool<br>    name         = optional(string)<br>    pod_cidr     = optional(string)<br>    service_cidr = optional(string)<br>    cni          = optional(string)<br>  })</pre> | n/a | yes |
 | k8s\_network\_policy\_name | Name of existing K8s Network Policy (if it exists) to be used. | `string` | `""` | no |
 | organization | Organization Name | `string` | `"default"` | no |
-| runtime\_policy | n/a | <pre>object({<br>    use_existing         = bool<br>    name                 = optional(string)<br>    http_proxy_hostname  = optional(string)<br>    http_proxy_port      = optional(number)<br>    http_proxy_protocol  = optional(string)<br>    http_proxy_username  = optional(string)<br>    http_proxy_password  = optional(string)<br>    https_proxy_hostname = optional(string)<br>    https_proxy_port     = optional(number)<br>    https_proxy_protocol = optional(string)<br>    https_proxy_username = optional(string)<br>    https_proxy_password = optional(string)<br>    docker_no_proxy      = optional(list(string))<br>  })</pre> | n/a | yes |
+| runtime\_policy | n/a | <pre>object({<br>    use_existing         = bool<br>    create_new           = bool<br>    name                 = optional(string)<br>    http_proxy_hostname  = optional(string)<br>    http_proxy_port      = optional(number)<br>    http_proxy_protocol  = optional(string)<br>    http_proxy_username  = optional(string)<br>    http_proxy_password  = optional(string)<br>    https_proxy_hostname = optional(string)<br>    https_proxy_port     = optional(number)<br>    https_proxy_protocol = optional(string)<br>    https_proxy_username = optional(string)<br>    https_proxy_password = optional(string)<br>    docker_no_proxy      = optional(list(string))<br>  })</pre> | n/a | yes |
 | sysconfig | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    ntp_servers  = optional(list(string))<br>    dns_servers  = optional(list(string))<br>    timezone     = optional(string)<br>    domain_name  = optional(string)<br>  })</pre> | n/a | yes |
 | tags | n/a | `list(map(string))` | `[]` | no |
-| tr\_policy | n/a | <pre>object({<br>    use_existing        = bool<br>    name                = string<br>    root_ca_registries  = optional(list(string))<br>    unsigned_registries = optional(list(string))<br>  })</pre> | n/a | yes |
+| tr\_policy | n/a | <pre>object({<br>    use_existing        = bool<br>    create_new          = bool<br>    name                = string<br>    root_ca_registries  = optional(list(string))<br>    unsigned_registries = optional(list(string))<br>  })</pre> | n/a | yes |
 | version\_policy | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    version      = optional(string)<br>  })</pre> | n/a | yes |
 
 ## Outputs

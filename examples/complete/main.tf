@@ -5,10 +5,11 @@ provider "intersight" {
 }
 
 module "terraform-intersight-iks" {
-  source = "terraform-cisco-modules/iks/intersight//"
+  # source = "terraform-cisco-modules/iks/intersight//"
+  source = "./../../"
 
   ip_pool = {
-    use_existing        = true
+    use_existing        = false
     name                = "ippool"
     ip_starting_address = "10.139.120.220"
     ip_pool_size        = "20"
@@ -18,7 +19,7 @@ module "terraform-intersight-iks" {
   }
 
   sysconfig = {
-    use_existing = true
+    use_existing = false
     name         = "New"
     domain_name  = "rich.ciscolabs.com"
     timezone     = "America/New_York"
@@ -27,7 +28,7 @@ module "terraform-intersight-iks" {
   }
 
   k8s_network = {
-    use_existing = true
+    use_existing = false
     name         = "default"
 
     ######### Below are the default settings.  Change if needed. #########
@@ -37,18 +38,20 @@ module "terraform-intersight-iks" {
   }
   # Version policy
   version_policy = {
-    use_existing = true
+    use_existing = false
     name         = "1.19.5"
     version      = "1.19.5"
   }
 
   # tr_policy_name = "test"
   tr_policy = {
-    use_existing = true
+    use_existing = false
+    create_new   = true
     name         = "triggermesh-trusted-registry"
   }
   runtime_policy = {
-    use_existing         = true
+    use_existing         = false
+    create_new           = true
     name                 = "runtime"
     http_proxy_hostname  = "proxy.com"
     http_proxy_port      = 80
@@ -64,7 +67,7 @@ module "terraform-intersight-iks" {
 
   # Infra Config Policy Information
   infra_config_policy = {
-    use_existing     = true
+    use_existing     = false
     name             = "vcenter"
     vc_target_name   = "marvel-vcsa.rich.ciscolabs.com"
     vc_portgroups    = ["panther|iks|tme"]
@@ -90,7 +93,7 @@ module "terraform-intersight-iks" {
     }
   ]
   instance_type = {
-    use_existing = true
+    use_existing = false
     name         = "small"
     cpu          = 4
     memory       = 16386
@@ -100,7 +103,7 @@ module "terraform-intersight-iks" {
   cluster = {
     name                = "new_cluster"
     action              = "Unassign"
-    wait_for_completion = true
+    wait_for_completion = false
     worker_nodes        = 5
     load_balancers      = 5
     worker_max          = 20
