@@ -104,7 +104,7 @@ variable "tr_policy" {
   type = object({
     use_existing        = bool
     create_new          = bool
-    name                = string
+    name                = optional(string)
     root_ca_registries  = optional(list(string))
     unsigned_registries = optional(list(string))
   })

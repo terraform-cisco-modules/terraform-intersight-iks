@@ -137,17 +137,17 @@ module "cluster_profile" {
   sys_config_moid     = var.sysconfig.use_existing == true ? data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid : module.k8s_sysconfig.0.sys_config_policy_moid
   # trusted_registry_policy_moid = var.tr_policy.use_existing == true ? data.intersight_kubernetes_trusted_registries_policy.this.0.results.0.moid : module.trusted_registry.0.trusted_registry_moid
   trusted_registry_policy_moid = trimspace(<<-EOT
-  %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == false~}${null}%{endif~}
+  %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == false~}null%{endif~}
   %{if var.tr_policy.use_existing == true~}${data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid}%{endif~}
-  %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == true~}${null}%{endif~}
+  %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == true~}null%{endif~}
   %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == true~}${module.trusted_registry.0.trusted_registry_moid}%{endif~}
   EOT
   )
   # runtime_policy_moid          = var.runtime_policy.use_existing == true ? data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid : module.runtime_policy.0.runtime_policy_moid
   runtime_policy_moid = trimspace(<<-EOT
-  %{if var.runtime_policy.use_existing == false && var.tr_policy.create_new == false~}${null}%{endif~}
+  %{if var.runtime_policy.use_existing == false && var.tr_policy.create_new == false~}null%{endif~}
   %{if var.runtime_policy.use_existing == true~}${data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid}%{endif~}
-  %{if var.runtime_policy.use_existing == true && var.tr_policy.create_new == true~}${null}%{endif~}
+  %{if var.runtime_policy.use_existing == true && var.tr_policy.create_new == true~}null%{endif~}
   %{if var.runtime_policy.use_existing == false && var.tr_policy.create_new == true~}${module.runtime_policy.0.runtime_policy_moid}%{endif~}
   EOT
   )
