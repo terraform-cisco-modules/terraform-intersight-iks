@@ -5,7 +5,7 @@ terraform {
     intersight = {
       source = "CiscoDevNet/intersight"
       # source = "cisco.com/intersight/intersight"
-      version = "=1.0.11"
+      version = "=1.0.15"
     }
   }
 }

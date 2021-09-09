@@ -48,6 +48,6 @@ These resources are created
 
 | Name | Description |
 |------|-------------|
-| worker\_profile\_moid | n/a |
+| moid | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

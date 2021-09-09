@@ -17,7 +17,7 @@ The variable "device_name" is the target name for the infrastructure provider.  
 
 
 These resources are created
-* [infrastructure provider](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_infra_config_policy)
+* [infrastructure config](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_infra_config_policy)
 
 
 

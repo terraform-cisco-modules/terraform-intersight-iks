@@ -41,7 +41,7 @@ Note that this example may create resources which are consumed for IKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | =1.0.11 |
+| intersight | =1.0.13 |
 
 ## Providers
 
@@ -51,7 +51,7 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| api\_key | API Key | `string` | n/a | yes |
+| apikey | API Key | `string` | n/a | yes |
 | endpoint | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
 | organization | Organization Name | `string` | `"default"` | no |
 | secretkey | Secret Key or file location | `string` | n/a | yes |

@@ -17,11 +17,17 @@ and its [source code](https://github.com/CiscoDevNet/terraform-provider-intersig
 
 This module creates all of the resources required for IKS.  Those resources are identitified below.  It is designed as a quickstart/example of how to get an IKS cluster running.  More customization is being enabled but currently there are some caveats:
 
-1.  Re-using IP Pools is not available in this module yet.  *this is a work in progress
-2.  Currently 3 "t-shirt" sizes are built
-    1.  Small - 4vcpu, 16GB Memory, 40GB Disk
-    2.  Medium - 8vcpu, 24GB Memory, 60GB Disk
-    3.  Large - 12vcpu, 32GB Memory, 80GB Disk
+Reusing prebuilt policies is supported.  Each object block has a variable for doing this.
+Set
+```
+use_existing = true
+```
+If existing objects are not available this module will create those objects for you where required.
+Set
+```
+use_existing = false
+```
+
 
 ## Usage
 
@@ -42,25 +48,74 @@ provider "intersight" {
 }
 
 module "terraform-intersight-iks" {
-  source = "terraform-cisco-modules/iks/intersight//modules/terraform-intersight-iks/"
-  # source = "terraform-cisco-modules/iks/intersight//"
-  # Infra Config Policy Information
-  cluster_name = "test0614"
-  # cluster_action   = "Deploy"
-  vc_target_name   = "marvel-vcsa.rich.ciscolabs.com"
-  vc_portgroup     = ["panther|triggerMesh|tme"]
-  vc_datastore     = "iks"
-  vc_cluster       = "tchalla"
-  vc_resource_pool = ""
-  vc_password      = var.vc_password
+  source = "terraform-cisco-modules/iks/intersight//"
+  
+  ip_pool = {
+    use_existing = true
+    name = "ippool"
+    ip_starting_address = "10.139.120.220"
+    ip_pool_size        = "20"
+    ip_netmask          = "255.255.255.0"
+    ip_gateway          = "10.139.120.1"
+    dns_servers         = ["10.101.128.15"]
+  }
+  
+  sysconfig = {
+    use_existing = true
+    name = "New"
+    domain_name = "rich.ciscolabs.com"
+    timezone    = "America/New_York"
+    ntp_servers = ["10.101.128.15"]
+    dns_servers = ["10.101.128.15"] 
+  }
+  
+  k8s_network = {
+    use_existing = true
+    name = "default"
 
-  # IP Pool Information
-  ip_starting_address = "10.139.120.220"
-  ip_pool_size        = "20"
-  ip_netmask          = "255.255.255.0"
-  ip_gateway          = "10.139.120.1"
-  ntp_servers         = ["10.101.128.15"]
-  dns_servers         = ["10.101.128.15"]
+######### Below are the default settings.  Change if needed. #########
+    pod_cidr = "100.65.0.0/16"
+    service_cidr = "100.64.0.0/24"
+    cni = "Calico"
+  }
+# Version policy
+version_policy = {
+  use_existing = true
+  name = "1.19.5"
+  version = "1.19.5"
+}
+
+# tr_policy_name = "test"
+  tr_policy = {
+    use_existing = true
+    name = "triggermesh-trusted-registry"
+  }
+  runtime_policy = {
+    use_existing = true
+    name = "runtime"
+    http_proxy_hostname = "proxy.com"
+    http_proxy_port = 80
+    http_proxy_protocol = "http"
+    http_proxy_username = null
+    http_proxy_password = null
+    https_proxy_hostname = "proxy.com"
+    https_proxy_port = 8080
+    https_proxy_protocol = "https"
+    https_proxy_username = null
+    https_proxy_password = null
+  }
+  
+  # Infra Config Policy Information
+  infra_config_policy = {
+    use_existing = true
+    name = "vcenter"
+    vc_target_name = "marvel-vcsa.rich.ciscolabs.com"
+    vc_portgroups    = ["panther|iks|tme"]
+    vc_datastore     = "iks"
+    vc_cluster       = "tchalla"
+    vc_resource_pool = ""
+    vc_password      = var.vc_password
+  }
 
   addons_list = [{
     addon_policy_name = "dashboard"
@@ -77,25 +132,25 @@ module "terraform-intersight-iks" {
       install_strategy  = "InstallOnly"
     }
   ]
-  # Network Configuration Settings
-  # pod_cidr = "100.65.0.0/16"
-  # service_cidr = "100.64.0.0/24"
-  # cni = "Calico"
-  domain_name = "rich.ciscolabs.com"
-  timezone    = "America/New_York"
-
-
-  # Trusted Registry Entry
-  # unsigned_registries = ["10.101.128.128"]
-  # root_ca_registries  = [""]
-
+instance_type = {
+  use_existing = true
+  name = "small"
+  cpu = 4
+  memory = 16386
+  disk_size = 40 
+}
   # Cluster information
-  ssh_user       = var.ssh_user
-  ssh_key        = var.ssh_key
-  worker_size    = "medium"
-  worker_count   = 4
-  master_count   = 1
-  load_balancers = 3
+  cluster = {
+    name = "new_cluster"
+    action = "Deploy"
+    wait_for_completion = true
+    worker_nodes = 5
+    load_balancers = 5
+    worker_max = 20
+    control_nodes = 1
+    ssh_user = "iksadmin"
+    ssh_public_key = var.ssh_key
+  }
   # Organization and Tag
   organization = var.organization
   tags         = var.tags
@@ -183,60 +238,32 @@ variable "tags" {
 | Name | Version |
 |------|---------|
 | terraform | >=0.14.5 |
-| intersight | >=1.0.11 |
+| intersight | >=1.0.13 |
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| intersight | >=1.0.13 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | addons\_list | List of objects for each addon to be added. | <pre>list(object({<br>    addon_policy_name = string<br>    addon             = string<br>    description       = string<br>    upgrade_strategy  = string<br>    install_strategy  = string<br>  }))</pre> | `[]` | no |
-| cluster\_action | Cluster action wanted (ex. Deploy or Unassign) | `string` | `"Unassign"` | no |
-| cluster\_name | Name to be given to the cluster.  This will also prefix all attributes created by this module. | `string` | n/a | yes |
-| cni | Supported CNI type. Currently we only support Calico.\* Calico - Calico CNI plugin as described in https://github.com/projectcalico/cni-plugin. | `string` | `"Calico"` | no |
-| dns\_servers | List of DNS Servers to be included in the Network Policy. | `list(string)` | n/a | yes |
-| docker\_no\_proxy | Networks excluded from the proxy. | `list(string)` | `[]` | no |
-| domain\_name | Domain Name information for DNS search. | `string` | n/a | yes |
-| ip\_gateway | Default gateway for this pool. | `string` | n/a | yes |
-| ip\_netmask | Subnet Mask for this pool. | `string` | n/a | yes |
-| ip\_pool\_size | Number of IPs you want this pool to contain. | `string` | n/a | yes |
-| ip\_starting\_address | Starting IP Address you want for this pool. | `string` | n/a | yes |
-| k8s\_version | Kubernetes Version to be installed | `string` | `"1.19.5"` | no |
-| load\_balancers | Number of load\_balancers for the cluster. | `number` | `3` | no |
-| master\_count | Number of master nodes | `number` | `1` | no |
-| ntp\_servers | List of NTP Servers to be included in the Network Policy. | `list(string)` | n/a | yes |
+| cluster | n/a | <pre>object({<br>    name                = string<br>    action              = string<br>    wait_for_completion = bool<br>    worker_nodes        = number<br>    load_balancers      = number<br>    worker_max          = number<br>    control_nodes       = number<br>    ssh_user            = string<br>    ssh_public_key      = string<br>  })</pre> | n/a | yes |
+| infra\_config\_policy | n/a | <pre>object({<br>    use_existing     = bool<br>    name             = optional(string)<br>    vc_target_name   = optional(string)<br>    vc_cluster       = optional(string)<br>    vc_portgroups    = optional(list(string))<br>    vc_datastore     = optional(string)<br>    vc_resource_pool = optional(string)<br>    vc_password      = optional(string)<br>  })</pre> | n/a | yes |
+| infra\_config\_policy\_name | Name of existing infra config policy (if it exists) to be used. | `string` | `""` | no |
+| instance\_type | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    cpu          = optional(number)<br>    memory       = optional(number)<br>    disk_size    = optional(number)<br>  })</pre> | n/a | yes |
+| ip\_pool | n/a | <pre>object({<br>    use_existing        = bool<br>    name                = string<br>    ip_starting_address = optional(string)<br>    ip_pool_size        = optional(string)<br>    ip_netmask          = optional(string)<br>    ip_gateway          = optional(string)<br>    dns_servers         = optional(list(string))<br>  })</pre> | n/a | yes |
+| k8s\_network | n/a | <pre>object({<br>    use_existing = bool<br>    name         = optional(string)<br>    pod_cidr     = optional(string)<br>    service_cidr = optional(string)<br>    cni          = optional(string)<br>  })</pre> | n/a | yes |
+| k8s\_network\_policy\_name | Name of existing K8s Network Policy (if it exists) to be used. | `string` | `""` | no |
 | organization | Organization Name | `string` | `"default"` | no |
-| pod\_cidr | Pod CIDR Block to be used to assign POD IP Addresses. | `string` | `"100.65.0.0/16"` | no |
-| proxy\_http\_hostname | HTTP Proxy server FQDN or IP. | `string` | `""` | no |
-| proxy\_http\_password | The password for the HTTP Proxy. | `string` | `""` | no |
-| proxy\_http\_port | The HTTP Proxy port number.The port number of the HTTP proxy must be between 1 and 65535, inclusive. | `number` | `8080` | no |
-| proxy\_http\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"http"` | no |
-| proxy\_http\_username | The username for the HTTP Proxy. | `string` | `""` | no |
-| proxy\_https\_hostname | HTTPS Proxy server FQDN or IP. | `string` | `""` | no |
-| proxy\_https\_password | The password for the HTTPS Proxy. | `string` | `""` | no |
-| proxy\_https\_port | The HTTPS Proxy port number.The port number of the HTTPS proxy must be between 1 and 65535, inclusive. | `number` | `8443` | no |
-| proxy\_https\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"https"` | no |
-| proxy\_https\_username | The username for the HTTPS Proxy. | `string` | `""` | no |
-| root\_ca\_registries | List of root CA certificates. | `list(string)` | `[]` | no |
-| service\_cidr | Service CIDR Block used to assign cluster service IP addresses. | `string` | `"100.64.0.0/24"` | no |
-| ssh\_key | SSH Public Key to be used to node login. | `string` | n/a | yes |
-| ssh\_user | SSH Username for node login. | `string` | n/a | yes |
+| runtime\_policy | n/a | <pre>object({<br>    use_existing         = bool<br>    name                 = optional(string)<br>    http_proxy_hostname  = optional(string)<br>    http_proxy_port      = optional(number)<br>    http_proxy_protocol  = optional(string)<br>    http_proxy_username  = optional(string)<br>    http_proxy_password  = optional(string)<br>    https_proxy_hostname = optional(string)<br>    https_proxy_port     = optional(number)<br>    https_proxy_protocol = optional(string)<br>    https_proxy_username = optional(string)<br>    https_proxy_password = optional(string)<br>    docker_no_proxy      = optional(list(string))<br>  })</pre> | n/a | yes |
+| sysconfig | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    ntp_servers  = optional(list(string))<br>    dns_servers  = optional(list(string))<br>    timezone     = optional(string)<br>    domain_name  = optional(string)<br>  })</pre> | n/a | yes |
 | tags | n/a | `list(map(string))` | `[]` | no |
-| timezone | The timezone of the node's system clock.  Check Terraform documentation for correct format.  Example America/New\_York | `string` | n/a | yes |
-| unsigned\_registries | List of unsigned registries to be supported. | `list(string)` | `[]` | no |
-| vc\_cluster | Name of the cluster you wish to make part of this provider within vCenter. | `string` | n/a | yes |
-| vc\_datastore | Name of the datastore to be used with this provider. | `string` | n/a | yes |
-| vc\_password | Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight. | `string` | n/a | yes |
-| vc\_portgroup | Name of the portgroup(s) to be used in this provider | `list(string)` | n/a | yes |
-| vc\_resource\_pool | Name of the resource pool to be used with this provider. | `string` | `""` | no |
-| vc\_target\_name | Target name as referenced in Intersight.  vCenter is currently the only supported target. | `string` | n/a | yes |
-| wait\_for\_completion | Wait for cluster completion true/false | `bool` | `false` | no |
-| worker\_count | Number of worker nodes wanted to deploy in the cluster. | `number` | `2` | no |
-| worker\_max | Maximum number of worker nodes in a cluster. | `number` | `50` | no |
-| worker\_size | Worker size attribute for worker nodes | `string` | n/a | yes |
+| tr\_policy | n/a | <pre>object({<br>    use_existing        = bool<br>    name                = string<br>    root_ca_registries  = optional(list(string))<br>    unsigned_registries = optional(list(string))<br>  })</pre> | n/a | yes |
+| version\_policy | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    version      = optional(string)<br>  })</pre> | n/a | yes |
 
 ## Outputs
 

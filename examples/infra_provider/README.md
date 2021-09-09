@@ -29,7 +29,7 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| api\_key | API Key | `string` | n/a | yes |
+| apikey | API Key | `string` | n/a | yes |
 | endpoint | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
 | secretkey | Secret Key or file location | `string` | n/a | yes |
 | tags | n/a | `list(map(string))` | `[]` | no |
