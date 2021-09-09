@@ -145,10 +145,10 @@ module "cluster_profile" {
   )
   # runtime_policy_moid          = var.runtime_policy.use_existing == true ? data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid : module.runtime_policy.0.runtime_policy_moid
   runtime_policy_moid = trimspace(<<-EOT
-  %{if var.runtime_policy.use_existing == false && var.tr_policy.create_new == false~}null%{endif~}
+  %{if var.runtime_policy.use_existing == false && var.runtime_policy.create_new == false~}null%{endif~}
   %{if var.runtime_policy.use_existing == true~}${data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid}%{endif~}
-  %{if var.runtime_policy.use_existing == true && var.tr_policy.create_new == true~}null%{endif~}
-  %{if var.runtime_policy.use_existing == false && var.tr_policy.create_new == true~}${module.runtime_policy.0.runtime_policy_moid}%{endif~}
+  %{if var.runtime_policy.use_existing == true && var.runtime_policy.create_new == true~}null%{endif~}
+  %{if var.runtime_policy.use_existing == false && var.runtime_policy.create_new == true~}${module.runtime_policy.0.runtime_policy_moid}%{endif~}
   EOT
   )
   org_name = var.organization
