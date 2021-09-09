@@ -5,8 +5,8 @@ provider "intersight" {
 }
 
 module "terraform-intersight-iks" {
-  # source = "terraform-cisco-modules/iks/intersight//"
-  source = "./../../"
+
+  source = "terraform-cisco-modules/iks/intersight//"
 
   ip_pool = {
     use_existing        = false
@@ -51,7 +51,7 @@ module "terraform-intersight-iks" {
   }
   runtime_policy = {
     use_existing         = false
-    create_new           = true
+    create_new           = false
     name                 = "runtime"
     http_proxy_hostname  = "proxy.com"
     http_proxy_port      = 80
