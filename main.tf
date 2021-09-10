@@ -80,7 +80,7 @@ module "k8s_sysconfig" {
   tags        = var.tags
 }
 module "trusted_registry" {
-  count               = var.tr_policy.use_existing == true ? 0 : 1
+  count               = var.tr_policy.create_new == true ? 1 : 0
   source              = "terraform-cisco-modules/iks/intersight//modules/trusted_registry"
   policy_name         = var.tr_policy.name
   unsigned_registries = var.tr_policy.unsigned_registries
@@ -90,7 +90,7 @@ module "trusted_registry" {
 }
 module "runtime_policy" {
   source               = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
-  count                = var.runtime_policy.use_existing == true ? 0 : 1
+  count                = var.runtime_policy.create_new == true ? 1 : 0
   name                 = var.runtime_policy.name
   proxy_http_hostname  = var.runtime_policy.http_proxy_hostname
   proxy_http_port      = var.runtime_policy.http_proxy_port
@@ -137,17 +137,17 @@ module "cluster_profile" {
   sys_config_moid     = var.sysconfig.use_existing == true ? data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid : module.k8s_sysconfig.0.sys_config_policy_moid
   # trusted_registry_policy_moid = var.tr_policy.use_existing == true ? data.intersight_kubernetes_trusted_registries_policy.this.0.results.0.moid : module.trusted_registry.0.trusted_registry_moid
   trusted_registry_policy_moid = trimspace(<<-EOT
-  %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == false~}null%{endif~}
-  %{if var.tr_policy.use_existing == true~}${data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid}%{endif~}
-  %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == true~}null%{endif~}
+  %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == false~}%{endif~}
+  %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == false~}${data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid}%{endif~}
+  %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == true~}%{endif~}
   %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == true~}${module.trusted_registry.0.trusted_registry_moid}%{endif~}
   EOT
   )
   # runtime_policy_moid          = var.runtime_policy.use_existing == true ? data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid : module.runtime_policy.0.runtime_policy_moid
   runtime_policy_moid = trimspace(<<-EOT
-  %{if var.runtime_policy.use_existing == false && var.runtime_policy.create_new == false~}null%{endif~}
-  %{if var.runtime_policy.use_existing == true~}${data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid}%{endif~}
-  %{if var.runtime_policy.use_existing == true && var.runtime_policy.create_new == true~}null%{endif~}
+  %{if var.runtime_policy.use_existing == false && var.runtime_policy.create_new == false~}%{endif~}
+  %{if var.runtime_policy.use_existing == true && var.runtime_policy.create_new == false~}${data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid}%{endif~}
+  %{if var.runtime_policy.use_existing == true && var.runtime_policy.create_new == true~}%{endif~}
   %{if var.runtime_policy.use_existing == false && var.runtime_policy.create_new == true~}${module.runtime_policy.0.runtime_policy_moid}%{endif~}
   EOT
   )

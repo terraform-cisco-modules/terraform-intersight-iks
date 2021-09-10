@@ -6,7 +6,6 @@ variable "name" {
   type        = string
   description = "Name of the Container Runtime Policy to be created."
 }
-
 variable "description" {
   type        = string
   default     = ""
