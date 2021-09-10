@@ -138,7 +138,7 @@ module "cluster_profile" {
   # trusted_registry_policy_moid = var.tr_policy.use_existing == true ? data.intersight_kubernetes_trusted_registries_policy.this.0.results.0.moid : module.trusted_registry.0.trusted_registry_moid
   trusted_registry_policy_moid = trimspace(<<-EOT
   %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == false~}%{endif~}
-  %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == false~}${data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid}%{endif~}
+  %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == false~}${data.intersight_kubernetes_trusted_registries_policy.this.0.results.0.moid}%{endif~}
   %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == true~}%{endif~}
   %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == true~}${module.trusted_registry.0.trusted_registry_moid}%{endif~}
   EOT
