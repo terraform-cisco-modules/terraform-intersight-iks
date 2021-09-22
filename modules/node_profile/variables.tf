@@ -13,9 +13,9 @@ variable "profile_type" {
   description = "Type of profile to be created. i.e Master or Worker"
   default     = ""
 }
-variable "desired_size" {
+variable "min_size" {
   type        = number
-  description = "Desired size for node profile.  For master profiles values an be 1 or 3"
+  description = "Minimum size for node profile."
   default     = 1
 }
 variable "max_size" {

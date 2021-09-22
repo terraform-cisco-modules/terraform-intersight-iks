@@ -9,15 +9,19 @@ This module builds a complete cluster along with all of the required components.
 
 ## Details
 
-This module creates all of the resources required for IKS.  Those resources are identitified below.  It is designed as a quickstart/example of how to get an IKS cluster running.  More customization is being enabled but currently there are some caveats:
+This module can create all of the resources required for IKS.  Those resources are identitified below.  It is designed as a quickstart/example of how to get an IKS cluster running.  If all objects are needed they can be created in theis module.  If only certain objects are needed and others reused they can be consumed in this module by setting the "use-exist" flag to "true".
 
-1.  Re-using IP Pools is not available in this module yet.  *this is a work in progress
-2.  Currently 3 "t-shirt" sizes are built
-    1.  Small - 4vcpu, 16GB Memory, 40GB Disk
-    2.  Medium - 8vcpu, 24GB Memory, 60GB Disk
-    3.  Large - 12vcpu, 32GB Memory, 80GB Disk
-3.  2 DNS and 2 NTP servers are required.  If you do not have 2, list the single DNS and NTP server twice.
-4.  The 
+## Objects created
+```
+* [VM Instance Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_instance_type)
+* [infrastructure config](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_infra_config_policy)
+* [Version Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_version_policy)
+* [ippool](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/ippool_pool)
+* [System Config Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_sys_config_policy)
+* [Trusted Registry](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_trusted_registries_policy)
+* [runtime-policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_container_runtime_policy)
+* [Network Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_network_policy)
+
 
 ## Usage
 
@@ -25,51 +29,126 @@ main.tf
 
 ```
 provider "intersight" {
-  apikey    = var.api_key
+  apikey    = var.apikey
   secretkey = var.secretkey
   endpoint  = var.endpoint
 }
 
 module "terraform-intersight-iks" {
+
   source = "terraform-cisco-modules/iks/intersight//"
+
+
+  ip_pool = {
+    use_existing        = false
+    name                = "ippool"
+    ip_starting_address = "10.139.120.220"
+    ip_pool_size        = "20"
+    ip_netmask          = "255.255.255.0"
+    ip_gateway          = "10.139.120.1"
+    dns_servers         = ["10.101.128.15"]
+  }
+
+  sysconfig = {
+    use_existing = false
+    name         = "New"
+    domain_name  = "rich.ciscolabs.com"
+    timezone     = "America/New_York"
+    ntp_servers  = ["10.101.128.15"]
+    dns_servers  = ["10.101.128.15"]
+  }
+
+  k8s_network = {
+    use_existing = false
+    name         = "default"
+
+    ######### Below are the default settings.  Change if needed. #########
+    pod_cidr     = "100.65.0.0/16"
+    service_cidr = "100.64.0.0/24"
+    cni          = "Calico"
+  }
+  # Version policy
+  version_policy = {
+    use_existing = false
+    name         = "1.19.5"
+    version      = "1.19.5"
+  }
+
+  # tr_policy_name = "test"
+  tr_policy = {
+    use_existing = false
+    create_new   = true
+    name         = "triggermesh-trusted-registry"
+  }
+  runtime_policy = {
+    use_existing = false
+    create_new   = false
+    # name                 = "runtime"
+    # http_proxy_hostname  = "t"
+    # http_proxy_port      = 80
+    # http_proxy_protocol  = "http"
+    # http_proxy_username  = null
+    # http_proxy_password  = null
+    # https_proxy_hostname = "t"
+    # https_proxy_port     = 8080
+    # https_proxy_protocol = "https"
+    # https_proxy_username = null
+    # https_proxy_password = null
+  }
+
   # Infra Config Policy Information
-  cluster_name = "tn"
-  cluster_action = "Deploy"
-  vc_target_name   = "wakanda-vcenter.rich.ciscolabs.com"
-  vc_portgroup     = ["panther|triggerMesh|tme"]
-  vc_datastore     = "iks"
-  vc_cluster       = "tchalla"
-  vc_resource_pool = ""
-  vc_password      = var.vc_password
+  infra_config_policy = {
+    use_existing     = false
+    name             = "vcenter"
+    vc_target_name   = "marvel-vcsa.rich.ciscolabs.com"
+    vc_portgroups    = ["panther|iks|tme"]
+    vc_datastore     = "iks"
+    vc_cluster       = "tchalla"
+    vc_resource_pool = ""
+    vc_password      = var.vc_password
+  }
 
-  # IP Pool Information
-  ip_starting_address = "10.139.120.220"
-  ip_pool_size        = "20"
-  ip_netmask          = "255.255.255.0"
-  ip_gateway          = "10.139.120.1"
-  ip_primary_dns      = "10.101.128.15"
-  ip_secondary_dns    = "10.101.128.16"
-
-  # Network Configuration Settings
-  # pod_cidr = "100.65.0.0/16"
-  # service_cidr = "100.64.0.0/24"
-  # cni = "Calico"
-  domain_name         = "rich.ciscolabs.com"
-  timezone            = "America/New_York"
-  unsigned_registries = ["10.101.128.128"]
-  # root_ca_registries  = [""]
-
+  addons_list = [{
+    addon_policy_name = "dashboard"
+    addon             = "kubernetes-dashboard"
+    description       = "K8s Dashboard Policy"
+    upgrade_strategy  = "AlwaysReinstall"
+    install_strategy  = "InstallOnly"
+    },
+    {
+      addon_policy_name = "monitor"
+      addon             = "ccp-monitor"
+      description       = "Grafana Policy"
+      upgrade_strategy  = "AlwaysReinstall"
+      install_strategy  = "InstallOnly"
+    }
+  ]
+  instance_type = {
+    use_existing = false
+    name         = "small"
+    cpu          = 4
+    memory       = 16386
+    disk_size    = 40
+  }
   # Cluster information
-  ssh_user     = var.ssh_user
-  ssh_key      = var.ssh_key
-  worker_size  = "small"
-  worker_count = 4
-  master_count = 1
-  load_balancers = 3
+  cluster = {
+    name                = "new_cluster"
+    action              = "Unassign"
+    wait_for_completion = false
+    worker_nodes        = 5
+    load_balancers      = 5
+    worker_max          = 20
+    control_nodes       = 1
+    ssh_user            = "iksadmin"
+    ssh_public_key      = var.ssh_key
+  }
   # Organization and Tag
   organization = var.organization
   tags         = var.tags
 }
+
+
+
 ```
 
 **Always check [Kubernetes Release Notes](https://kubernetes.io/docs/setup/release/notes/) before updating the major version.**
