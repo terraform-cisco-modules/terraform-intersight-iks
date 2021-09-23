@@ -42,8 +42,8 @@ These resources are created
 | cluster\_moid | MOID derived from the Cluster that is being consumed. | `string` | n/a | yes |
 | description | Descripton of the Node Profile. | `string` | `""` | no |
 | ip\_pool\_moid | MOID derived from the IP Pool that is being consumed. | `string` | n/a | yes |
-| max\_size | Maximum size for node profile. | `number` | `1` | no |
-| min\_size | Minimum size for node profile. | `number` | `1` | no |
+| max\_size | Maximum size for node profile. | `number` | n/a | yes |
+| min\_size | Minimum size for node profile. | `number` | n/a | yes |
 | name | Name of the Node Profile to be created. | `string` | n/a | yes |
 | profile\_type | Type of profile to be created. i.e Master or Worker | `string` | `""` | no |
 | tags | n/a | `list(map(string))` | `[]` | no |
