@@ -5,6 +5,7 @@ resource "intersight_kubernetes_node_group_profile" "this" {
   node_type   = var.profile_type
   minsize     = var.min_size
   maxsize     = var.max_size
+  desiredsize = var.min_size
   ip_pools {
     object_type = "ippool.Pool"
     moid        = var.ip_pool_moid
