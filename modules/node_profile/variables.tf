@@ -16,12 +16,10 @@ variable "profile_type" {
 variable "min_size" {
   type        = number
   description = "Minimum size for node profile."
-  default     = 1
 }
 variable "max_size" {
   type        = number
   description = "Maximum size for node profile."
-  default     = 1
 }
 
 variable "ip_pool_moid" {
