@@ -6,6 +6,9 @@ A terraform module to create a managed Kubernetes clusters using Intersight Kube
 <!-- Inspired by and adapted from [this doc](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs) -->
 and its [source code](https://github.com/CiscoDevNet/terraform-provider-intersight).
 
+## CAVEAT
+* You cannot assign the cluster action as "Deploy" and "wait_for_completion" as TRUE at the same time.
+
 
 ## Assumptions
 
@@ -146,7 +149,7 @@ instance_type = {
   # Cluster information
   cluster = {
     name = "new_cluster"
-    action = "Deploy"
+    action = "Unassign"
     wait_for_completion = true
     worker_nodes = 5
     load_balancers = 5

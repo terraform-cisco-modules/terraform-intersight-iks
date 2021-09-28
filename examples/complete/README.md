@@ -21,7 +21,10 @@ This module can create all of the resources required for IKS.  Those resources a
 * [Trusted Registry](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_trusted_registries_policy)
 * [runtime-policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_container_runtime_policy)
 * [Network Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_network_policy)
+```
 
+## CAVEAT
+* You cannot assign the cluster action as "Deploy" and "wait_for_completion" as TRUE at the same time.
 
 ## Usage
 
