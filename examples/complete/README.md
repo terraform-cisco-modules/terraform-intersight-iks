@@ -12,7 +12,7 @@ This module builds a complete cluster along with all of the required components.
 This module can create all of the resources required for IKS.  Those resources are identitified below.  It is designed as a quickstart/example of how to get an IKS cluster running.  If all objects are needed they can be created in theis module.  If only certain objects are needed and others reused they can be consumed in this module by setting the "use-exist" flag to "true".
 
 ## Objects created
-```
+
 * [VM Instance Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_instance_type)
 * [infrastructure config](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_infra_config_policy)
 * [Version Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_version_policy)
@@ -21,7 +21,7 @@ This module can create all of the resources required for IKS.  Those resources a
 * [Trusted Registry](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_trusted_registries_policy)
 * [runtime-policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_container_runtime_policy)
 * [Network Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_network_policy)
-```
+
 
 ## CAVEAT
 * You cannot assign the cluster action as "Deploy" and "wait_for_completion" as TRUE at the same time.
