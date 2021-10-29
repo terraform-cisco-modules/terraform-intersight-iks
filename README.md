@@ -265,21 +265,21 @@ variable "tags" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_addons"></a> [addons](#module\_addons) | terraform-cisco-modules/iks/intersight//modules/addon_policy | 2.0.4 |
-| <a name="module_cluster_addon_profile"></a> [cluster\_addon\_profile](#module\_cluster\_addon\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile | 2.0.4 |
-| <a name="module_cluster_profile"></a> [cluster\_profile](#module\_cluster\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster | 2.0.4 |
-| <a name="module_control_profile"></a> [control\_profile](#module\_control\_profile) | terraform-cisco-modules/iks/intersight//modules/node_profile | 2.0.4 |
-| <a name="module_control_provider"></a> [control\_provider](#module\_control\_provider) | terraform-cisco-modules/iks/intersight//modules/infra_provider | 2.0.4 |
-| <a name="module_infra_config_policy"></a> [infra\_config\_policy](#module\_infra\_config\_policy) | terraform-cisco-modules/iks/intersight//modules/infra_config_policy | 2.0.4 |
-| <a name="module_instance_type"></a> [instance\_type](#module\_instance\_type) | terraform-cisco-modules/iks/intersight//modules/worker_profile | 2.0.4 |
-| <a name="module_ip_pool_policy"></a> [ip\_pool\_policy](#module\_ip\_pool\_policy) | terraform-cisco-modules/iks/intersight//modules/ip_pool | 2.0.4 |
-| <a name="module_k8s_network"></a> [k8s\_network](#module\_k8s\_network) | terraform-cisco-modules/iks/intersight//modules/k8s_network | 2.0.4 |
-| <a name="module_k8s_sysconfig"></a> [k8s\_sysconfig](#module\_k8s\_sysconfig) | terraform-cisco-modules/iks/intersight//modules/k8s_sysconfig | 2.0.4 |
-| <a name="module_k8s_version"></a> [k8s\_version](#module\_k8s\_version) | terraform-cisco-modules/iks/intersight//modules/version | 2.0.4 |
-| <a name="module_runtime_policy"></a> [runtime\_policy](#module\_runtime\_policy) | terraform-cisco-modules/iks/intersight//modules/runtime_policy | 2.0.4 |
-| <a name="module_trusted_registry"></a> [trusted\_registry](#module\_trusted\_registry) | terraform-cisco-modules/iks/intersight//modules/trusted_registry | 2.0.4 |
-| <a name="module_worker_profile"></a> [worker\_profile](#module\_worker\_profile) | terraform-cisco-modules/iks/intersight//modules/node_profile | 2.0.4 |
-| <a name="module_worker_provider"></a> [worker\_provider](#module\_worker\_provider) | terraform-cisco-modules/iks/intersight//modules/infra_provider | 2.0.4 |
+| <a name="module_addons"></a> [addons](#module\_addons) | terraform-cisco-modules/iks/intersight//modules/addon_policy | >=2.0.3 |
+| <a name="module_cluster_addon_profile"></a> [cluster\_addon\_profile](#module\_cluster\_addon\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile | >=2.0.3 |
+| <a name="module_cluster_profile"></a> [cluster\_profile](#module\_cluster\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster | >=2.0.3 |
+| <a name="module_control_profile"></a> [control\_profile](#module\_control\_profile) | terraform-cisco-modules/iks/intersight//modules/node_profile | >=2.0.3 |
+| <a name="module_control_provider"></a> [control\_provider](#module\_control\_provider) | terraform-cisco-modules/iks/intersight//modules/infra_provider | >=2.0.3 |
+| <a name="module_infra_config_policy"></a> [infra\_config\_policy](#module\_infra\_config\_policy) | terraform-cisco-modules/iks/intersight//modules/infra_config_policy | >=2.0.3 |
+| <a name="module_instance_type"></a> [instance\_type](#module\_instance\_type) | terraform-cisco-modules/iks/intersight//modules/worker_profile | >=2.0.3 |
+| <a name="module_ip_pool_policy"></a> [ip\_pool\_policy](#module\_ip\_pool\_policy) | terraform-cisco-modules/iks/intersight//modules/ip_pool | >=2.0.3 |
+| <a name="module_k8s_network"></a> [k8s\_network](#module\_k8s\_network) | terraform-cisco-modules/iks/intersight//modules/k8s_network | >=2.0.3 |
+| <a name="module_k8s_sysconfig"></a> [k8s\_sysconfig](#module\_k8s\_sysconfig) | terraform-cisco-modules/iks/intersight//modules/k8s_sysconfig | >=2.0.3 |
+| <a name="module_k8s_version"></a> [k8s\_version](#module\_k8s\_version) | terraform-cisco-modules/iks/intersight//modules/version | >=2.0.3 |
+| <a name="module_runtime_policy"></a> [runtime\_policy](#module\_runtime\_policy) | terraform-cisco-modules/iks/intersight//modules/runtime_policy | >=2.0.3 |
+| <a name="module_trusted_registry"></a> [trusted\_registry](#module\_trusted\_registry) | terraform-cisco-modules/iks/intersight//modules/trusted_registry | >=2.0.3 |
+| <a name="module_worker_profile"></a> [worker\_profile](#module\_worker\_profile) | terraform-cisco-modules/iks/intersight//modules/node_profile | >=2.0.3 |
+| <a name="module_worker_provider"></a> [worker\_provider](#module\_worker\_provider) | terraform-cisco-modules/iks/intersight//modules/infra_provider | >=2.0.3 |
 
 ## Resources
 
