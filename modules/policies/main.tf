@@ -11,18 +11,21 @@ module "k8s_version" {
 
 
 module "infra_config_policy" {
-  version          = ">=2.0.3"
-  source           = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
-  count            = var.infra_config_policy.create == true ? 1 : 0
-  name             = var.infra_config_policy.name
-  device_name      = var.infra_config_policy.vc_target_name
-  vc_portgroup     = var.infra_config_policy.vc_portgroups
-  vc_datastore     = var.infra_config_policy.vc_datastore
-  vc_cluster       = var.infra_config_policy.vc_cluster
-  vc_resource_pool = var.infra_config_policy.vc_resource_pool
-  vc_password      = var.infra_config_policy.vc_password
-  org_name         = var.organization
-  tags             = var.tags
+  version = ">=2.0.3"
+  source  = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
+  count   = var.infraConfigPolicy.create == true ? 1 : 0
+  vmConfig = {
+    platformType       = var.infraConfigPolicy.platformType
+    targetName         = var.infraConfigPolicy.targetName
+    policyName         = var.infraConfigPolicy.policyName
+    description        = var.infraConfigPolicy.description
+    interfaces         = var.infraConfigPolicy.interfaces
+    vcTargetName       = var.infraConfigPolicy.vcTargetName
+    vcClusterName      = var.infraConfigPolicy.vcClusterName
+    vcDatastoreName    = var.infraConfigPolicy.vcDatastoreName
+    vcResourcePoolName = var.infraConfigPolicy.vcResourcePoolName
+    vcPassword         = var.infraConfigPolicy.vcPassword
+  }
 }
 module "instance_type" {
   source    = "terraform-cisco-modules/iks/intersight//modules/worker_profile"

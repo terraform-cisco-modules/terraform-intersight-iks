@@ -5,19 +5,6 @@ variable "version_policy" {
     version      = optional(string)
   })
 }
-# variable "infra_config_policy" {
-#   type = object({
-#     use_existing     = bool
-#     name             = optional(string)
-#     vc_target_name   = optional(string)
-#     vc_cluster       = optional(string)
-#     vc_portgroups    = optional(list(string))
-#     vc_datastore     = optional(string)
-#     vc_resource_pool = optional(string)
-#     vc_password      = optional(string)
-#   })
-#   sensitive = true
-# }
 
 variable "infraConfigPolicy" {
   type = object({
