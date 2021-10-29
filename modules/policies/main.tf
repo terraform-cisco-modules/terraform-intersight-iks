@@ -1,6 +1,7 @@
 
 module "k8s_version" {
   source           = "terraform-cisco-modules/iks/intersight//modules/version"
+  version          = "2.0.4"
   count            = var.version_policy.create == true ? 1 : 0
   k8s_version_name = var.version_policy.name
   k8s_version      = var.version_policy.version
@@ -10,6 +11,7 @@ module "k8s_version" {
 
 
 module "infra_config_policy" {
+  version          = "2.0.4"
   source           = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
   count            = var.infra_config_policy.create == true ? 1 : 0
   name             = var.infra_config_policy.name
@@ -23,8 +25,8 @@ module "infra_config_policy" {
   tags             = var.tags
 }
 module "instance_type" {
-  # source    = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
   source    = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
+  version   = "2.0.4"
   count     = var.instance_type.create == true ? 1 : 0
   name      = var.instance_type.name
   cpu       = var.instance_type.cpu
@@ -35,6 +37,7 @@ module "instance_type" {
 }
 module "k8s_network" {
   source       = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
+  version      = "2.0.4"
   count        = var.k8s_network.create == true ? 1 : 0
   policy_name  = var.k8s_network.name
   pod_cidr     = var.k8s_network.pod_cidr
@@ -47,6 +50,7 @@ module "k8s_network" {
 module "ip_pool_policy" {
   count            = var.ip_pool.create == true ? 1 : 0
   source           = "terraform-cisco-modules/iks/intersight//modules/ip_pool"
+  version          = "2.0.4"
   name             = var.ip_pool.name
   starting_address = var.ip_pool.ip_starting_address
   pool_size        = var.ip_pool.ip_pool_size
@@ -59,6 +63,7 @@ module "ip_pool_policy" {
 }
 module "k8s_sysconfig" {
   source      = "terraform-cisco-modules/iks/intersight//modules/k8s_sysconfig"
+  version     = "2.0.4"
   count       = var.sysconfig.create == true ? 1 : 0
   policy_name = var.sysconfig.name
   dns_servers = var.sysconfig.dns_servers
@@ -69,8 +74,9 @@ module "k8s_sysconfig" {
   tags        = var.tags
 }
 module "trusted_registry" {
-  count               = var.tr_policy.create == true ? 1 : 0
   source              = "terraform-cisco-modules/iks/intersight//modules/trusted_registry"
+  version             = "2.0.4"
+  count               = var.tr_policy.create == true ? 1 : 0
   policy_name         = var.tr_policy.name
   unsigned_registries = var.tr_policy.unsigned_registries
   root_ca_registries  = var.tr_policy.root_ca_registries
@@ -80,6 +86,7 @@ module "trusted_registry" {
 
 module "runtime_policy" {
   source               = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
+  version              = "2.0.4"
   count                = var.runtime_policy.create == true ? 1 : 0
   name                 = var.runtime_policy.name
   proxy_http_hostname  = var.runtime_policy.http_proxy_hostname

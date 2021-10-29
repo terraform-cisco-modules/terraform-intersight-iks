@@ -6,6 +6,7 @@ provider "intersight" {
 
 module "ip_pool_1-139-140-0" {
   source           = "terraform-cisco-modules/iks/intersight//modules/ip_pool"
+  version          = "2.0.4"
   name             = "test_139"
   starting_address = "10.139.140.200"
   pool_size        = "20"

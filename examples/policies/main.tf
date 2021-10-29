@@ -5,7 +5,8 @@ provider "intersight" {
 }
 
 module "kubernetes" {
-  source = "terraform-cisco-modules/iks/intersight//modules/policies"
+  source  = "terraform-cisco-modules/iks/intersight//modules/policies"
+  version = "2.0.4"
 
   # Kubernetes Version Policy
   version_policy = {

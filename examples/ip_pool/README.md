@@ -42,25 +42,34 @@ Note that this example may create resources which are consumed for IKS clusters.
 
 | Name | Version |
 |------|---------|
-| terraform | >=0.14.5 |
-| intersight | =1.0.13 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | =1.0.17 |
 
 ## Providers
 
-No provider.
+No providers.
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_ip_pool_1-139-140-0"></a> [ip\_pool\_1-139-140-0](#module\_ip\_pool\_1-139-140-0) | terraform-cisco-modules/iks/intersight//modules/ip_pool | 2.0.4 |
+
+## Resources
+
+No resources.
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| apikey | API Key | `string` | n/a | yes |
-| endpoint | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
-| organization | Organization Name | `string` | `"default"` | no |
-| secretkey | Secret Key or file location | `string` | n/a | yes |
-| tags | n/a | `list(map(string))` | `[]` | no |
+| <a name="input_apikey"></a> [apikey](#input\_apikey) | API Key | `string` | n/a | yes |
+| <a name="input_endpoint"></a> [endpoint](#input\_endpoint) | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
+| <a name="input_organization"></a> [organization](#input\_organization) | Organization Name | `string` | `"default"` | no |
+| <a name="input_secretkey"></a> [secretkey](#input\_secretkey) | Secret Key or file location | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `list(map(string))` | `[]` | no |
 
 ## Outputs
 
-No output.
-
+No outputs.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

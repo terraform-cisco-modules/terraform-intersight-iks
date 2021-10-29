@@ -23,33 +23,43 @@ These resources are created
 
 | Name | Version |
 |------|---------|
-| terraform | >=0.14.5 |
-| intersight | >=1.0.11 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.17 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | >=1.0.11 |
+| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.17 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [intersight_ippool_pool.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/ippool_pool) | resource |
+| [intersight_organization_organization.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/organization_organization) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| gateway | Default gateway for this pool. | `string` | n/a | yes |
-| name | Name of the IP Pool to be created. | `string` | n/a | yes |
-| netmask | Subnet Mask for this pool. | `string` | n/a | yes |
-| org\_name | Intersight Organization name | `string` | n/a | yes |
-| pool\_size | Number of IPs you want this pool to contain. | `string` | n/a | yes |
-| primary\_dns | Primary DNS Server for this pool. | `string` | n/a | yes |
-| secondary\_dns | Secondary DNS Server for this pool. | `string` | `""` | no |
-| starting\_address | Starting IP Address you want for this pool. | `string` | n/a | yes |
-| tags | n/a | `list(map(string))` | `[]` | no |
+| <a name="input_gateway"></a> [gateway](#input\_gateway) | Default gateway for this pool. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | Name of the IP Pool to be created. | `string` | n/a | yes |
+| <a name="input_netmask"></a> [netmask](#input\_netmask) | Subnet Mask for this pool. | `string` | n/a | yes |
+| <a name="input_org_name"></a> [org\_name](#input\_org\_name) | Intersight Organization name | `string` | n/a | yes |
+| <a name="input_pool_size"></a> [pool\_size](#input\_pool\_size) | Number of IPs you want this pool to contain. | `string` | n/a | yes |
+| <a name="input_primary_dns"></a> [primary\_dns](#input\_primary\_dns) | Primary DNS Server for this pool. | `string` | n/a | yes |
+| <a name="input_secondary_dns"></a> [secondary\_dns](#input\_secondary\_dns) | Secondary DNS Server for this pool. | `string` | `""` | no |
+| <a name="input_starting_address"></a> [starting\_address](#input\_starting\_address) | Starting IP Address you want for this pool. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `list(map(string))` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| ip\_pool\_moid | n/a |
-
+| <a name="output_ip_pool_moid"></a> [ip\_pool\_moid](#output\_ip\_pool\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

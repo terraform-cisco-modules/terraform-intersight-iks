@@ -25,28 +25,39 @@ These resources are created
 
 | Name | Version |
 |------|---------|
-| terraform | >=0.14.5 |
-| intersight | >=1.0.11 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.17 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | >=1.0.11 |
+| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.17 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [intersight_kubernetes_version_policy.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_version_policy) | resource |
+| [intersight_kubernetes_version.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/kubernetes_version) | data source |
+| [intersight_organization_organization.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/organization_organization) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| k8s\_version | Version of the Kubernetes cluster | `string` | n/a | yes |
-| k8s\_version\_name | Name of the policy to be created | `string` | n/a | yes |
-| org\_name | Intersight Organization name | `string` | n/a | yes |
-| tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
+| <a name="input_k8s_version"></a> [k8s\_version](#input\_k8s\_version) | Version of the Kubernetes cluster | `string` | n/a | yes |
+| <a name="input_k8s_version_name"></a> [k8s\_version\_name](#input\_k8s\_version\_name) | Name of the policy to be created | `string` | n/a | yes |
+| <a name="input_org_name"></a> [org\_name](#input\_org\_name) | Intersight Organization name | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| version\_policy\_moid | n/a |
-
+| <a name="output_version_policy_moid"></a> [version\_policy\_moid](#output\_version\_policy\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

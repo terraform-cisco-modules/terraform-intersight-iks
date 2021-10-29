@@ -4,21 +4,29 @@ data "intersight_organization_organization" "this" {
 }
 # Looking up Asset Target MOID
 data "intersight_asset_target" "this" {
-  name = var.device_name
+  name = var.vmConfig.targetName
 }
 
 resource "intersight_kubernetes_virtual_machine_infra_config_policy" "this" {
-  name        = var.name
-  description = var.description
+  name        = var.vmConfig.policyName
+  description = var.vmConfig.description
   vm_config {
-    object_type = "kubernetes.EsxiVirtualMachineInfraConfig"
-    interfaces  = var.vc_portgroup
+    interfaces = var.vmConfig.interfaces
     additional_properties = jsonencode({
-      Datastore    = var.vc_datastore
-      Cluster      = var.vc_cluster
-      Passphrase   = var.vc_password
-      ResourcePool = var.vc_resource_pool
+
+      Datastore    = var.vmConfig.vcDatastoreName
+      Cluster      = var.vmConfig.vcClusterName
+      Passphrase   = var.vmConfig.vcPassword
+      ResourcePool = var.vmConfig.vcResourcePoolName
+
     })
+    # object_type = "kubernetes.HyperFlexApVirtualMachineInfraConfig"
+    object_type = trimspace(<<-EOT
+      %{if lower(var.vmConfig.platformType) == "esxi"~}${"kubernetes.EsxiVirtualMachineInfraConfig"}%{endif~}
+      %{if lower(var.vmConfig.platformType) == "iwe"~}${"kubernetes.HyperFlexApVirtualMachineInfraConfig"}%{endif~}
+      EOT
+    )
+
   }
   target {
     object_type = "asset.DeviceRegistration"

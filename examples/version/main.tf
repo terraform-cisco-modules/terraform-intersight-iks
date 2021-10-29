@@ -6,6 +6,7 @@ provider "intersight" {
 
 module "k8s_version_1-19-5" {
   source           = "terraform-cisco-modules/iks/intersight//modules/version"
+  version          = "2.0.4"
   k8s_version      = "1.19.5"
   k8s_version_name = "test_1.19.5"
 

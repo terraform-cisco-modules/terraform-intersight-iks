@@ -23,40 +23,50 @@ These resources are created:
 
 | Name | Version |
 |------|---------|
-| terraform | >=0.14.5 |
-| intersight | >=1.0.11 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.17 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | >=1.0.11 |
+| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.17 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [intersight_kubernetes_container_runtime_policy.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_container_runtime_policy) | resource |
+| [intersight_organization_organization.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/organization_organization) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| description | Description to be used to describe the addon policy | `string` | `""` | no |
-| docker\_bridge\_cidr | Docker Bridge CIDR network to be specified. | `string` | `""` | no |
-| docker\_no\_proxy | Networks excluded from the proxy. | `list(string)` | `[]` | no |
-| name | Name of the Container Runtime Policy to be created. | `string` | n/a | yes |
-| org\_name | Intersight Organization name | `string` | n/a | yes |
-| proxy\_http\_hostname | HTTP Proxy server FQDN or IP. | `string` | n/a | yes |
-| proxy\_http\_password | The password for the HTTP Proxy. | `string` | `""` | no |
-| proxy\_http\_port | The HTTP Proxy port number.The port number of the HTTP proxy must be between 1 and 65535, inclusive. | `number` | `8080` | no |
-| proxy\_http\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"http"` | no |
-| proxy\_http\_username | The username for the HTTP Proxy. | `string` | `""` | no |
-| proxy\_https\_hostname | HTTPS Proxy server FQDN or IP. | `string` | n/a | yes |
-| proxy\_https\_password | The password for the HTTPS Proxy. | `string` | `""` | no |
-| proxy\_https\_port | The HTTPS Proxy port number.The port number of the HTTPS proxy must be between 1 and 65535, inclusive. | `number` | `8443` | no |
-| proxy\_https\_protocol | Protocol to use for the HTTPS Proxy. | `string` | `"https"` | no |
-| proxy\_https\_username | The username for the HTTPS Proxy. | `string` | `""` | no |
-| tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
+| <a name="input_description"></a> [description](#input\_description) | Description to be used to describe the addon policy | `string` | `""` | no |
+| <a name="input_docker_bridge_cidr"></a> [docker\_bridge\_cidr](#input\_docker\_bridge\_cidr) | Docker Bridge CIDR network to be specified. | `string` | `""` | no |
+| <a name="input_docker_no_proxy"></a> [docker\_no\_proxy](#input\_docker\_no\_proxy) | Networks excluded from the proxy. | `list(string)` | `[]` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name of the Container Runtime Policy to be created. | `string` | n/a | yes |
+| <a name="input_org_name"></a> [org\_name](#input\_org\_name) | Intersight Organization name | `string` | n/a | yes |
+| <a name="input_proxy_http_hostname"></a> [proxy\_http\_hostname](#input\_proxy\_http\_hostname) | HTTP Proxy server FQDN or IP. | `string` | n/a | yes |
+| <a name="input_proxy_http_password"></a> [proxy\_http\_password](#input\_proxy\_http\_password) | The password for the HTTP Proxy. | `string` | `""` | no |
+| <a name="input_proxy_http_port"></a> [proxy\_http\_port](#input\_proxy\_http\_port) | The HTTP Proxy port number.The port number of the HTTP proxy must be between 1 and 65535, inclusive. | `number` | `8080` | no |
+| <a name="input_proxy_http_protocol"></a> [proxy\_http\_protocol](#input\_proxy\_http\_protocol) | Protocol to use for the HTTPS Proxy. | `string` | `"http"` | no |
+| <a name="input_proxy_http_username"></a> [proxy\_http\_username](#input\_proxy\_http\_username) | The username for the HTTP Proxy. | `string` | `""` | no |
+| <a name="input_proxy_https_hostname"></a> [proxy\_https\_hostname](#input\_proxy\_https\_hostname) | HTTPS Proxy server FQDN or IP. | `string` | n/a | yes |
+| <a name="input_proxy_https_password"></a> [proxy\_https\_password](#input\_proxy\_https\_password) | The password for the HTTPS Proxy. | `string` | `""` | no |
+| <a name="input_proxy_https_port"></a> [proxy\_https\_port](#input\_proxy\_https\_port) | The HTTPS Proxy port number.The port number of the HTTPS proxy must be between 1 and 65535, inclusive. | `number` | `8443` | no |
+| <a name="input_proxy_https_protocol"></a> [proxy\_https\_protocol](#input\_proxy\_https\_protocol) | Protocol to use for the HTTPS Proxy. | `string` | `"https"` | no |
+| <a name="input_proxy_https_username"></a> [proxy\_https\_username](#input\_proxy\_https\_username) | The username for the HTTPS Proxy. | `string` | `""` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| runtime\_policy\_moid | n/a |
-
+| <a name="output_runtime_policy_moid"></a> [runtime\_policy\_moid](#output\_runtime\_policy\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
