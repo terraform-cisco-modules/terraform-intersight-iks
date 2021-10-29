@@ -44,14 +44,14 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_infra_config_policy"></a> [infra\_config\_policy](#module\_infra\_config\_policy) | terraform-cisco-modules/iks/intersight//modules/infra_config_policy | 2.0.4 |
-| <a name="module_instance_type"></a> [instance\_type](#module\_instance\_type) | terraform-cisco-modules/iks/intersight//modules/worker_profile | 2.0.4 |
-| <a name="module_ip_pool_policy"></a> [ip\_pool\_policy](#module\_ip\_pool\_policy) | terraform-cisco-modules/iks/intersight//modules/ip_pool | 2.0.4 |
-| <a name="module_k8s_network"></a> [k8s\_network](#module\_k8s\_network) | terraform-cisco-modules/iks/intersight//modules/k8s_network | 2.0.4 |
-| <a name="module_k8s_sysconfig"></a> [k8s\_sysconfig](#module\_k8s\_sysconfig) | terraform-cisco-modules/iks/intersight//modules/k8s_sysconfig | 2.0.4 |
-| <a name="module_k8s_version"></a> [k8s\_version](#module\_k8s\_version) | terraform-cisco-modules/iks/intersight//modules/version | 2.0.4 |
-| <a name="module_runtime_policy"></a> [runtime\_policy](#module\_runtime\_policy) | terraform-cisco-modules/iks/intersight//modules/runtime_policy | 2.0.4 |
-| <a name="module_trusted_registry"></a> [trusted\_registry](#module\_trusted\_registry) | terraform-cisco-modules/iks/intersight//modules/trusted_registry | 2.0.4 |
+| <a name="module_infra_config_policy"></a> [infra\_config\_policy](#module\_infra\_config\_policy) | terraform-cisco-modules/iks/intersight//modules/infra_config_policy | >=2.0.3 |
+| <a name="module_instance_type"></a> [instance\_type](#module\_instance\_type) | terraform-cisco-modules/iks/intersight//modules/worker_profile | >=2.0.3 |
+| <a name="module_ip_pool_policy"></a> [ip\_pool\_policy](#module\_ip\_pool\_policy) | terraform-cisco-modules/iks/intersight//modules/ip_pool | >=2.0.3 |
+| <a name="module_k8s_network"></a> [k8s\_network](#module\_k8s\_network) | terraform-cisco-modules/iks/intersight//modules/k8s_network | >=2.0.3 |
+| <a name="module_k8s_sysconfig"></a> [k8s\_sysconfig](#module\_k8s\_sysconfig) | terraform-cisco-modules/iks/intersight//modules/k8s_sysconfig | >=2.0.3 |
+| <a name="module_k8s_version"></a> [k8s\_version](#module\_k8s\_version) | terraform-cisco-modules/iks/intersight//modules/version | >=2.0.3 |
+| <a name="module_runtime_policy"></a> [runtime\_policy](#module\_runtime\_policy) | terraform-cisco-modules/iks/intersight//modules/runtime_policy | >=2.0.3 |
+| <a name="module_trusted_registry"></a> [trusted\_registry](#module\_trusted\_registry) | terraform-cisco-modules/iks/intersight//modules/trusted_registry | >=2.0.3 |
 
 ## Resources
 
