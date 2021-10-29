@@ -6,6 +6,7 @@ provider "intersight" {
 
 module "prod" {
   source       = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
+  version      = "2.0.4"
   policy_name  = "prod"
   pod_cidr     = "100.65.0.0/16"
   service_cidr = "100.64.0.0/24"

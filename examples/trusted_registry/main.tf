@@ -6,6 +6,7 @@ provider "intersight" {
 
 module "trusted_registry" {
   source              = "terraform-cisco-modules/iks/intersight//modules/trusted_registry"
+  version             = "2.0.4"
   policy_name         = "test"
   unsigned_registries = ["10.139.10.100"]
 

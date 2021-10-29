@@ -14,6 +14,9 @@ module "iks_infra_provider" {
 This module will lookup the infrastructure target (i.e. vCenter) via the target name.  It will then create a Kubernetes Infrastructure Configuration Policy for that target.  This can be used to build IKS clusters.  
 
 The variable "device_name" is the target name for the infrastructure provider.  This can be located in Intersight--->Targets
+For the Platform Type options are "esxi" or "iwe".
+
+
 
 
 These resources are created
@@ -26,34 +29,38 @@ These resources are created
 
 | Name | Version |
 |------|---------|
-| terraform | >=0.14.5 |
-| intersight | >=1.0.11 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.17 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | >=1.0.11 |
+| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.17 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [intersight_kubernetes_virtual_machine_infra_config_policy.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_infra_config_policy) | resource |
+| [intersight_asset_target.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/asset_target) | data source |
+| [intersight_organization_organization.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/organization_organization) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| description | Description to be used to describe the infrastructure configuration policy | `string` | `""` | no |
-| device\_name | Name of the Virtual Machine Provider you wish to add.  i.e vCenter | `string` | n/a | yes |
-| name | Name of the Infrastructure Provider to be created | `string` | n/a | yes |
-| org\_name | Intersight Organization name | `string` | `"default"` | no |
-| tags | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
-| vc\_cluster | Name of the cluster you wish to make part of this provider within vCenter. | `string` | n/a | yes |
-| vc\_datastore | Name of the datastore to be used with this provider. | `string` | n/a | yes |
-| vc\_password | Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight. | `string` | n/a | yes |
-| vc\_portgroup | Name of the portgroup(s) to be used in this provider | `list(string)` | n/a | yes |
-| vc\_resource\_pool | Name of the resource pool to be used with this provider. | `string` | `""` | no |
+| <a name="input_org_name"></a> [org\_name](#input\_org\_name) | Intersight Organization name | `string` | `"default"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
+| <a name="input_vmConfig"></a> [vmConfig](#input\_vmConfig) | n/a | <pre>object({<br>    platformType       = string<br>    targetName         = string<br>    policyName         = string<br>    description        = optional(string)<br>    interfaces         = list(string)<br>    diskMode           = optional(string)<br>    vcTargetName       = optional(string)<br>    vcClusterName      = optional(string)<br>    vcDatastoreName    = optional(string)<br>    vcResourcePoolName = optional(string)<br>    vcPassword         = optional(string)<br>  })</pre> | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| infra\_config\_moid | n/a |
-
+| <a name="output_infra_config_moid"></a> [infra\_config\_moid](#output\_infra\_config\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

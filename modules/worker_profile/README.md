@@ -24,30 +24,40 @@ These resources are created
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.14.5 |
-| intersight | >=1.0.11 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.5 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.17 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| intersight | >=1.0.11 |
+| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.17 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [intersight_kubernetes_virtual_machine_instance_type.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_virtual_machine_instance_type) | resource |
+| [intersight_organization_organization.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/organization_organization) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| cpu | Number of CPU allocated to the virtual machine. | `number` | `4` | no |
-| disk\_size | Amount of disk to be assigned to the virtual machine in GiB. | `number` | `40` | no |
-| memory | Amount of memory assigned to the virtual machine in MiB. | `number` | `16384` | no |
-| name | Name of the Worker Profile to be created.  i.e small | `string` | n/a | yes |
-| org\_name | Intersight Organization name | `string` | n/a | yes |
-| tags | n/a | `list(map(string))` | `[]` | no |
+| <a name="input_cpu"></a> [cpu](#input\_cpu) | Number of CPU allocated to the virtual machine. | `number` | `4` | no |
+| <a name="input_disk_size"></a> [disk\_size](#input\_disk\_size) | Amount of disk to be assigned to the virtual machine in GiB. | `number` | `40` | no |
+| <a name="input_memory"></a> [memory](#input\_memory) | Amount of memory assigned to the virtual machine in MiB. | `number` | `16384` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name of the Worker Profile to be created.  i.e small | `string` | n/a | yes |
+| <a name="input_org_name"></a> [org\_name](#input\_org\_name) | Intersight Organization name | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `list(map(string))` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| moid | n/a |
-
+| <a name="output_moid"></a> [moid](#output\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

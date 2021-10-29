@@ -7,6 +7,7 @@ provider "intersight" {
 
 module "prod_vcenter" {
   source                   = "terraform-cisco-modules/iks/intersight//modules/infra_provider"
+  version                  = "2.0.4"
   name                     = "wakanda_vc_worker_3"
   instance_type_moid       = ""
   node_group_moid          = ""
