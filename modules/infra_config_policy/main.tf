@@ -5,6 +5,11 @@ data "intersight_organization_organization" "this" {
 # Looking up Asset Target MOID
 data "intersight_asset_target" "this" {
   name = var.vmConfig.targetName
+  target_type = trimspace(<<-EOT
+      %{if lower(var.vmConfig.platformType) == "esxi"~}${"VmwareVcenter"}%{endif~}
+      %{if lower(var.vmConfig.platformType) == "iwe"~}${"IWE"}%{endif~}
+      EOT
+  )
 }
 
 resource "intersight_kubernetes_virtual_machine_infra_config_policy" "this" {

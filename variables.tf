@@ -9,11 +9,11 @@ variable "version_policy" {
 variable "infraConfigPolicy" {
   type = object({
     use_existing       = bool
-    platformType       = string
-    targetName         = string
+    platformType       = optional(string)
+    targetName         = optional(string)
     policyName         = string
     description        = optional(string)
-    interfaces         = list(string)
+    interfaces         = optional(list(string))
     diskMode           = optional(string)
     vcTargetName       = optional(string)
     vcClusterName      = optional(string)
