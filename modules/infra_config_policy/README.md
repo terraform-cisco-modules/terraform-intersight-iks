@@ -56,7 +56,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_org_name"></a> [org\_name](#input\_org\_name) | Intersight Organization name | `string` | `"default"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to be associated with this object in Intersight. | `list(map(string))` | `[]` | no |
-| <a name="input_vmConfig"></a> [vmConfig](#input\_vmConfig) | n/a | <pre>object({<br>    platformType       = string<br>    targetName         = string<br>    policyName         = string<br>    description        = optional(string)<br>    interfaces         = list(string)<br>    diskMode           = optional(string)<br>    vcTargetName       = optional(string)<br>    vcClusterName      = optional(string)<br>    vcDatastoreName    = optional(string)<br>    vcResourcePoolName = optional(string)<br>    vcPassword         = optional(string)<br>  })</pre> | n/a | yes |
+| <a name="input_vmConfig"></a> [vmConfig](#input\_vmConfig) | n/a | <pre>object({<br>    platformType       = string<br>    targetName         = string<br>    policyName         = string<br>    description        = optional(string)<br>    interfaces         = list(string)<br>    diskMode           = optional(string)<br>    vcClusterName      = optional(string)<br>    vcDatastoreName    = optional(string)<br>    vcResourcePoolName = optional(string)<br>    vcPassword         = optional(string)<br>  })</pre> | n/a | yes |
 
 ## Outputs
 

@@ -4,20 +4,36 @@ provider "intersight" {
   endpoint  = var.endpoint
 }
 
-module "prod_vcenter" {
-  source  = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
-  version = "2.0.4"
+module "iwe" {
+  # source  = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
+  source = "../../modules/infra_config_policy"
+  # version = "2.0.4"
   vmConfig = {
     platformType = "iwe"
     targetName   = "falcon"
-    policyName   = "falcon-prod"
+    policyName   = "iwe-test"
     description  = "Test Policy"
     interfaces   = ["iwe-guests"]
-    # vcTargetName   = optional(string)
-    # vcClusterName      = optional(string)
-    # vcDatastoreName     = optional(string)
-    # vcResourcePoolName = optional(string)
-    # vcPassword      = optional(string)
+  }
+
+  org_name = var.organization
+  tags     = var.tags
+}
+
+module "vcenter" {
+  # source  = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
+  source = "../../modules/infra_config_policy"
+  # version = "2.0.4"
+  vmConfig = {
+    platformType       = "esxi"
+    targetName         = "marvel-vcsa.rich.ciscolabs.com"
+    policyName         = "esxi-test"
+    description        = "Test Policy"
+    interfaces         = ["iwe-guests"]
+    vcClusterName      = "test"
+    vcDatastoreName    = "test"
+    vcPassword         = "12345"
+    vcResourcePoolName = ""
   }
 
   org_name = var.organization

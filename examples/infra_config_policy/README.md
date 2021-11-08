@@ -55,7 +55,8 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_prod_vcenter"></a> [prod\_vcenter](#module\_prod\_vcenter) | terraform-cisco-modules/iks/intersight//modules/infra_config_policy | 2.0.4 |
+| <a name="module_iwe"></a> [iwe](#module\_iwe) | ../../modules/infra_config_policy | n/a |
+| <a name="module_vcenter"></a> [vcenter](#module\_vcenter) | ../../modules/infra_config_policy | n/a |
 
 ## Resources
 

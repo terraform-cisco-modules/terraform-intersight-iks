@@ -12,7 +12,6 @@ variable "vmConfig" {
     description        = optional(string)
     interfaces         = list(string)
     diskMode           = optional(string)
-    vcTargetName       = optional(string)
     vcClusterName      = optional(string)
     vcDatastoreName    = optional(string)
     vcResourcePoolName = optional(string)
