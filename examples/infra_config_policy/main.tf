@@ -21,9 +21,8 @@ module "iwe" {
 }
 
 module "vcenter" {
-  # source  = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
-  source = "../../modules/infra_config_policy"
-  # version = "2.0.4"
+  source  = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
+  version = "2.0.4"
   vmConfig = {
     platformType       = "esxi"
     targetName         = "marvel-vcsa.rich.ciscolabs.com"
