@@ -32,6 +32,7 @@ data "intersight_kubernetes_virtual_machine_instance_type" "this" {
   count = var.instance_type.use_existing == true ? 1 : 0
   name  = var.instance_type.name
 }
+
 module "infra_config_policy" {
   source  = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
   version = ">=2.0.3"
