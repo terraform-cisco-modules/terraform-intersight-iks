@@ -6,7 +6,7 @@ data "intersight_organization_organization" "this" {
 data "intersight_asset_target" "this" {
   name = var.vmConfig.targetName
   target_type = trimspace(<<-EOT
-      %{if lower(var.vmConfig.platformType) == "esxi"~}${"VmwareVcenter"}%{endif~}
+      %{if lower(var.vmConfig.platformType) == "esxi" || "esx"~}${"VmwareVcenter"}%{endif~}
       %{if lower(var.vmConfig.platformType) == "iwe"~}${"IWE"}%{endif~}
       EOT
   )
