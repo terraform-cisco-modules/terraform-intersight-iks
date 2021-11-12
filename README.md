@@ -321,5 +321,5 @@ variable "tags" {
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cluster_moid"></a> [cluster\_moid](#output\_cluster\_moid) | n/a |
+| <a name="output_cluster_profile_moid"></a> [cluster\_profile\_moid](#output\_cluster\_profile\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
