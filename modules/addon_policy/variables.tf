@@ -1,12 +1,16 @@
-variable "addons" {
-  description = "Addons to be created and added to the cluster"
-  type = list(object({
-    addon_policy_name = string
-    addon             = string
-    description       = string
-    upgrade_strategy  = string
-    install_strategy  = string
-  }))
+variable "addon" {
+  type = object({
+    policyName       = string
+    addonName        = string
+    description      = optional(string)
+    upgradeStrategy  = optional(string)
+    installStrategy  = optional(string)
+    overrideSets     = optional(list(map(string)))
+    overrides        = optional(string)
+    releaseName      = optional(string)
+    releaseNamespace = optional(string)
+    releaseVersion   = string
+  })
 
 }
 variable "org_name" {

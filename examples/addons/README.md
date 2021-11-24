@@ -4,45 +4,58 @@ This example creates addons and based on the information provided in the module.
 
 ## Usage
 
-To run this example you need to execute:
+To run this create a 'main.tf', 'variables.tf' and 'versions.tf' file and place them in the same folder.  Modify the attributes below to meet your needs and run 
 
 ```bash
-$ terraform init
-$ terraform plan
-$ terraform apply
+terraform init
+terraform plan
+terraform apply
 ```
 
 The list of supported addons is continuously growing.  Please check the documentation for the most current information.
 
 ** Additional ".tf" file examples are located within the GITHUB Repo.  Link Above.
 
-```
+```hcl
 provider "intersight" {
-  apikey    = var.api_key
+  apikey    = var.apikey
   secretkey = var.secretkey
   endpoint  = var.endpoint
 }
-module "addons" {
 
-  source            = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
-  addons = [{
-    addon_policy_name = "dashboard"
-    addon = "kubernetes-dashboard"
-    description = "K8s Dashboard Policy"
-    upgrade_strategy = "AlwaysReinstall"
-    install_strategy = "InstallOnly"
-  },
-  {
-    addon_policy_name = "monitor"
-    addon = "ccp-monitor"
-    description = "Grafana Policy"
-    upgrade_strategy = "AlwaysReinstall"
-    install_strategy = "InstallOnly"
+
+module "smm" {
+  source = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
+  addon = {
+    policyName = "smm-tf"
+    addonName            = "smm"
+    description       = "SMM Policy"
+    upgradeStrategy  = "AlwaysReinstall"
+    installStrategy  = "InstallOnly"
+    releaseVersion = "1.7.4-cisco4-helm3"
+    overrides = yamlencode({"demoApplication":{"enabled":true}
+    })
   }
-  ]
 
-  org_name          = var.organization
-  tags              = var.tags
+  org_name = var.organization
+  tags     = var.tags
+}
+
+module "monitor" {
+  source = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
+  addon = {
+    policyName = "monitor-tf"
+    addonName            = "ccp-monitor"
+    description       = "Monitor Policy"
+    upgradeStrategy  = "AlwaysReinstall"
+    installStrategy  = "InstallOnly"
+    releaseVersion = "0.2.61-helm3"
+    overrides = yamlencode({"demoApplication":{"enabled":true}
+    })
+  }
+
+  org_name = var.organization
+  tags     = var.tags
 }
 ```
 
@@ -54,27 +67,35 @@ Note that this example may create resources which are consumed for IKS clusters.
 
 | Name | Version |
 |------|---------|
-| terraform | >=0.14.5 |
-| intersight | =1.0.15 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | =1.0.18 |
 
 ## Providers
 
-No provider.
+No providers.
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_monitor"></a> [monitor](#module\_monitor) | terraform-cisco-modules/iks/intersight//modules/addon_policy | n/a |
+| <a name="module_smm"></a> [smm](#module\_smm) | terraform-cisco-modules/iks/intersight//modules/addon_policy | n/a |
+
+## Resources
+
+No resources.
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| apikey | API Key | `string` | n/a | yes |
-| endpoint | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
-| organization | Organization Name | `string` | `"default"` | no |
-| secretkey | Secret Key or file location | `string` | n/a | yes |
-| tags | n/a | `list(map(string))` | `[]` | no |
+| <a name="input_apikey"></a> [apikey](#input\_apikey) | API Key | `string` | n/a | yes |
+| <a name="input_endpoint"></a> [endpoint](#input\_endpoint) | API Endpoint URL | `string` | `"https://www.intersight.com"` | no |
+| <a name="input_organization"></a> [organization](#input\_organization) | Organization Name | `string` | `"default"` | no |
+| <a name="input_secretkey"></a> [secretkey](#input\_secretkey) | Secret Key or file location | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `list(map(string))` | `[]` | no |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| addon\_policy | n/a |
-
+No outputs.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

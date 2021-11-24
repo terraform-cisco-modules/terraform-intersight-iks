@@ -163,19 +163,39 @@ module "cluster_profile" {
 }
 module "addons" {
 
-  source   = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
-  addons   = var.addons_list
+  source = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
+  for_each = {
+    for addon in var.addons : addon.addonName => addon
+    if addon.createNew != false && can(addon)
+  }
+  addon = {
+    policyName       = each.value.addonPolicyName
+    addonName        = each.value.addonName
+    description      = each.value.description
+    upgradeStrategy  = each.value.upgradeStrategy
+    installStrategy  = each.value.installStrategy
+    overrideSets     = each.value.overrideSets
+    overrides        = each.value.overrides
+    releaseName      = each.value.releaseName
+    releaseNamespace = each.value.releaseNamespace
+    releaseVersion   = each.value.releaseVersion
+
+  }
+
   org_name = var.organization
   tags     = var.tags
 }
+
 module "cluster_addon_profile" {
 
-  source       = "terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile"
-  count        = var.addons_list != null ? 1 : 0
+  # source       = "terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile"
+  source       = "./modules/cluster_addon_profile"
   depends_on   = [module.addons]
+  count        = var.addons != null ? 1 : 0
   profile_name = "${var.cluster.name}-addon-profile"
 
-  addons       = keys(module.addons.addon_policy)
+  addons = var.addons
+
   cluster_moid = module.cluster_profile.k8s_cluster_moid
   org_name     = var.organization
   tags         = var.tags

@@ -1,11 +1,11 @@
-# addons - Intersight IKS Addon Terraform Module
+# Cluster Profile Creation
 
 ## Usage
 
 ```hcl
-module "iks_addon_policy" {
+module "iks_cluster_profile" {
 
-  source = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
+  source = "terraform-cisco-modules/iks/intersight//modules/cluster"
 
   # omitted...
 }
@@ -16,7 +16,7 @@ This module is used to create IKS clusters.  It can be used standalone or with a
 
 These resources are created
 
-* [addon-policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_addon_policy)
+* [cluster_profile](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_cluster_profile)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -24,13 +24,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
-| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.17 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.18 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.17 |
+| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.18 |
 
 ## Modules
 
@@ -66,6 +66,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cluster_moid"></a> [cluster\_moid](#output\_cluster\_moid) | n/a |
 | <a name="output_k8s_cluster_moid"></a> [k8s\_cluster\_moid](#output\_k8s\_cluster\_moid) | n/a |
+| <a name="output_k8s_cluster_profile_moid"></a> [k8s\_cluster\_profile\_moid](#output\_k8s\_cluster\_profile\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
