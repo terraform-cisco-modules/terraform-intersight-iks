@@ -11,7 +11,7 @@ module "iks_network_policies" {
 }
 ```
 
-This module will create the System Configuration policy for IKS.  This policy can then be used to create IKS clusters.
+This module will create the System Configuration policy for IKS.  This policy can then be used to create IKS clusters.  In the Intersight UI this is referenced as Type 'Network CIDR'
 
 
 These resources are created
@@ -26,13 +26,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
-| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.17 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.18 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.17 |
+| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.18 |
 
 ## Modules
 

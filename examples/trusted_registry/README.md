@@ -4,18 +4,18 @@ This example creates an IKS Trusted Registry Policy based on the information pro
 
 ## Usage
 
-To run this example you need to execute:
+To run this create a 'main.tf', 'variables.tf' and 'versions.tf' file and place them in the same folder.  Modify the attributes below to meet your needs and run 
 
 ```bash
-$ terraform init
-$ terraform plan
-$ terraform apply
+terraform init
+terraform plan
+terraform apply
 ```
 
 ** Additional ".tf" file examples are located within the GITHUB Repo.  Link Above.
 
 main.tf
-```
+```hcl
 provider "intersight" {
   apikey    = var.api_key
   secretkey = var.secretkey
@@ -41,7 +41,7 @@ Current supported Version is 1.18.12
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
-| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | =1.0.17 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | =1.0.18 |
 
 ## Providers
 
@@ -51,7 +51,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_trusted_registry"></a> [trusted\_registry](#module\_trusted\_registry) | terraform-cisco-modules/iks/intersight//modules/trusted_registry | 2.0.4 |
+| <a name="module_trusted_registry"></a> [trusted\_registry](#module\_trusted\_registry) | terraform-cisco-modules/iks/intersight//modules/trusted_registry | n/a |
 
 ## Resources
 

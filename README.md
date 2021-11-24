@@ -26,16 +26,16 @@ This module creates all of the resources required for IKS.  Those resources are 
 
 Reusing prebuilt policies is supported.  Each object block has a variable for doing this.
 Set
-```
+```hcl
 use_existing = true
 ```
 If existing objects are not available this module will create those objects for you where required.
 Set
-```
+```hcl
 use_existing = false
 ```
 For the runtime_policies and the Trusted registry, if you DO NOT want to use this policy in your cluster build you need to set the following variable combination in EACH object block.
-```
+```hcl
   use_existing         = false
   create_new           = false
 ```
@@ -51,7 +51,7 @@ See the above Examples folder for more information.
 
 
 Sample main.tf file.  
-```
+```hcl
 provider "intersight" {
   apikey    = var.apikey
   secretkey = var.secretkey
@@ -59,158 +59,175 @@ provider "intersight" {
 }
 
 module "terraform-intersight-iks" {
-  source = "terraform-cisco-modules/iks/intersight//"
-  
-  ip_pool = {
-    use_existing = true
-    name = "ippool"
-    ip_starting_address = "10.139.120.220"
-    ip_pool_size        = "20"
-    ip_netmask          = "255.255.255.0"
-    ip_gateway          = "10.139.120.1"
-    dns_servers         = ["10.101.128.15"]
+
+  source  = "terraform-cisco-modules/iks/intersight//"
+  version = "2.1.0"
+
+# Kubernetes Cluster Profile  Adjust the values as needed.
+  cluster = {
+    name                = "new_cluster"
+    action              = "Unassign"
+    wait_for_completion = false
+    worker_nodes        = 5
+    load_balancers      = 5
+    worker_max          = 20
+    control_nodes       = 1
+    ssh_user            = var.ssh_user
+    ssh_public_key      = var.ssh_key
   }
-  
+
+
+# IP Pool Information (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
+  ip_pool = {
+    use_existing        = true
+    name                = "10-239-21-0"
+    # ip_starting_address = "10.239.21.220"
+    # ip_pool_size        = "20"
+    # ip_netmask          = "255.255.255.0"
+    # ip_gateway          = "10.239.21.1"
+    # dns_servers         = ["10.101.128.15","10.101.128.16"]
+  }
+
+# Sysconfig Policy (UI Reference NODE OS Configuration) (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
   sysconfig = {
     use_existing = true
-    name = "New"
-    domain_name = "rich.ciscolabs.com"
-    timezone    = "America/New_York"
-    ntp_servers = ["10.101.128.15"]
-    dns_servers = ["10.101.128.15"] 
+    name         = "richfield"
+    # domain_name  = "rich.ciscolabs.com"
+    # timezone     = "America/New_York"
+    # ntp_servers  = ["10.101.128.15"]
+    # dns_servers  = ["10.101.128.15"]
   }
-  
+
+# Kubernetes Network CIDR (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
   k8s_network = {
     use_existing = true
-    name = "default"
+    name         = "default"
 
-######### Below are the default settings.  Change if needed. #########
-    pod_cidr = "100.65.0.0/16"
-    service_cidr = "100.64.0.0/24"
-    cni = "Calico"
+    ######### Below are the default settings.  Change if needed. #########
+    # pod_cidr     = "100.65.0.0/16"
+    # service_cidr = "100.64.0.0/24"
+    # cni          = "Calico"
   }
-# Version policy
-version_policy = {
-  use_existing = true
-  name = "1.19.5"
-  version = "1.19.5"
-}
-
-# tr_policy_name = "test"
+# Version policy (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
+  version_policy = {
+    use_existing = true
+    name         = "1.19.15"
+    # version      = "1.19.15"
+  }
+# Trusted Registry Policy (To create new change "use_existing" to 'false' and set "create_new' to 'true' uncomment variables and modify them to meet your needs.)
+# Set both variables to 'false' if this policy is not needed.
   tr_policy = {
-    use_existing = true
-    name = "triggermesh-trusted-registry"
+    use_existing = false
+    create_new   = false
+    name         = "trusted-registry"
   }
+# Runtime Policy (To create new change "use_existing" to 'false' and set "create_new' to 'true' uncomment variables and modify them to meet your needs.)
+# Set both variables to 'false' if this policy is not needed.
   runtime_policy = {
-    use_existing = true
-    name = "runtime"
-    http_proxy_hostname = "proxy.com"
-    http_proxy_port = 80
-    http_proxy_protocol = "http"
-    http_proxy_username = null
-    http_proxy_password = null
-    https_proxy_hostname = "proxy.com"
-    https_proxy_port = 8080
-    https_proxy_protocol = "https"
-    https_proxy_username = null
-    https_proxy_password = null
-  }
-  
-  # Infra Config Policy Information
-  infra_config_policy = {
-    use_existing = true
-    name = "vcenter"
-    vc_target_name = "marvel-vcsa.rich.ciscolabs.com"
-    vc_portgroups    = ["panther|iks|tme"]
-    vc_datastore     = "iks"
-    vc_cluster       = "tchalla"
-    vc_resource_pool = ""
-    vc_password      = var.vc_password
+    use_existing = false
+    create_new   = false
+    # name                 = "runtime"
+    # http_proxy_hostname  = "t"
+    # http_proxy_port      = 80
+    # http_proxy_protocol  = "http"
+    # http_proxy_username  = null
+    # http_proxy_password  = null
+    # https_proxy_hostname = "t"
+    # https_proxy_port     = 8080
+    # https_proxy_protocol = "https"
+    # https_proxy_username = null
+    # https_proxy_password = null
   }
 
-  addons_list = [{
-    addon_policy_name = "dashboard"
-    addon             = "kubernetes-dashboard"
-    description       = "K8s Dashboard Policy"
-    upgrade_strategy  = "AlwaysReinstall"
-    install_strategy  = "InstallOnly"
+# Infrastructure Configuration Policy (To create new change "use_existing" to 'false' and uncomment variables and modify them to meet your needs.)
+  infraConfigPolicy = {
+    use_existing = true
+    # platformType = "iwe"
+    # targetName   = "falcon"
+    policyName   = "dev"
+    # description  = "Test Policy"
+    # interfaces   = ["iwe-guests"]
+    # vcTargetName   = optional(string)
+    # vcClusterName      = optional(string)
+    # vcDatastoreName     = optional(string)
+    # vcResourcePoolName = optional(string)
+    # vcPassword      = optional(string)
+  }
+
+# Addon Profile and Policies (To create new change "createNew" to 'true' and uncomment variables and modify them to meet your needs.)
+# This is an Optional item.  Comment or remove to not use.  Multiple addons can be configured.
+  addons       = [
+    {
+    createNew = true
+    addonPolicyName = "smm-tf"
+    addonName            = "smm"
+    description       = "SMM Policy"
+    upgradeStrategy  = "AlwaysReinstall"
+    installStrategy  = "InstallOnly"
+    releaseVersion = "1.7.4-cisco4-helm3"
+    overrides = yamlencode({"demoApplication":{"enabled":true}})
     },
-    {
-      addon_policy_name = "monitor"
-      addon             = "ccp-monitor"
-      description       = "Grafana Policy"
-      upgrade_strategy  = "AlwaysReinstall"
-      install_strategy  = "InstallOnly"
-    }
-    {
-      addon_policy_name = "smm"
-      addon             = "smm"
-      description       = "Service Mesh Manager Policy"
-      upgrade_strategy  = "AlwaysReinstall"
-      install_strategy  = "InstallOnly"
-
-    }
+    # {
+    # createNew = true
+    # addonName            = "ccp-monitor"
+    # description       = "monitor Policy"
+    # # upgradeStrategy  = "AlwaysReinstall"
+    # # installStrategy  = "InstallOnly"
+    # releaseVersion = "0.2.61-helm3"
+    # # overrides = yamlencode({"demoApplication":{"enabled":true}})
+    # }
   ]
-instance_type = {
-  use_existing = true
-  name = "small"
-  cpu = 4
-  memory = 16386
-  disk_size = 40 
-}
-  # Cluster information
-  cluster = {
-    name = "new_cluster"
-    action = "Unassign"
-    wait_for_completion = true
-    worker_nodes = 5
-    load_balancers = 5
-    worker_max = 20
-    control_nodes = 1
-    ssh_user = "iksadmin"
-    ssh_public_key = var.ssh_key
+
+# Worker Node Instance Type (To create new change "use_existing" to 'false' and uncomment variables and modify them to meet your needs.)
+  instance_type = {
+    use_existing = true
+    name         = "small"
+    # cpu          = 4
+    # memory       = 16386
+    # disk_size    = 40
   }
-  # Organization and Tag
+
+# Organization and Tag Information
   organization = var.organization
   tags         = var.tags
 }
+
 ```
 Sample terraform.tfvars file.
-```
-# Required Varilables
+```hcl
 apikey       = ""
-vc_password  = ""
-ssh_user     = "iksadmin"
-ssh_key      = ""
-# Optional Variables
+secretkey    = "../../.secret"
+organization = "default"
+ssh_user = "iksadmin"
+ssh_key  = ""
 tags = [
   {
-    "key" : "key-1"
-    "value" : "value-1"
+    "key" : "managed_by"
+    "value" : "Terraform"
   },
   {
-    "key" : "key-2"
-    "value" : "value-2"
+    "key" : "owner"
+    "value" : "jb"
   }
 ]
 organization = "default" # Change this if a different org is required.  Default org is set to "default"
 ```
 
 Sample versions.tf file
-```
+```hcl
 terraform {
   required_version = ">=0.14.5"
 
   required_providers {
     intersight = {
       source  = "CiscoDevNet/intersight"
-      version = "=1.0.13"
+      version = ">=1.0.18"
     }
   }
 }
 ```
 Sample variables.tf file.
-```
+```hcl
 variable "apikey" {
   type        = string
   description = "API Key"
@@ -237,11 +254,6 @@ variable "ssh_key" {
   type        = string
   description = "SSH Public Key to be used to node login."
 }
-variable "vc_password" {
-  sensitive   = true
-  type        = string
-  description = "Password of the account to be used with vCenter.  This should be the password for the account used to register vCenter with Intersight."
-}
 variable "tags" {
   type    = list(map(string))
   default = []
@@ -257,20 +269,20 @@ variable "tags" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
-| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.17 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.18 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.17 |
+| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.18 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_addons"></a> [addons](#module\_addons) | terraform-cisco-modules/iks/intersight//modules/addon_policy | n/a |
-| <a name="module_cluster_addon_profile"></a> [cluster\_addon\_profile](#module\_cluster\_addon\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile | n/a |
+| <a name="module_cluster_addon_profile"></a> [cluster\_addon\_profile](#module\_cluster\_addon\_profile) | ./modules/cluster_addon_profile | n/a |
 | <a name="module_cluster_profile"></a> [cluster\_profile](#module\_cluster\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster | n/a |
 | <a name="module_control_profile"></a> [control\_profile](#module\_control\_profile) | terraform-cisco-modules/iks/intersight//modules/node_profile | n/a |
 | <a name="module_control_provider"></a> [control\_provider](#module\_control\_provider) | terraform-cisco-modules/iks/intersight//modules/infra_provider | n/a |
@@ -302,7 +314,7 @@ variable "tags" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_addons_list"></a> [addons\_list](#input\_addons\_list) | List of objects for each addon to be added. | <pre>list(object({<br>    addon_policy_name = string<br>    addon             = string<br>    description       = string<br>    upgrade_strategy  = string<br>    install_strategy  = string<br>  }))</pre> | `[]` | no |
+| <a name="input_addons"></a> [addons](#input\_addons) | n/a | <pre>list(object({<br>    createNew        = bool<br>    addonPolicyName  = optional(string)<br>    addonName        = optional(string)<br>    description      = optional(string)<br>    upgradeStrategy  = optional(string)<br>    installStrategy  = optional(string)<br>    overrideSets     = optional(list(map(string)))<br>    overrides        = optional(string)<br>    releaseName      = optional(string)<br>    releaseNamespace = optional(string)<br>    releaseVersion   = optional(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_cluster"></a> [cluster](#input\_cluster) | n/a | <pre>object({<br>    name                = string<br>    action              = string<br>    wait_for_completion = bool<br>    worker_nodes        = number<br>    load_balancers      = number<br>    worker_max          = number<br>    control_nodes       = number<br>    ssh_user            = string<br>    ssh_public_key      = string<br>  })</pre> | n/a | yes |
 | <a name="input_infraConfigPolicy"></a> [infraConfigPolicy](#input\_infraConfigPolicy) | n/a | <pre>object({<br>    use_existing       = bool<br>    platformType       = optional(string)<br>    targetName         = optional(string)<br>    policyName         = string<br>    description        = optional(string)<br>    interfaces         = optional(list(string))<br>    diskMode           = optional(string)<br>    vcTargetName       = optional(string)<br>    vcClusterName      = optional(string)<br>    vcDatastoreName    = optional(string)<br>    vcResourcePoolName = optional(string)<br>    vcPassword         = optional(string)<br>  })</pre> | n/a | yes |
 | <a name="input_infra_config_policy_name"></a> [infra\_config\_policy\_name](#input\_infra\_config\_policy\_name) | Name of existing infra config policy (if it exists) to be used. | `string` | `""` | no |
@@ -321,5 +333,6 @@ variable "tags" {
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cluster_profile_moid"></a> [cluster\_profile\_moid](#output\_cluster\_profile\_moid) | n/a |
+| <a name="output_k8s_cluster_moid"></a> [k8s\_cluster\_moid](#output\_k8s\_cluster\_moid) | n/a |
+| <a name="output_k8s_cluster_profile_moid"></a> [k8s\_cluster\_profile\_moid](#output\_k8s\_cluster\_profile\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

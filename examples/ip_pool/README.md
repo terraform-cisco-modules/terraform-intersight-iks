@@ -4,17 +4,18 @@ This example creates an IP Pool based on the information provided in the module.
 
 ## Usage
 
-To run this example you need to execute:
+To run this create a 'main.tf', 'variables.tf' and 'versions.tf' file and place them in the same folder.  Modify the attributes below to meet your needs and run 
 
 ```bash
-$ terraform init
-$ terraform plan
-$ terraform apply
+terraform init
+terraform plan
+terraform apply
 ```
+
 ** Additional ".tf" file examples are located within the GITHUB Repo.  Link Above.
 
 main.tf
-```
+```hcl
 provider "intersight" {
   apikey    = var.api_key
   secretkey = var.secretkey
@@ -43,7 +44,7 @@ Note that this example may create resources which are consumed for IKS clusters.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
-| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | =1.0.17 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | =1.0.18 |
 
 ## Providers
 
@@ -53,7 +54,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ip_pool_1-139-140-0"></a> [ip\_pool\_1-139-140-0](#module\_ip\_pool\_1-139-140-0) | terraform-cisco-modules/iks/intersight//modules/ip_pool | 2.0.4 |
+| <a name="module_ip_pool_1-139-140-0"></a> [ip\_pool\_1-139-140-0](#module\_ip\_pool\_1-139-140-0) | terraform-cisco-modules/iks/intersight//modules/ip_pool | n/a |
 
 ## Resources
 

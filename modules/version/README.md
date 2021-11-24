@@ -14,6 +14,11 @@ module "iks_version" {
 This module will create the Kubernetes Version Policy IKS.  This policy can then be used to create IKS clusters.
 Check with the IKS documentation for supported Kubernetes Versions
 
+Current supported IKS versions are:
+
+1.19.5
+1.19.15
+
 
 These resources are created
 * [Version Policy](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_version_policy)
@@ -26,13 +31,13 @@ These resources are created
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
-| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.17 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.18 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.17 |
+| <a name="provider_intersight"></a> [intersight](#provider\_intersight) | >=1.0.18 |
 
 ## Modules
 

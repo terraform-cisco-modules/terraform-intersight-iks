@@ -5,7 +5,6 @@ variable "version_policy" {
     version      = optional(string)
   })
 }
-
 variable "infraConfigPolicy" {
   type = object({
     use_existing       = bool
@@ -74,17 +73,23 @@ variable "k8s_network_policy_name" {
   description = "Name of existing K8s Network Policy (if it exists) to be used."
   default     = ""
 }
-variable "addons_list" {
+variable "addons" {
   type = list(object({
-    addon_policy_name = string
-    addon             = string
-    description       = string
-    upgrade_strategy  = string
-    install_strategy  = string
+    createNew        = bool
+    addonPolicyName  = optional(string)
+    addonName        = optional(string)
+    description      = optional(string)
+    upgradeStrategy  = optional(string)
+    installStrategy  = optional(string)
+    overrideSets     = optional(list(map(string)))
+    overrides        = optional(string)
+    releaseName      = optional(string)
+    releaseNamespace = optional(string)
+    releaseVersion   = optional(string)
   }))
-  description = "List of objects for each addon to be added."
-  default     = []
+  default = []
 }
+
 variable "ip_pool" {
   type = object({
     use_existing        = bool

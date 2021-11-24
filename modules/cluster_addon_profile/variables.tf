@@ -1,8 +1,18 @@
+
 variable "addons" {
-  type        = list(string)
-  default     = []
-  description = "List of addons to be added to the policy."
+  type = list(object({
+    addonName        = string
+    description      = optional(string)
+    upgradeStrategy  = optional(string)
+    installStrategy  = optional(string)
+    overrideSets     = optional(list(map(string)))
+    overrides        = optional(string)
+    releaseName      = optional(string)
+    releaseNamespace = optional(string)
+    releaseVersion   = optional(string)
+  }))
 }
+
 variable "profile_name" {
   type        = string
   description = "Name of the Cluster Addon Policy"

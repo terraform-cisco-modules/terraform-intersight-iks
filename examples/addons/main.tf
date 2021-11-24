@@ -3,24 +3,37 @@ provider "intersight" {
   secretkey = var.secretkey
   endpoint  = var.endpoint
 }
-module "addons" {
 
+
+module "smm" {
   source = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
-  addons = [{
-    addon_policy_name = "dashboard"
-    addon             = "kubernetes-dashboard"
-    description       = "K8s Dashboard Policy"
-    upgrade_strategy  = "AlwaysReinstall"
-    install_strategy  = "InstallOnly"
-    },
-    {
-      addon_policy_name = "monitor"
-      addon             = "ccp-monitor"
-      description       = "Grafana Policy"
-      upgrade_strategy  = "AlwaysReinstall"
-      install_strategy  = "InstallOnly"
-    }
-  ]
+  addon = {
+    policyName      = "smm-tf"
+    addonName       = "smm"
+    description     = "SMM Policy"
+    upgradeStrategy = "AlwaysReinstall"
+    installStrategy = "InstallOnly"
+    releaseVersion  = "1.7.4-cisco4-helm3"
+    overrides = yamlencode({ "demoApplication" : { "enabled" : true }
+    })
+  }
+
+  org_name = var.organization
+  tags     = var.tags
+}
+
+module "monitor" {
+  source = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
+  addon = {
+    policyName      = "monitor-tf"
+    addonName       = "ccp-monitor"
+    description     = "Monitor Policy"
+    upgradeStrategy = "AlwaysReinstall"
+    installStrategy = "InstallOnly"
+    releaseVersion  = "0.2.61-helm3"
+    overrides = yamlencode({ "demoApplication" : { "enabled" : true }
+    })
+  }
 
   org_name = var.organization
   tags     = var.tags

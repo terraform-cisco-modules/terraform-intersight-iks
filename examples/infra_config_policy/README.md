@@ -4,19 +4,16 @@ This example creates an Infrastructure Provider policy based on the information 
 
 ## Usage
 
-To run this example you need to execute:
-
-
+To run this create a 'main.tf', 'variables.tf' and 'versions.tf' file and place them in the same folder.  Modify the attributes below to meet your needs and run 
 
 ```bash
-$ terraform init
-$ terraform plan
-$ terraform apply
+terraform init
+terraform plan
+terraform apply
 ```
-** Additional ".tf" file examples are located within the GITHUB Repo.  Link Above.
 
-main.tf
-```
+
+```hcl
 provider "intersight" {
   apikey    = var.apikey
   secretkey = var.secretkey
@@ -41,7 +38,6 @@ module "iwe" {
 #Policy Example for Vcenter
 module "vcenter" {
   source  = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
-  version = "2.0.4"
   vmConfig = {
     platformType       = "esxi"
     targetName         = "marvel-vcsa.rich.ciscolabs.com"
@@ -57,9 +53,6 @@ module "vcenter" {
   org_name = var.organization
   tags     = var.tags
 }
-
-
-
 ```
 
 
@@ -81,7 +74,7 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_iwe"></a> [iwe](#module\_iwe) | terraform-cisco-modules/iks/intersight//modules/infra_config_policy | 2.0.4 |
-| <a name="module_vcenter"></a> [vcenter](#module\_vcenter) | terraform-cisco-modules/iks/intersight//modules/infra_config_policy | 2.0.4 |
+| <a name="module_vcenter"></a> [vcenter](#module\_vcenter) | terraform-cisco-modules/iks/intersight//modules/infra_config_policy | n/a |
 
 ## Resources
 
