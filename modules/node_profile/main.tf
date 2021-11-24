@@ -1,6 +1,7 @@
 resource "intersight_kubernetes_node_group_profile" "this" {
 
   name        = var.name
+  action      = var.action
   description = var.description
   node_type   = var.profile_type
   minsize     = var.min_size
