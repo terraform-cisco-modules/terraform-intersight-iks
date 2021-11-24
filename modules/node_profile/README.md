@@ -49,6 +49,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_action"></a> [action](#input\_action) | User Initiated action.  Options are {{Delete\|Deploy\|Ready\|No-op\|Unassign}. | `string` | `"No-op"` | no |
 | <a name="input_cluster_moid"></a> [cluster\_moid](#input\_cluster\_moid) | MOID derived from the Cluster that is being consumed. | `string` | n/a | yes |
 | <a name="input_description"></a> [description](#input\_description) | Descripton of the Node Profile. | `string` | `""` | no |
 | <a name="input_ip_pool_moid"></a> [ip\_pool\_moid](#input\_ip\_pool\_moid) | MOID derived from the IP Pool that is being consumed. | `string` | n/a | yes |

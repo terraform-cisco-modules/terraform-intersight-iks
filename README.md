@@ -282,7 +282,7 @@ variable "tags" {
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_addons"></a> [addons](#module\_addons) | terraform-cisco-modules/iks/intersight//modules/addon_policy | n/a |
-| <a name="module_cluster_addon_profile"></a> [cluster\_addon\_profile](#module\_cluster\_addon\_profile) | ./modules/cluster_addon_profile | n/a |
+| <a name="module_cluster_addon_profile"></a> [cluster\_addon\_profile](#module\_cluster\_addon\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile | n/a |
 | <a name="module_cluster_profile"></a> [cluster\_profile](#module\_cluster\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster | n/a |
 | <a name="module_control_profile"></a> [control\_profile](#module\_control\_profile) | terraform-cisco-modules/iks/intersight//modules/node_profile | n/a |
 | <a name="module_control_provider"></a> [control\_provider](#module\_control\_provider) | terraform-cisco-modules/iks/intersight//modules/infra_provider | n/a |
@@ -334,5 +334,4 @@ variable "tags" {
 | Name | Description |
 |------|-------------|
 | <a name="output_k8s_cluster_moid"></a> [k8s\_cluster\_moid](#output\_k8s\_cluster\_moid) | n/a |
-| <a name="output_k8s_cluster_profile_moid"></a> [k8s\_cluster\_profile\_moid](#output\_k8s\_cluster\_profile\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
