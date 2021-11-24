@@ -207,7 +207,7 @@ module "control_profile" {
   max_size     = var.cluster.control_nodes + 1
   ip_pool_moid = var.ip_pool.use_existing == true ? data.intersight_ippool_pool.this.0.results.0.moid : module.ip_pool_policy.0.ip_pool_moid
   version_moid = var.version_policy.use_existing == true ? data.intersight_kubernetes_version_policy.this.0.results.0.moid : module.k8s_version.0.version_policy_moid
-  cluster_moid = module.cluster_profile.cluster_moid
+  cluster_moid = module.cluster_profile.k8s_cluster_profile_moid
 
 }
 module "worker_profile" {
@@ -218,7 +218,7 @@ module "worker_profile" {
   max_size     = var.cluster.worker_max
   ip_pool_moid = var.ip_pool.use_existing == true ? data.intersight_ippool_pool.this.0.results.0.moid : module.ip_pool_policy.0.ip_pool_moid
   version_moid = var.version_policy.use_existing == true ? data.intersight_kubernetes_version_policy.this.0.results.0.moid : module.k8s_version.0.version_policy_moid
-  cluster_moid = module.cluster_profile.cluster_moid
+  cluster_moid = module.cluster_profile.k8s_cluster_profile_moid
 
 }
 module "control_provider" {
