@@ -22,7 +22,11 @@ variable "disk_size" {
   description = "Amount of disk to be assigned to the virtual machine in GiB."
   default     = 40
 }
-
+variable "description" {
+  type        = string
+  default     = ""
+  description = "Description to be used to describe the worker profile."
+}
 variable "tags" {
   type    = list(map(string))
   default = []

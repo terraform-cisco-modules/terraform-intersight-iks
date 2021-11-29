@@ -5,6 +5,7 @@ data "intersight_organization_organization" "this" {
 resource "intersight_kubernetes_sys_config_policy" "this" {
 
   name            = var.policy_name
+  description     = var.description
   dns_servers     = var.dns_servers
   ntp_servers     = var.ntp_servers
   timezone        = var.timezone

@@ -49,6 +49,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_description"></a> [description](#input\_description) | Description to be used to describe the K8s sysconfig profile. | `string` | `""` | no |
 | <a name="input_dns_servers"></a> [dns\_servers](#input\_dns\_servers) | DNS Servers to be included in the Network Policy. | `list(string)` | n/a | yes |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain Name information for DNS search. | `string` | n/a | yes |
 | <a name="input_ntp_servers"></a> [ntp\_servers](#input\_ntp\_servers) | NTP Servers to be included in the Network Policy. | `list(string)` | n/a | yes |

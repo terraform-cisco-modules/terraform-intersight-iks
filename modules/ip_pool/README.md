@@ -47,6 +47,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_description"></a> [description](#input\_description) | Description to be used to describe the IP Pool Policy. | `string` | `""` | no |
 | <a name="input_gateway"></a> [gateway](#input\_gateway) | Default gateway for this pool. | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Name of the IP Pool to be created. | `string` | n/a | yes |
 | <a name="input_netmask"></a> [netmask](#input\_netmask) | Subnet Mask for this pool. | `string` | n/a | yes |

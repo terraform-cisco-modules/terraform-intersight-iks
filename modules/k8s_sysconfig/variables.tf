@@ -2,6 +2,11 @@ variable "org_name" {
   type        = string
   description = "Intersight Organization name"
 }
+variable "description" {
+  type        = string
+  default     = ""
+  description = "Description to be used to describe the K8s sysconfig profile."
+}
 variable "policy_name" {
   type        = string
   description = "Name of the policy.  `_Network` and `_pod` will be added to the end of the name for the respective policies to be built."

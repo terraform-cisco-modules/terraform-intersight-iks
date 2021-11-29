@@ -3,10 +3,11 @@ data "intersight_organization_organization" "this" {
 }
 resource "intersight_kubernetes_virtual_machine_instance_type" "this" {
 
-  name      = var.name
-  cpu       = var.cpu
-  disk_size = var.disk_size
-  memory    = var.memory
+  name        = var.name
+  description = var.description
+  cpu         = var.cpu
+  disk_size   = var.disk_size
+  memory      = var.memory
   organization {
     object_type = "organization.Organization"
     moid        = data.intersight_organization_organization.this.results.0.moid

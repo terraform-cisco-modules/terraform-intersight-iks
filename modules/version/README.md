@@ -55,6 +55,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_description"></a> [description](#input\_description) | Description to be used to describe the k8s version profile. | `string` | `""` | no |
 | <a name="input_k8s_version"></a> [k8s\_version](#input\_k8s\_version) | Version of the Kubernetes cluster | `string` | n/a | yes |
 | <a name="input_k8s_version_name"></a> [k8s\_version\_name](#input\_k8s\_version\_name) | Name of the policy to be created | `string` | n/a | yes |
 | <a name="input_org_name"></a> [org\_name](#input\_org\_name) | Intersight Organization name | `string` | n/a | yes |

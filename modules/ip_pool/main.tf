@@ -5,7 +5,8 @@ data "intersight_organization_organization" "this" {
 
 # Supports IPV4 today.
 resource "intersight_ippool_pool" "this" {
-  name = var.name
+  name        = var.name
+  description = var.description
   ip_v4_blocks {
     from = var.starting_address
     size = var.pool_size

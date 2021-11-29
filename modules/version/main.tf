@@ -9,7 +9,8 @@ data "intersight_kubernetes_version" "this" {
 }
 resource "intersight_kubernetes_version_policy" "this" {
 
-  name = var.k8s_version_name
+  name        = var.k8s_version_name
+  description = var.description
   nr_version {
 
     object_type = "kubernetes.Version"
