@@ -6,6 +6,7 @@ resource "intersight_kubernetes_network_policy" "this" {
 
 
   name             = var.policy_name
+  description      = var.description
   pod_network_cidr = var.pod_cidr
   service_cidr     = var.service_cidr
   cni_type         = var.cni

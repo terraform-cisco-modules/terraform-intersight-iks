@@ -49,6 +49,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | Number of CPU allocated to the virtual machine. | `number` | `4` | no |
+| <a name="input_description"></a> [description](#input\_description) | Description to be used to describe the worker profile. | `string` | `""` | no |
 | <a name="input_disk_size"></a> [disk\_size](#input\_disk\_size) | Amount of disk to be assigned to the virtual machine in GiB. | `number` | `40` | no |
 | <a name="input_memory"></a> [memory](#input\_memory) | Amount of memory assigned to the virtual machine in MiB. | `number` | `16384` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the Worker Profile to be created.  i.e small | `string` | n/a | yes |

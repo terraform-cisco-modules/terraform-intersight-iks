@@ -2,6 +2,11 @@ variable "org_name" {
   type        = string
   description = "Intersight Organization name"
 }
+variable "description" {
+  type        = string
+  default     = ""
+  description = "Description to be used to describe the IP Pool Policy."
+}
 variable "name" {
   type        = string
   description = "Name of the IP Pool to be created."

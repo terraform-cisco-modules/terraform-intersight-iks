@@ -6,6 +6,7 @@ resource "intersight_kubernetes_trusted_registries_policy" "this" {
 
 
   name                = var.policy_name
+  description         = var.description
   root_ca_registries  = var.root_ca_registries
   unsigned_registries = var.unsigned_registries
   organization {
