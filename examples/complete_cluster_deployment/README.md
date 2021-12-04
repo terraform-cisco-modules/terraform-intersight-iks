@@ -189,7 +189,7 @@ module "iks_cluster" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
-| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | =1.0.18 |
+| <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | =1.0.19 |
 
 ## Providers
 
@@ -199,7 +199,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iks_cluster"></a> [iks\_cluster](#module\_iks\_cluster) | terraform-cisco-modules/iks/intersight// | 2.1.0 |
+| <a name="module_iks_cluster"></a> [iks\_cluster](#module\_iks\_cluster) | terraform-cisco-modules/iks/intersight// | 2.1.2 |
 
 ## Resources
 

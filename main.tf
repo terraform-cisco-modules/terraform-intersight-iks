@@ -25,8 +25,8 @@ data "intersight_kubernetes_container_runtime_policy" "this" {
   name  = var.runtime_policy.name
 }
 data "intersight_kubernetes_version_policy" "this" {
-  count = var.version_policy.use_existing == true ? 1 : 0
-  name  = var.version_policy.name
+  count = var.versionPolicy.useExisting == true ? 1 : 0
+  name  = var.versionPolicy.policyName
 }
 data "intersight_kubernetes_virtual_machine_instance_type" "this" {
   count = var.instance_type.use_existing == true ? 1 : 0
@@ -114,12 +114,13 @@ module "runtime_policy" {
   tags                 = var.tags
 }
 module "k8s_version" {
-  source           = "terraform-cisco-modules/iks/intersight//modules/version"
-  count            = var.version_policy.use_existing == true ? 0 : 1
-  k8s_version      = var.version_policy.version
-  k8s_version_name = var.version_policy.name
-  org_name         = var.organization
-  tags             = var.tags
+  source         = "terraform-cisco-modules/iks/intersight//modules/version"
+  count          = var.versionPolicy.useExisting == true ? 0 : 1
+  iksVersionName = var.versionPolicy.versionName
+  policyName     = var.versionPolicy.policyName
+  description    = var.versionPolicy.description
+  org_name       = var.organization
+  tags           = var.tags
 }
 module "instance_type" {
   source    = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
@@ -142,7 +143,6 @@ module "cluster_profile" {
   ssh_user            = var.cluster.ssh_user
   net_config_moid     = var.k8s_network.use_existing == true ? data.intersight_kubernetes_network_policy.this.0.results.0.moid : module.k8s_network.0.network_policy_moid
   sys_config_moid     = var.sysconfig.use_existing == true ? data.intersight_kubernetes_sys_config_policy.this.0.results.0.moid : module.k8s_sysconfig.0.sys_config_policy_moid
-  # trusted_registry_policy_moid = var.tr_policy.use_existing == true ? data.intersight_kubernetes_trusted_registries_policy.this.0.results.0.moid : module.trusted_registry.0.trusted_registry_moid
   trusted_registry_policy_moid = trimspace(<<-EOT
   %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == false~}%{endif~}
   %{if var.tr_policy.use_existing == true && var.tr_policy.create_new == false~}${data.intersight_kubernetes_trusted_registries_policy.this.0.results.0.moid}%{endif~}
@@ -150,7 +150,6 @@ module "cluster_profile" {
   %{if var.tr_policy.use_existing == false && var.tr_policy.create_new == true~}${module.trusted_registry.0.trusted_registry_moid}%{endif~}
   EOT
   )
-  # runtime_policy_moid          = var.runtime_policy.use_existing == true ? data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid : module.runtime_policy.0.runtime_policy_moid
   runtime_policy_moid = trimspace(<<-EOT
   %{if var.runtime_policy.use_existing == false && var.runtime_policy.create_new == false~}%{endif~}
   %{if var.runtime_policy.use_existing == true && var.runtime_policy.create_new == false~}${data.intersight_kubernetes_container_runtime_policy.this.0.results.0.moid}%{endif~}
@@ -206,7 +205,7 @@ module "control_profile" {
   min_size     = var.cluster.control_nodes
   max_size     = var.cluster.control_nodes + 1
   ip_pool_moid = var.ip_pool.use_existing == true ? data.intersight_ippool_pool.this.0.results.0.moid : module.ip_pool_policy.0.ip_pool_moid
-  version_moid = var.version_policy.use_existing == true ? data.intersight_kubernetes_version_policy.this.0.results.0.moid : module.k8s_version.0.version_policy_moid
+  version_moid = var.versionPolicy.useExisting == true ? data.intersight_kubernetes_version_policy.this.0.results.0.moid : module.k8s_version.0.version_policy_moid
   cluster_moid = module.cluster_profile.k8s_cluster_profile_moid
 
 }
@@ -217,7 +216,7 @@ module "worker_profile" {
   min_size     = var.cluster.worker_nodes
   max_size     = var.cluster.worker_max
   ip_pool_moid = var.ip_pool.use_existing == true ? data.intersight_ippool_pool.this.0.results.0.moid : module.ip_pool_policy.0.ip_pool_moid
-  version_moid = var.version_policy.use_existing == true ? data.intersight_kubernetes_version_policy.this.0.results.0.moid : module.k8s_version.0.version_policy_moid
+  version_moid = var.versionPolicy.useExisting == true ? data.intersight_kubernetes_version_policy.this.0.results.0.moid : module.k8s_version.0.version_policy_moid
   cluster_moid = module.cluster_profile.k8s_cluster_profile_moid
 
 }
