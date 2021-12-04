@@ -2,11 +2,11 @@ variable "org_name" {
   type        = string
   description = "Intersight Organization name"
 }
-variable "k8s_version" {
+variable "iksVersionName" {
   type        = string
-  description = "Version of the Kubernetes cluster"
+  description = "Version name of IKS"
 }
-variable "k8s_version_name" {
+variable "policyName" {
   type        = string
   description = "Name of the policy to be created"
 }

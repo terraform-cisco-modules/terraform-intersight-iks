@@ -6,14 +6,14 @@ provider "intersight" {
 
 module "iks_cluster" {
   source  = "terraform-cisco-modules/iks/intersight//"
-  version = "2.1.0"
+  version = "2.1.2"
 
   # Kubernetes Cluster Profile  Adjust the values as needed.
   cluster = {
-    name                = "new_cluster"
+    name                = "test"
     action              = "Unassign"
     wait_for_completion = false
-    worker_nodes        = 5
+    worker_nodes        = 2
     load_balancers      = 5
     worker_max          = 20
     control_nodes       = 1
@@ -24,7 +24,7 @@ module "iks_cluster" {
   # IP Pool Information (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
   ip_pool = {
     use_existing = true
-    name         = "10-239-21-0"
+    name         = "marvel-prod"
     # ip_starting_address = "10.239.21.220"
     # ip_pool_size        = "20"
     # ip_netmask          = "255.255.255.0"
@@ -53,10 +53,10 @@ module "iks_cluster" {
   }
 
   # Version policy (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
-  version_policy = {
-    use_existing = true
-    name         = "1.19.15"
-    # version      = "1.19.15"
+  versionPolicy = {
+    useExisting    = false
+    policyName     = "1.19.15"
+    iksVersionName = "1.19.15-iks.3"
   }
 
   # Trusted Registry Policy (To create new change "use_existing" to 'false' and set "create_new' to 'true' uncomment variables and modify them to meet your needs.)
@@ -64,7 +64,7 @@ module "iks_cluster" {
   tr_policy = {
     use_existing = false
     create_new   = false
-    name         = "trusted-registry"
+    # name         = "trusted-registry"
   }
 
   # Runtime Policy (To create new change "use_existing" to 'false' and set "create_new' to 'true' uncomment variables and modify them to meet your needs.)
@@ -90,7 +90,7 @@ module "iks_cluster" {
     use_existing = true
     # platformType = "iwe"
     # targetName   = "falcon"
-    policyName = "dev"
+    policyName = "marvel-prod"
     # description  = "Test Policy"
     # interfaces   = ["iwe-guests"]
     # vcTargetName   = optional(string)
@@ -104,14 +104,14 @@ module "iks_cluster" {
   # This is an Optional item.  Comment or remove to not use.  Multiple addons can be configured.
   addons = [
     {
-      createNew       = true
-      addonPolicyName = "smm-tf"
+      createNew       = false
+      addonPolicyName = "smm"
       addonName       = "smm"
-      description     = "SMM Policy"
-      upgradeStrategy = "AlwaysReinstall"
-      installStrategy = "InstallOnly"
-      releaseVersion  = "1.7.4-cisco4-helm3"
-      overrides       = yamlencode({ "demoApplication" : { "enabled" : true } })
+      # description     = "SMM Policy"
+      # upgradeStrategy = "AlwaysReinstall"
+      # installStrategy = "InstallOnly"
+      # releaseVersion  = "1.7.4-cisco4-helm3"
+      overrides = yamlencode({ "demoApplication" : { "enabled" : true } })
     },
     # {
     # createNew = true

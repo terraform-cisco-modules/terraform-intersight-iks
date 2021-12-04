@@ -52,6 +52,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_k8s_version_1-19-15-iks3"></a> [k8s\_version\_1-19-15-iks3](#module\_k8s\_version\_1-19-15-iks3) | terraform-cisco-modules/iks/intersight//modules/version | n/a |
 | <a name="module_k8s_version_1-19-5"></a> [k8s\_version\_1-19-5](#module\_k8s\_version\_1-19-5) | terraform-cisco-modules/iks/intersight//modules/version | n/a |
 
 ## Resources

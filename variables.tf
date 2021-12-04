@@ -1,8 +1,9 @@
-variable "version_policy" {
+variable "versionPolicy" {
   type = object({
-    use_existing = bool
-    name         = string
-    version      = optional(string)
+    useExisting = bool
+    policyName  = string
+    description = optional(string)
+    versionName = optional(string)
   })
 }
 variable "infraConfigPolicy" {
