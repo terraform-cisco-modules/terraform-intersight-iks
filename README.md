@@ -108,11 +108,11 @@ module "terraform-intersight-iks" {
     # service_cidr = "100.64.0.0/24"
     # cni          = "Calico"
   }
-# Version policy (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
-  version_policy = {
-    use_existing = true
-    name         = "1.19.15"
-    # version      = "1.19.15"
+# Version policy (To create new change "useExisting" to 'false' uncomment variables and modify them to meet your needs.)
+  versionPolicy = {
+    useExisting = true
+    policyName     = "1-19-15-iks.3"
+    iksVersionName = "1.19.15-iks.3"
   }
 # Trusted Registry Policy (To create new change "use_existing" to 'false' and set "create_new' to 'true' uncomment variables and modify them to meet your needs.)
 # Set both variables to 'false' if this policy is not needed.
