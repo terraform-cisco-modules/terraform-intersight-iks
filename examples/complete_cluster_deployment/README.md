@@ -199,7 +199,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iks_cluster"></a> [iks\_cluster](#module\_iks\_cluster) | terraform-cisco-modules/iks/intersight// | 2.1.2 |
+| <a name="module_iks_cluster"></a> [iks\_cluster](#module\_iks\_cluster) | terraform-cisco-modules/iks/intersight// | 2.1.3 |
 
 ## Resources
 
