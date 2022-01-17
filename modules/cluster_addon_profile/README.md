@@ -49,7 +49,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_addons"></a> [addons](#input\_addons) | n/a | <pre>list(object({<br>    addonName        = string<br>    description      = optional(string)<br>    upgradeStrategy  = optional(string)<br>    installStrategy  = optional(string)<br>    overrideSets     = optional(list(map(string)))<br>    overrides        = optional(string)<br>    releaseName      = optional(string)<br>    releaseNamespace = optional(string)<br>    releaseVersion   = optional(string)<br>  }))</pre> | n/a | yes |
+| <a name="input_addons"></a> [addons](#input\_addons) | n/a | <pre>list(object({<br>    addonPolicyName  = string<br>    addonName        = string<br>    description      = optional(string)<br>    upgradeStrategy  = optional(string)<br>    installStrategy  = optional(string)<br>    overrideSets     = optional(list(map(string)))<br>    overrides        = optional(string)<br>    releaseName      = optional(string)<br>    releaseNamespace = optional(string)<br>    releaseVersion   = optional(string)<br>  }))</pre> | n/a | yes |
 | <a name="input_cluster_moid"></a> [cluster\_moid](#input\_cluster\_moid) | MOID of the cluster to be associated with this cluster addon profile. | `string` | `""` | no |
 | <a name="input_org_name"></a> [org\_name](#input\_org\_name) | Intersight Organization name | `string` | n/a | yes |
 | <a name="input_profile_name"></a> [profile\_name](#input\_profile\_name) | Name of the Cluster Addon Policy | `string` | n/a | yes |

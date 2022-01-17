@@ -102,27 +102,26 @@ module "iks_cluster" {
 
   # Addon Profile and Policies (To create new change "createNew" to 'true' and uncomment variables and modify them to meet your needs.)
   # This is an Optional item.  Comment or remove to not use.  Multiple addons can be configured.
-  # addons = [
-  #   {
-  #     createNew       = false
-  #     addonPolicyName = "smm"
-  #     addonName       = "smm"
-  #     # description     = "SMM Policy"
-  #     # upgradeStrategy = "AlwaysReinstall"
-  #     # installStrategy = "InstallOnly"
-  #     # releaseVersion  = "1.7.4-cisco4-helm3"
-  #     overrides = yamlencode({ "demoApplication" : { "enabled" : true } })
-  #   },
-  #   # {
-  #   # createNew = true
-  #   # addonName            = "ccp-monitor"
-  #   # description       = "monitor Policy"
-  #   # # upgradeStrategy  = "AlwaysReinstall"
-  #   # # installStrategy  = "InstallOnly"
-  #   # releaseVersion = "0.2.61-helm3"
-  #   # # overrides = yamlencode({"demoApplication":{"enabled":true}})
-  #   # }
-  # ]
+  addons = [
+    {
+      createNew       = true
+      addonPolicyName = "smm-test-cluster"
+      addonName       = "smm"
+      description     = "SMM Policy"
+      upgradeStrategy = "AlwaysReinstall"
+      installStrategy = "InstallOnly"
+      releaseVersion  = "1.7.4-cisco4-helm3"
+      overrides       = yamlencode({ "demoApplication" : { "enabled" : true } })
+    },
+    {
+      createNew       = false
+      addonPolicyName = "ccp-monitor"
+      description     = "monitor Policy"
+      # upgradeStrategy  = "AlwaysReinstall"
+      # installStrategy  = "InstallOnly"
+      releaseVersion = "0.2.61-helm3"
+    }
+  ]
 
   # Worker Node Instance Type (To create new change "use_existing" to 'false' and uncomment variables and modify them to meet your needs.)
   instance_type = {
