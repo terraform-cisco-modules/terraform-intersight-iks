@@ -1,9 +1,10 @@
 variable "versionPolicy" {
   type = object({
-    useExisting = bool
-    policyName  = string
-    description = optional(string)
-    versionName = optional(string)
+    useExisting    = bool
+    policyName     = string
+    iksVersionName = string
+    description    = optional(string)
+    versionName    = optional(string)
   })
 }
 variable "infraConfigPolicy" {

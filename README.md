@@ -327,7 +327,7 @@ variable "tags" {
 | <a name="input_sysconfig"></a> [sysconfig](#input\_sysconfig) | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    ntp_servers  = optional(list(string))<br>    dns_servers  = optional(list(string))<br>    timezone     = optional(string)<br>    domain_name  = optional(string)<br>  })</pre> | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | n/a | `list(map(string))` | `[]` | no |
 | <a name="input_tr_policy"></a> [tr\_policy](#input\_tr\_policy) | n/a | <pre>object({<br>    use_existing        = bool<br>    create_new          = bool<br>    name                = optional(string)<br>    root_ca_registries  = optional(list(string))<br>    unsigned_registries = optional(list(string))<br>  })</pre> | n/a | yes |
-| <a name="input_versionPolicy"></a> [versionPolicy](#input\_versionPolicy) | n/a | <pre>object({<br>    useExisting = bool<br>    policyName  = string<br>    description = optional(string)<br>    versionName = optional(string)<br>  })</pre> | n/a | yes |
+| <a name="input_versionPolicy"></a> [versionPolicy](#input\_versionPolicy) | n/a | <pre>object({<br>    useExisting    = bool<br>    policyName     = string<br>    iksVersionName = string<br>    description    = optional(string)<br>    versionName    = optional(string)<br>  })</pre> | n/a | yes |
 
 ## Outputs
 
