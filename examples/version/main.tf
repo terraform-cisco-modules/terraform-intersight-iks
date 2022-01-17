@@ -6,7 +6,7 @@ provider "intersight" {
 
 module "k8s_version_1-19-5" {
   source         = "terraform-cisco-modules/iks/intersight//modules/version"
-  policyName     = "1.19.5"
+  policyName     = "1.19.5-test"
   iksVersionName = "1.19.5-iks-0"
 
   org_name = var.organization
@@ -15,8 +15,8 @@ module "k8s_version_1-19-5" {
 
 module "k8s_version_1-19-15-iks3" {
   source         = "terraform-cisco-modules/iks/intersight//modules/version"
-  policyName     = "1-19-15-iks.3"
-  iksVersionName = "1.19.15-iks.3"
+  policyName     = "1-19-15-iks.5-test"
+  iksVersionName = "1.19.15-iks.5"
 
   org_name = var.organization
   tags     = var.tags
