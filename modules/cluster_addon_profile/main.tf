@@ -5,7 +5,7 @@ data "intersight_organization_organization" "this" {
 # Loop through and lookup Addon Policy MOID(s)
 data "intersight_kubernetes_addon_policy" "this" {
   for_each = {
-    for addon in var.addons : addon.addonName => addon
+    for addon in var.addons : addon.addonPolicyName => addon
   }
   name = each.key
 }
@@ -15,11 +15,11 @@ resource "intersight_kubernetes_cluster_addon_profile" "this" {
 
   dynamic "addons" {
     for_each = {
-      for addon in var.addons : addon.addonName => addon
+      for addon in var.addons : addon.addonPolicyName => addon
     }
     content {
       addon_policy { moid = data.intersight_kubernetes_addon_policy.this[addons.key].results.0["moid"] }
-      name = addons.value["addonName"]
+      name = addons.value["addonPolicyName"]
       addon_configuration {
         override_sets     = addons.value["overrideSets"]
         overrides         = addons.value["overrides"]

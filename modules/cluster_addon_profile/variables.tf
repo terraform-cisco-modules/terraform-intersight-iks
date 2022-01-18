@@ -1,6 +1,7 @@
 
 variable "addons" {
   type = list(object({
+    addonPolicyName  = string
     addonName        = string
     description      = optional(string)
     upgradeStrategy  = optional(string)
