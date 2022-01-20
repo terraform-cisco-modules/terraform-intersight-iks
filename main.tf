@@ -26,7 +26,7 @@ data "intersight_kubernetes_container_runtime_policy" "this" {
 }
 data "intersight_kubernetes_version_policy" "this" {
   count = var.versionPolicy.useExisting == true ? 1 : 0
-  name  = var.versionPolicy.iksVersionName
+  name  = var.versionPolicy.policyName
 }
 data "intersight_kubernetes_virtual_machine_instance_type" "this" {
   count = var.instance_type.use_existing == true ? 1 : 0

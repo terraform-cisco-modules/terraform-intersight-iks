@@ -2,7 +2,7 @@ variable "versionPolicy" {
   type = object({
     useExisting    = bool
     policyName     = string
-    iksVersionName = string
+    iksVersionName = optional(string)
     description    = optional(string)
     versionName    = optional(string)
   })
