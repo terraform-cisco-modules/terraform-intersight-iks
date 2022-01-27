@@ -34,7 +34,7 @@ data "intersight_kubernetes_virtual_machine_instance_type" "this" {
 }
 
 module "infra_config_policy" {
-  source = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
+  source = "./modules/infra_config_policy"
   count  = var.infraConfigPolicy.use_existing == true ? 0 : 1
   vmConfig = {
     platformType       = var.infraConfigPolicy.platformType
@@ -54,7 +54,7 @@ module "infra_config_policy" {
 }
 module "ip_pool_policy" {
   count            = var.ip_pool.use_existing == true ? 0 : 1
-  source           = "terraform-cisco-modules/iks/intersight//modules/ip_pool"
+  source           = "./modules/ip_pool"
   name             = var.ip_pool.name
   starting_address = var.ip_pool.ip_starting_address
   pool_size        = var.ip_pool.ip_pool_size
@@ -66,7 +66,7 @@ module "ip_pool_policy" {
   tags             = var.tags
 }
 module "k8s_network" {
-  source       = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
+  source       = "./modules/k8s_network"
   count        = var.k8s_network.use_existing == true ? 0 : 1
   policy_name  = var.k8s_network.name
   pod_cidr     = var.k8s_network.pod_cidr
@@ -76,7 +76,7 @@ module "k8s_network" {
   tags         = var.tags
 }
 module "k8s_sysconfig" {
-  source      = "terraform-cisco-modules/iks/intersight//modules/k8s_sysconfig"
+  source      = "./modules/k8s_sysconfig"
   count       = var.sysconfig.use_existing == true ? 0 : 1
   policy_name = var.sysconfig.name
   dns_servers = var.sysconfig.dns_servers
@@ -87,7 +87,7 @@ module "k8s_sysconfig" {
   tags        = var.tags
 }
 module "trusted_registry" {
-  source              = "terraform-cisco-modules/iks/intersight//modules/trusted_registry"
+  source              = "./modules/trusted_registry"
   count               = var.tr_policy.create_new == true ? 1 : 0
   policy_name         = var.tr_policy.name
   unsigned_registries = var.tr_policy.unsigned_registries
@@ -96,7 +96,7 @@ module "trusted_registry" {
   tags                = var.tags
 }
 module "runtime_policy" {
-  source               = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
+  source               = "./modules/runtime_policy"
   count                = var.runtime_policy.create_new == true ? 1 : 0
   name                 = var.runtime_policy.name
   proxy_http_hostname  = var.runtime_policy.http_proxy_hostname
@@ -114,7 +114,7 @@ module "runtime_policy" {
   tags                 = var.tags
 }
 module "k8s_version" {
-  source         = "terraform-cisco-modules/iks/intersight//modules/version"
+  source         = "./modules/version"
   count          = var.versionPolicy.useExisting == true ? 0 : 1
   iksVersionName = var.versionPolicy.iksVersionName
   policyName     = var.versionPolicy.policyName
@@ -123,7 +123,7 @@ module "k8s_version" {
   tags           = var.tags
 }
 module "instance_type" {
-  source    = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
+  source    = "./modules/worker_profile"
   count     = var.instance_type.use_existing == true ? 0 : 1
   name      = var.instance_type.name
   cpu       = var.instance_type.cpu
@@ -133,7 +133,7 @@ module "instance_type" {
   tags      = var.tags
 }
 module "cluster_profile" {
-  source              = "terraform-cisco-modules/iks/intersight//modules/cluster"
+  source              = "./modules/cluster"
   name                = var.cluster.name
   action              = var.cluster.action
   wait_for_completion = var.cluster.wait_for_completion
@@ -162,7 +162,7 @@ module "cluster_profile" {
 }
 module "addons" {
 
-  source = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
+  source = "./modules/addon_policy"
   for_each = {
     for addon in var.addons : addon.addonName => addon
     if addon.createNew != false && can(addon)
@@ -187,7 +187,7 @@ module "addons" {
 
 module "cluster_addon_profile" {
 
-  source       = "terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile"
+  source       = "./modules/cluster_addon_profile"
   depends_on   = [module.addons]
   count        = var.addons != null ? 1 : 0
   profile_name = "${var.cluster.name}-addon-profile"
@@ -199,7 +199,7 @@ module "cluster_addon_profile" {
   tags         = var.tags
 }
 module "control_profile" {
-  source       = "terraform-cisco-modules/iks/intersight//modules/node_profile"
+  source       = "./modules/node_profile"
   name         = "${var.cluster.name}-control_profile"
   profile_type = "ControlPlane"
   min_size     = var.cluster.control_nodes
@@ -210,7 +210,7 @@ module "control_profile" {
 
 }
 module "worker_profile" {
-  source       = "terraform-cisco-modules/iks/intersight//modules/node_profile"
+  source       = "./modules/node_profile"
   name         = "${var.cluster.name}-worker_profile"
   profile_type = "Worker"
   min_size     = var.cluster.worker_nodes
@@ -221,7 +221,7 @@ module "worker_profile" {
 
 }
 module "control_provider" {
-  source                   = "terraform-cisco-modules/iks/intersight//modules/infra_provider"
+  source                   = "./modules/infra_provider"
   name                     = "${var.cluster.name}-control_provider"
   instance_type_moid       = var.instance_type.use_existing == true ? data.intersight_kubernetes_virtual_machine_instance_type.this.0.results.0.moid : module.instance_type.0.moid
   node_group_moid          = module.control_profile.node_group_profile_moid
@@ -229,7 +229,7 @@ module "control_provider" {
   tags                     = var.tags
 }
 module "worker_provider" {
-  source                   = "terraform-cisco-modules/iks/intersight//modules/infra_provider"
+  source                   = "./modules/infra_provider"
   name                     = "${var.cluster.name}-worker_provider"
   instance_type_moid       = var.instance_type.use_existing == true ? data.intersight_kubernetes_virtual_machine_instance_type.this.0.results.0.moid : module.instance_type.0.moid
   node_group_moid          = module.worker_profile.node_group_profile_moid
