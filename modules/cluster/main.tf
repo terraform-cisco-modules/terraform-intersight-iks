@@ -13,8 +13,11 @@ resource "intersight_kubernetes_cluster_profile" "this" {
   cluster_ip_pools {
     moid = var.ip_pool_moid
   }
-  container_runtime_config {
-    moid = var.runtime_policy_moid
+  dynamic "container_runtime_config" {
+    for_each = var.runtime_policy_moid == "" ? [] : [var.runtime_policy_moid]
+    content {
+      moid = container_runtime_config.value
+    }
   }
   management_config {
     load_balancer_count = var.load_balancer
@@ -23,8 +26,11 @@ resource "intersight_kubernetes_cluster_profile" "this" {
     ]
     ssh_user = var.ssh_user
   }
-  trusted_registries {
-    moid = var.trusted_registry_policy_moid
+  dynamic "trusted_registries" {
+    for_each = var.trusted_registry_policy_moid == "" ? [] : [var.trusted_registry_policy_moid]
+    content {
+      moid = trusted_registries.value
+    }
   }
   net_config {
     moid = var.net_config_moid
