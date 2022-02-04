@@ -14,6 +14,7 @@ variable "description" {
   type        = string
   default     = ""
   description = "Description to be used to describe the k8s version profile."
+  nullable    = false
 }
 variable "tags" {
   type        = list(map(string))

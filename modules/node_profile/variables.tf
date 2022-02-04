@@ -6,16 +6,19 @@ variable "description" {
   type        = string
   description = "Descripton of the Node Profile."
   default     = ""
+  nullable    = false
 }
 variable "action" {
   default     = "No-op"
   description = "User Initiated action.  Options are {{Delete|Deploy|Ready|No-op|Unassign}."
   type        = string
+  nullable    = false
 }
 variable "profile_type" {
   type        = string
   description = "Type of profile to be created. i.e Master or Worker"
   default     = ""
+  nullable    = false
 }
 variable "min_size" {
   type        = number
