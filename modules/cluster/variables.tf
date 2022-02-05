@@ -33,16 +33,19 @@ variable "wait_for_completion" {
   type        = bool
   default     = false
   description = "Wait for cluster completion true/false"
+  nullable    = false
 }
 variable "runtime_policy_moid" {
   type        = string
   description = "MOID for the Runtime Policy that is being consumed."
   default     = ""
+  nullable    = false
 }
 variable "trusted_registry_policy_moid" {
   type        = string
   description = "MOID for the Trusted Registry Policy that is being consumed."
   default     = ""
+  nullable    = false
 }
 
 variable "net_config_moid" {
@@ -60,6 +63,7 @@ variable "action" {
   type        = string
   description = "Action for cluster. i.e 'Deploy' 'Unassign'"
   default     = "Unassign"
+  nullable    = false
 }
 
 

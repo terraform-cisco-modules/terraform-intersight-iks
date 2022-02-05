@@ -6,6 +6,7 @@ variable "description" {
   type        = string
   default     = ""
   description = "Description to be used to describe the IP Pool Policy."
+  nullable    = false
 }
 variable "name" {
   type        = string
@@ -35,6 +36,7 @@ variable "secondary_dns" {
   type        = string
   description = "Secondary DNS Server for this pool."
   default     = ""
+  nullable    = false
 }
 
 variable "tags" {

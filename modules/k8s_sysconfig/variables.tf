@@ -6,6 +6,7 @@ variable "description" {
   type        = string
   default     = ""
   description = "Description to be used to describe the K8s sysconfig profile."
+  nullable    = false
 }
 variable "policy_name" {
   type        = string

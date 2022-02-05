@@ -22,6 +22,7 @@ variable "cluster_moid" {
   type        = string
   description = "MOID of the cluster to be associated with this cluster addon profile."
   default     = ""
+  nullable    = false
 }
 variable "org_name" {
   type        = string

@@ -6,6 +6,7 @@ variable "description" {
   type        = string
   default     = ""
   description = "Description to be used to describe the trusted registry profile."
+  nullable    = false
 }
 
 variable "policy_name" {
@@ -17,11 +18,13 @@ variable "root_ca_registries" {
   type        = list(string)
   description = "List of root CA certificates."
   default     = []
+  nullable    = false
 }
 variable "unsigned_registries" {
   type        = list(string)
   description = "List of unsigned registries to be supported."
   default     = []
+  nullable    = false
 }
 variable "tags" {
   type        = list(map(string))
