@@ -20,6 +20,11 @@ variable "pool_size" {
   type        = string
   description = "Number of IPs you want this pool to contain."
 }
+variable "ending_address" {
+  type        = string
+  description = "Ending IP Address you want for this pool."
+  default = null
+}
 variable "netmask" {
   type        = string
   description = "Subnet Mask for this pool."

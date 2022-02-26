@@ -10,6 +10,7 @@ resource "intersight_ippool_pool" "this" {
   ip_v4_blocks {
     from = var.starting_address
     size = var.pool_size
+    to = var.ending_address
   }
   ip_v4_config {
     netmask       = var.netmask
