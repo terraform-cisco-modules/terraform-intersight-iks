@@ -216,7 +216,7 @@ organization = "default" # Change this if a different org is required.  Default 
 Sample versions.tf file
 ```hcl
 terraform {
-  required_version = ">=0.14.5"
+  required_version = ">=1.1.0"
 
   required_providers {
     intersight = {
