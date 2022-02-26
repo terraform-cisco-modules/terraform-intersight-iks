@@ -9,6 +9,7 @@ module "ip_pool_1-139-140-0" {
   name             = "test_139"
   starting_address = "10.139.140.200"
   pool_size        = "20"
+  ending_address   = "10.139.140.219"
   netmask          = "255.255.255.0"
   gateway          = "10.139.140.1"
   primary_dns      = "10.101.128.15"

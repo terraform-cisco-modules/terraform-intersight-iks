@@ -23,7 +23,7 @@ These resources are created
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.1.0 |
 | <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.18 |
 
 ## Providers
@@ -48,6 +48,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_description"></a> [description](#input\_description) | Description to be used to describe the IP Pool Policy. | `string` | `""` | no |
+| <a name="input_ending_address"></a> [ending\_address](#input\_ending\_address) | Ending IP Address you want for this pool. | `string` | `null` | no |
 | <a name="input_gateway"></a> [gateway](#input\_gateway) | Default gateway for this pool. | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Name of the IP Pool to be created. | `string` | n/a | yes |
 | <a name="input_netmask"></a> [netmask](#input\_netmask) | Subnet Mask for this pool. | `string` | n/a | yes |

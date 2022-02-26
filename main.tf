@@ -58,7 +58,7 @@ module "ip_pool_policy" {
   name             = var.ip_pool.name
   starting_address = var.ip_pool.ip_starting_address
   pool_size        = var.ip_pool.ip_pool_size
-  ending_address = var.ip_pool.ip_ending_address
+  ending_address   = var.ip_pool.ip_ending_address
   netmask          = var.ip_pool.ip_netmask
   gateway          = var.ip_pool.ip_gateway
   primary_dns      = var.ip_pool.dns_servers[0]

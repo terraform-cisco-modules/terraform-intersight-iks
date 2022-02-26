@@ -24,7 +24,7 @@ Note that this example may create resources which are consumed for IKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.1.0 |
 | <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.18 |
 
 ## Providers

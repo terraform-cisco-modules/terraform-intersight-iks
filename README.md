@@ -83,6 +83,7 @@ module "terraform-intersight-iks" {
     name                = "10-239-21-0"
     # ip_starting_address = "10.239.21.220"
     # ip_pool_size        = "20"
+    # ip_ending_address   = "10.239.21.239"
     # ip_netmask          = "255.255.255.0"
     # ip_gateway          = "10.239.21.1"
     # dns_servers         = ["10.101.128.15","10.101.128.16"]
@@ -268,7 +269,7 @@ variable "tags" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.14.5 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.1.0 |
 | <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.18 |
 
 ## Providers
@@ -281,21 +282,21 @@ variable "tags" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_addons"></a> [addons](#module\_addons) | terraform-cisco-modules/iks/intersight//modules/addon_policy | n/a |
-| <a name="module_cluster_addon_profile"></a> [cluster\_addon\_profile](#module\_cluster\_addon\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster_addon_profile | n/a |
-| <a name="module_cluster_profile"></a> [cluster\_profile](#module\_cluster\_profile) | terraform-cisco-modules/iks/intersight//modules/cluster | n/a |
-| <a name="module_control_profile"></a> [control\_profile](#module\_control\_profile) | terraform-cisco-modules/iks/intersight//modules/node_profile | n/a |
-| <a name="module_control_provider"></a> [control\_provider](#module\_control\_provider) | terraform-cisco-modules/iks/intersight//modules/infra_provider | n/a |
-| <a name="module_infra_config_policy"></a> [infra\_config\_policy](#module\_infra\_config\_policy) | terraform-cisco-modules/iks/intersight//modules/infra_config_policy | n/a |
-| <a name="module_instance_type"></a> [instance\_type](#module\_instance\_type) | terraform-cisco-modules/iks/intersight//modules/worker_profile | n/a |
-| <a name="module_ip_pool_policy"></a> [ip\_pool\_policy](#module\_ip\_pool\_policy) | terraform-cisco-modules/iks/intersight//modules/ip_pool | n/a |
-| <a name="module_k8s_network"></a> [k8s\_network](#module\_k8s\_network) | terraform-cisco-modules/iks/intersight//modules/k8s_network | n/a |
-| <a name="module_k8s_sysconfig"></a> [k8s\_sysconfig](#module\_k8s\_sysconfig) | terraform-cisco-modules/iks/intersight//modules/k8s_sysconfig | n/a |
-| <a name="module_k8s_version"></a> [k8s\_version](#module\_k8s\_version) | terraform-cisco-modules/iks/intersight//modules/version | n/a |
-| <a name="module_runtime_policy"></a> [runtime\_policy](#module\_runtime\_policy) | terraform-cisco-modules/iks/intersight//modules/runtime_policy | n/a |
-| <a name="module_trusted_registry"></a> [trusted\_registry](#module\_trusted\_registry) | terraform-cisco-modules/iks/intersight//modules/trusted_registry | n/a |
-| <a name="module_worker_profile"></a> [worker\_profile](#module\_worker\_profile) | terraform-cisco-modules/iks/intersight//modules/node_profile | n/a |
-| <a name="module_worker_provider"></a> [worker\_provider](#module\_worker\_provider) | terraform-cisco-modules/iks/intersight//modules/infra_provider | n/a |
+| <a name="module_addons"></a> [addons](#module\_addons) | ./modules/addon_policy | n/a |
+| <a name="module_cluster_addon_profile"></a> [cluster\_addon\_profile](#module\_cluster\_addon\_profile) | ./modules/cluster_addon_profile | n/a |
+| <a name="module_cluster_profile"></a> [cluster\_profile](#module\_cluster\_profile) | ./modules/cluster | n/a |
+| <a name="module_control_profile"></a> [control\_profile](#module\_control\_profile) | ./modules/node_profile | n/a |
+| <a name="module_control_provider"></a> [control\_provider](#module\_control\_provider) | ./modules/infra_provider | n/a |
+| <a name="module_infra_config_policy"></a> [infra\_config\_policy](#module\_infra\_config\_policy) | ./modules/infra_config_policy | n/a |
+| <a name="module_instance_type"></a> [instance\_type](#module\_instance\_type) | ./modules/worker_profile | n/a |
+| <a name="module_ip_pool_policy"></a> [ip\_pool\_policy](#module\_ip\_pool\_policy) | ./modules/ip_pool | n/a |
+| <a name="module_k8s_network"></a> [k8s\_network](#module\_k8s\_network) | ./modules/k8s_network | n/a |
+| <a name="module_k8s_sysconfig"></a> [k8s\_sysconfig](#module\_k8s\_sysconfig) | ./modules/k8s_sysconfig | n/a |
+| <a name="module_k8s_version"></a> [k8s\_version](#module\_k8s\_version) | ./modules/version | n/a |
+| <a name="module_runtime_policy"></a> [runtime\_policy](#module\_runtime\_policy) | ./modules/runtime_policy | n/a |
+| <a name="module_trusted_registry"></a> [trusted\_registry](#module\_trusted\_registry) | ./modules/trusted_registry | n/a |
+| <a name="module_worker_profile"></a> [worker\_profile](#module\_worker\_profile) | ./modules/node_profile | n/a |
+| <a name="module_worker_provider"></a> [worker\_provider](#module\_worker\_provider) | ./modules/infra_provider | n/a |
 
 ## Resources
 
@@ -319,7 +320,7 @@ variable "tags" {
 | <a name="input_infraConfigPolicy"></a> [infraConfigPolicy](#input\_infraConfigPolicy) | n/a | <pre>object({<br>    use_existing       = bool<br>    platformType       = optional(string)<br>    targetName         = optional(string)<br>    policyName         = string<br>    description        = optional(string)<br>    interfaces         = optional(list(string))<br>    diskMode           = optional(string)<br>    vcTargetName       = optional(string)<br>    vcClusterName      = optional(string)<br>    vcDatastoreName    = optional(string)<br>    vcResourcePoolName = optional(string)<br>    vcPassword         = optional(string)<br>  })</pre> | n/a | yes |
 | <a name="input_infra_config_policy_name"></a> [infra\_config\_policy\_name](#input\_infra\_config\_policy\_name) | Name of existing infra config policy (if it exists) to be used. | `string` | `""` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    cpu          = optional(number)<br>    memory       = optional(number)<br>    disk_size    = optional(number)<br>  })</pre> | n/a | yes |
-| <a name="input_ip_pool"></a> [ip\_pool](#input\_ip\_pool) | n/a | <pre>object({<br>    use_existing        = bool<br>    name                = string<br>    ip_starting_address = optional(string)<br>    ip_pool_size        = optional(string)<br>    ip_netmask          = optional(string)<br>    ip_gateway          = optional(string)<br>    dns_servers         = optional(list(string))<br>  })</pre> | n/a | yes |
+| <a name="input_ip_pool"></a> [ip\_pool](#input\_ip\_pool) | n/a | <pre>object({<br>    use_existing        = bool<br>    name                = string<br>    ip_starting_address = optional(string)<br>    ip_pool_size        = optional(string)<br>    ip_ending_address   = optional(string)<br>    ip_netmask          = optional(string)<br>    ip_gateway          = optional(string)<br>    dns_servers         = optional(list(string))<br>  })</pre> | n/a | yes |
 | <a name="input_k8s_network"></a> [k8s\_network](#input\_k8s\_network) | n/a | <pre>object({<br>    use_existing = bool<br>    name         = optional(string)<br>    pod_cidr     = optional(string)<br>    service_cidr = optional(string)<br>    cni          = optional(string)<br>  })</pre> | n/a | yes |
 | <a name="input_k8s_network_policy_name"></a> [k8s\_network\_policy\_name](#input\_k8s\_network\_policy\_name) | Name of existing K8s Network Policy (if it exists) to be used. | `string` | `""` | no |
 | <a name="input_organization"></a> [organization](#input\_organization) | Organization Name | `string` | `"default"` | no |

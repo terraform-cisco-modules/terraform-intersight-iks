@@ -23,7 +23,7 @@ variable "pool_size" {
 variable "ending_address" {
   type        = string
   description = "Ending IP Address you want for this pool."
-  default = null
+  default     = null
 }
 variable "netmask" {
   type        = string
