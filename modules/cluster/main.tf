@@ -24,7 +24,6 @@ resource "intersight_kubernetes_cluster_profile" "this" {
     ssh_keys = [
       var.ssh_key
     ]
-    ssh_user = var.ssh_user
   }
   dynamic "trusted_registries" {
     for_each = var.trusted_registry_policy_moid == "" ? [] : [var.trusted_registry_policy_moid]
