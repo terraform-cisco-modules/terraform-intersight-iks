@@ -61,7 +61,7 @@ provider "intersight" {
 module "terraform-intersight-iks" {
 
   source  = "terraform-cisco-modules/iks/intersight//"
-  version = "~>2.2.2"
+  version = "~>2.3.0"
 
 # Kubernetes Cluster Profile  Adjust the values as needed.
   cluster = {
@@ -83,7 +83,6 @@ module "terraform-intersight-iks" {
     name                = "10-239-21-0"
     # ip_starting_address = "10.239.21.220"
     # ip_pool_size        = "20"
-    # ip_ending_address   = "10.239.21.239"
     # ip_netmask          = "255.255.255.0"
     # ip_gateway          = "10.239.21.1"
     # dns_servers         = ["10.101.128.15","10.101.128.16"]
