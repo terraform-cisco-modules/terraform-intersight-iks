@@ -98,7 +98,6 @@ variable "ip_pool" {
     name                = string
     ip_starting_address = optional(string)
     ip_pool_size        = optional(string)
-    ip_ending_address   = optional(string)
     ip_netmask          = optional(string)
     ip_gateway          = optional(string)
     dns_servers         = optional(list(string))
