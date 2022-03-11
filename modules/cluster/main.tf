@@ -50,3 +50,7 @@ resource "intersight_kubernetes_cluster_profile" "this" {
     moid        = data.intersight_organization_organization.this.results.0.moid
   }
 }
+
+data "intersight_kubernetes_cluster" "this" {
+  moid = intersight_kubernetes_cluster_profile.this.associated_cluster.0.moid
+}
