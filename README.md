@@ -6,9 +6,7 @@
 
 The Cisco Intersight Terraform Provider is available in the Terraform Registry at https://registry.terraform.io/providers/CiscoDevNet/intersight/latest.  This repository contains example modules that use the provider to create 
 
-A terraform module to create a managed Kubernetes clusters using Intersight Kubernetes Service (IKS). Available through the [Terraform registry](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest).
-<!-- Inspired by and adapted from [this doc](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs) -->
-and its [source code](https://github.com/CiscoDevNet/terraform-provider-intersight).
+A terraform module to create a managed Kubernetes clusters using Intersight Kubernetes Service (IKS). Available through the [Terraform registry](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest) and its [source code](https://github.com/CiscoDevNet/terraform-provider-intersight).
 
 ## CAVEAT
 * You cannot assign the cluster action as "Deploy" and "wait_for_completion" as TRUE at the same time.
@@ -61,7 +59,7 @@ provider "intersight" {
 module "terraform-intersight-iks" {
 
   source  = "terraform-cisco-modules/iks/intersight//"
-  version = "~>2.3.0"
+  version = "~>2.4.0"
 
 # Kubernetes Cluster Profile  Adjust the values as needed.
   cluster = {
