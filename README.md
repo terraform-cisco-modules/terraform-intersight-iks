@@ -333,5 +333,11 @@ variable "tags" {
 
 | Name | Description |
 |------|-------------|
+| <a name="output_k8s_cluster_ca_certificate"></a> [k8s\_cluster\_ca\_certificate](#output\_k8s\_cluster\_ca\_certificate) | n/a |
+| <a name="output_k8s_cluster_client_certificate"></a> [k8s\_cluster\_client\_certificate](#output\_k8s\_cluster\_client\_certificate) | n/a |
+| <a name="output_k8s_cluster_client_key"></a> [k8s\_cluster\_client\_key](#output\_k8s\_cluster\_client\_key) | n/a |
+| <a name="output_k8s_cluster_host"></a> [k8s\_cluster\_host](#output\_k8s\_cluster\_host) | n/a |
+| <a name="output_k8s_cluster_kubeconfig"></a> [k8s\_cluster\_kubeconfig](#output\_k8s\_cluster\_kubeconfig) | n/a |
 | <a name="output_k8s_cluster_moid"></a> [k8s\_cluster\_moid](#output\_k8s\_cluster\_moid) | n/a |
+| <a name="output_k8s_cluster_profile_moid"></a> [k8s\_cluster\_profile\_moid](#output\_k8s\_cluster\_profile\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

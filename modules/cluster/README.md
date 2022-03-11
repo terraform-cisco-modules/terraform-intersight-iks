@@ -41,6 +41,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [intersight_kubernetes_cluster_profile.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kubernetes_cluster_profile) | resource |
+| [intersight_kubernetes_cluster.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/kubernetes_cluster) | data source |
 | [intersight_organization_organization.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/organization_organization) | data source |
 
 ## Inputs
@@ -66,6 +67,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_k8s_cluster_kubeconfig"></a> [k8s\_cluster\_kubeconfig](#output\_k8s\_cluster\_kubeconfig) | n/a |
 | <a name="output_k8s_cluster_moid"></a> [k8s\_cluster\_moid](#output\_k8s\_cluster\_moid) | n/a |
 | <a name="output_k8s_cluster_profile_moid"></a> [k8s\_cluster\_profile\_moid](#output\_k8s\_cluster\_profile\_moid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
