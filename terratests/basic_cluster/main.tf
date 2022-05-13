@@ -95,9 +95,9 @@ module "main" {
 
   # Infrastructure Configuration Policy (To create new change "use_existing" to 'false' and uncomment variables and modify them to meet your needs.)
   infraConfigPolicy = {
-    use_existing       = false
-    policyName         = var.name
-    platformType       = "esxi"
+    use_existing = false
+    policyName   = var.name
+    platformType = "esxi"
     # targetName         = "prodvcenter.ceclab.info"
     targetName         = "10.67.17.125"
     description        = "Infra config policy for ${var.name}"
@@ -147,10 +147,18 @@ module "main" {
   tags         = []
 }
 
-variable "vsphere_password" {}
-variable "intersight_apikey" {}
-variable "intersight_secretkey" {}
-variable "intersight_endpoint" {}
+variable "vsphere_password" {
+  sensitive = true
+}
+variable "intersight_apikey" {
+  sensitive = true
+}
+variable "intersight_secretkey" {
+  sensitive = true
+}
+variable "intersight_endpoint" {
+  sensitive = true
+}
 variable "name" {
   default = "test_basic_cluster"
 }
