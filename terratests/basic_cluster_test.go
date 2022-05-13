@@ -3,6 +3,7 @@ package test
 import (
 	"context"
 	"fmt"
+	"os"
 	"regexp"
 	"testing"
 
@@ -18,7 +19,7 @@ func TestBasicCluster(t *testing.T) {
 	instanceName := fmt.Sprintf("test_basic_cluster-%s", uniqueId)
 
 	vars := map[string]interface{}{}
-	terraform.GetAllVariablesFromVarFile(t, "../test_creds_staging.tfvars", &vars)
+	terraform.GetAllVariablesFromVarFile(t, os.Getenv("TF_CREDS_FILE"), &vars)
 	// terraform.GetAllVariablesFromVarFile(t, "../test_creds.tfvars", &vars)
 	vars["name"] = instanceName
 
