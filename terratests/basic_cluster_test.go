@@ -3,6 +3,7 @@ package test
 import (
 	"context"
 	"fmt"
+	"os"
 	"regexp"
 	"testing"
 
@@ -28,7 +29,8 @@ func TestBasicCluster(t *testing.T) {
 		Vars:         vars,
 	})
 
-	client, ctx := setupIntersight(t, vars["intersight_apikey"].(string), vars["intersight_secretkey"].(string), vars["intersight_endpoint"].(string))
+	// client, ctx := setupIntersight(t, vars["intersight_apikey"].(string), vars["intersight_secretkey"].(string), vars["intersight_endpoint"].(string))
+	client, ctx := setupIntersight(t, os.Getenv("TF_VAR_intersight_apikey"), os.Getenv("TF_VAR_intersight_secretkey"), os.Getenv("intersight_endpoint"))
 
 	// Tests start here:
 
