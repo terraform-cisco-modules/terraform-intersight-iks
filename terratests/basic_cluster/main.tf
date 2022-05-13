@@ -11,7 +11,7 @@ terraform {
 
 provider "intersight" {
   apikey    = var.intersight_apikey
-  secretkey = var.intersight_secretkey
+  secretkey = file(var.intersight_secretkey_file)
   endpoint  = var.intersight_endpoint
 }
 
@@ -153,7 +153,7 @@ variable "vsphere_password" {
 variable "intersight_apikey" {
   sensitive = true
 }
-variable "intersight_secretkey" {
+variable "intersight_secretkey_file" {
   sensitive = true
 }
 variable "intersight_endpoint" {
