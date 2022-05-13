@@ -27,10 +27,16 @@ func TestBasicCluster(t *testing.T) {
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: "./basic_cluster",
 		Vars:         vars,
+		EnvVars: map[string]string{
+			"TF_VAR_intersight_apikey":         os.Getenv("TF_VAR_intersight_apikey"),
+			"TF_VAR_intersight_secretkey_file": os.Getenv("TF_VAR_intersight_secretkey_file"),
+			"TF_VAR_intersight_endpoint":       os.Getenv("TF_VAR_intersight_endpoint"),
+			"TF_VAR_vsphere_password":          os.Getenv("TF_VAR_vsphere_password"),
+		},
 	})
 
 	// client, ctx := setupIntersight(t, vars["intersight_apikey"].(string), vars["intersight_secretkey"].(string), vars["intersight_endpoint"].(string))
-	client, ctx := setupIntersight(t, os.Getenv("TF_VAR_intersight_apikey"), os.Getenv("TF_VAR_intersight_secretkey"), os.Getenv("intersight_endpoint"))
+	client, ctx := setupIntersight(t, os.Getenv("TF_VAR_intersight_apikey"), os.Getenv("TF_VAR_intersight_secretkey_file"), os.Getenv("TF_VAR_intersight_endpoint"))
 
 	// Tests start here:
 
@@ -85,7 +91,8 @@ func setupIntersight(t *testing.T, keyID, key, endpoint string) (*intersight.API
 
 	// Set up the authentication configuration struct
 	authConfig := intersight.HttpSignatureAuth{
-		KeyId: keyID,
+		KeyId:          keyID,
+		PrivateKeyPath: key,
 
 		SigningScheme: intersight.HttpSigningSchemeRsaSha256,
 		SignedHeaders: []string{
@@ -96,8 +103,8 @@ func setupIntersight(t *testing.T, keyID, key, endpoint string) (*intersight.API
 		},
 		SigningAlgorithm: intersight.HttpSigningAlgorithmRsaPKCS1v15,
 	}
-	err := authConfig.SetPrivateKey(key)
-	assert.NoError(t, err)
+	// err := authConfig.SetPrivateKey(key)
+	// assert.NoError(t, err)
 
 	// Get a context that includes the authentication config
 	ctx, err := authConfig.ContextWithValue(context.Background())
