@@ -24,7 +24,16 @@ variable "infraConfigPolicy" {
   })
   sensitive = true
 }
-variable "instance_type" {
+variable "worker_instance_type" {
+  type = object({
+    use_existing = bool
+    name         = string
+    cpu          = optional(number)
+    memory       = optional(number)
+    disk_size    = optional(number)
+  })
+}
+variable "control_instance_type" {
   type = object({
     use_existing = bool
     name         = string
