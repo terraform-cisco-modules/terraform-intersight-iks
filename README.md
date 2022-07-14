@@ -177,7 +177,16 @@ module "terraform-intersight-iks" {
   ]
 
 # Worker Node Instance Type (To create new change "use_existing" to 'false' and uncomment variables and modify them to meet your needs.)
-  instance_type = {
+  worker_instance_type = {
+    use_existing = true
+    name         = "large"
+    # cpu          = 4
+    # memory       = 16386
+    # disk_size    = 40
+  }
+
+# Control Node Instance Type (To create new change "use_existing" to 'false' and uncomment variables and modify them to meet your needs.)
+  control_instance_type = {
     use_existing = true
     name         = "small"
     # cpu          = 4
@@ -285,7 +294,8 @@ variable "tags" {
 | <a name="module_control_profile"></a> [control\_profile](#module\_control\_profile) | ./modules/node_profile | n/a |
 | <a name="module_control_provider"></a> [control\_provider](#module\_control\_provider) | ./modules/infra_provider | n/a |
 | <a name="module_infra_config_policy"></a> [infra\_config\_policy](#module\_infra\_config\_policy) | ./modules/infra_config_policy | n/a |
-| <a name="module_instance_type"></a> [instance\_type](#module\_instance\_type) | ./modules/worker_profile | n/a |
+| <a name="module_worker_instance_type"></a> [worker\_instance\_type](#module\_instance\_type) | ./modules/worker_profile | n/a |
+| <a name="module_control_instance_type"></a> [control\_instance\_type](#module\_instance\_type) | ./modules/worker_profile | n/a |
 | <a name="module_ip_pool_policy"></a> [ip\_pool\_policy](#module\_ip\_pool\_policy) | ./modules/ip_pool | n/a |
 | <a name="module_k8s_network"></a> [k8s\_network](#module\_k8s\_network) | ./modules/k8s_network | n/a |
 | <a name="module_k8s_sysconfig"></a> [k8s\_sysconfig](#module\_k8s\_sysconfig) | ./modules/k8s_sysconfig | n/a |
@@ -306,7 +316,8 @@ variable "tags" {
 | [intersight_kubernetes_trusted_registries_policy.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/kubernetes_trusted_registries_policy) | data source |
 | [intersight_kubernetes_version_policy.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/kubernetes_version_policy) | data source |
 | [intersight_kubernetes_virtual_machine_infra_config_policy.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/kubernetes_virtual_machine_infra_config_policy) | data source |
-| [intersight_kubernetes_virtual_machine_instance_type.this](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/kubernetes_virtual_machine_instance_type) | data source |
+| [intersight_kubernetes_virtual_machine_instance_type.this_worker](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/kubernetes_virtual_machine_instance_type) | data source |
+| [intersight_kubernetes_virtual_machine_instance_type.this_control](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/kubernetes_virtual_machine_instance_type) | data source |
 
 ## Inputs
 
@@ -316,7 +327,8 @@ variable "tags" {
 | <a name="input_cluster"></a> [cluster](#input\_cluster) | n/a | <pre>object({<br>    name                = string<br>    action              = string<br>    wait_for_completion = bool<br>    worker_nodes        = number<br>    load_balancers      = number<br>    worker_max          = number<br>    control_nodes       = number<br>    ssh_user            = string<br>    ssh_public_key      = string<br>  })</pre> | n/a | yes |
 | <a name="input_infraConfigPolicy"></a> [infraConfigPolicy](#input\_infraConfigPolicy) | n/a | <pre>object({<br>    use_existing       = bool<br>    platformType       = optional(string)<br>    targetName         = optional(string)<br>    policyName         = string<br>    description        = optional(string)<br>    interfaces         = optional(list(string))<br>    diskMode           = optional(string)<br>    vcTargetName       = optional(string)<br>    vcClusterName      = optional(string)<br>    vcDatastoreName    = optional(string)<br>    vcResourcePoolName = optional(string)<br>    vcPassword         = optional(string)<br>  })</pre> | n/a | yes |
 | <a name="input_infra_config_policy_name"></a> [infra\_config\_policy\_name](#input\_infra\_config\_policy\_name) | Name of existing infra config policy (if it exists) to be used. | `string` | `""` | no |
-| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    cpu          = optional(number)<br>    memory       = optional(number)<br>    disk_size    = optional(number)<br>  })</pre> | n/a | yes |
+| <a name="input_worker_instance_type"></a> [worker_instance\_type](#input\_worker\_instance\_type) | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    cpu          = optional(number)<br>    memory       = optional(number)<br>    disk_size    = optional(number)<br>  })</pre> | n/a | yes |
+| <a name="input_control_instance_type"></a> [control_instance\_type](#input\_control\_instance\_type) | n/a | <pre>object({<br>    use_existing = bool<br>    name         = string<br>    cpu          = optional(number)<br>    memory       = optional(number)<br>    disk_size    = optional(number)<br>  })</pre> | n/a | yes |
 | <a name="input_ip_pool"></a> [ip\_pool](#input\_ip\_pool) | n/a | <pre>object({<br>    use_existing        = bool<br>    name                = string<br>    ip_starting_address = optional(string)<br>    ip_pool_size        = optional(string)<br>    ip_netmask          = optional(string)<br>    ip_gateway          = optional(string)<br>    dns_servers         = optional(list(string))<br>  })</pre> | n/a | yes |
 | <a name="input_k8s_network"></a> [k8s\_network](#input\_k8s\_network) | n/a | <pre>object({<br>    use_existing = bool<br>    name         = optional(string)<br>    pod_cidr     = optional(string)<br>    service_cidr = optional(string)<br>    cni          = optional(string)<br>  })</pre> | n/a | yes |
 | <a name="input_k8s_network_policy_name"></a> [k8s\_network\_policy\_name](#input\_k8s\_network\_policy\_name) | Name of existing K8s Network Policy (if it exists) to be used. | `string` | `""` | no |
