@@ -166,7 +166,16 @@ module "iks_cluster" {
   ]
 
   # Worker Node Instance Type (To create new change "use_existing" to 'false' and uncomment variables and modify them to meet your needs.)
-  instance_type = {
+  worker_instance_type = {
+    use_existing = true
+    name         = "small"
+    # cpu          = 4
+    # memory       = 16386
+    # disk_size    = 40
+  }
+
+  # Control Node Instance Type (To create new change "use_existing" to 'false' and uncomment variables and modify them to meet your needs.)
+  control_instance_type = {
     use_existing = true
     name         = "small"
     # cpu          = 4

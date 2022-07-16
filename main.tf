@@ -28,9 +28,13 @@ data "intersight_kubernetes_version_policy" "this" {
   count = var.versionPolicy.useExisting == true ? 1 : 0
   name  = var.versionPolicy.policyName
 }
-data "intersight_kubernetes_virtual_machine_instance_type" "this" {
-  count = var.instance_type.use_existing == true ? 1 : 0
-  name  = var.instance_type.name
+data "intersight_kubernetes_virtual_machine_instance_type" "this_worker" {
+  count = var.worker_instance_type.use_existing == true ? 1 : 0
+  name  = var.worker_instance_type.name
+}
+data "intersight_kubernetes_virtual_machine_instance_type" "this_control" {
+  count = var.control_instance_type.use_existing == true ? 1 : 0
+  name  = var.control_instance_type.name
 }
 
 module "infra_config_policy" {
@@ -122,13 +126,23 @@ module "k8s_version" {
   org_name       = var.organization
   tags           = var.tags
 }
-module "instance_type" {
+module "worker_instance_type" {
   source    = "./modules/worker_profile"
-  count     = var.instance_type.use_existing == true ? 0 : 1
-  name      = var.instance_type.name
-  cpu       = var.instance_type.cpu
-  memory    = var.instance_type.memory
-  disk_size = var.instance_type.disk_size
+  count     = var.worker_instance_type.use_existing == true ? 0 : 1
+  name      = var.worker_instance_type.name
+  cpu       = var.worker_instance_type.cpu
+  memory    = var.worker_instance_type.memory
+  disk_size = var.worker_instance_type.disk_size
+  org_name  = var.organization
+  tags      = var.tags
+}
+module "control_instance_type" {
+  source    = "./modules/worker_profile"
+  count     = var.control_instance_type.use_existing == true ? 0 : 1
+  name      = var.control_instance_type.name
+  cpu       = var.control_instance_type.cpu
+  memory    = var.control_instance_type.memory
+  disk_size = var.control_instance_type.disk_size
   org_name  = var.organization
   tags      = var.tags
 }
@@ -223,7 +237,7 @@ module "worker_profile" {
 module "control_provider" {
   source                   = "./modules/infra_provider"
   name                     = "${var.cluster.name}-control_provider"
-  instance_type_moid       = var.instance_type.use_existing == true ? data.intersight_kubernetes_virtual_machine_instance_type.this.0.results.0.moid : module.instance_type.0.moid
+  instance_type_moid       = var.control_instance_type.use_existing == true ? data.intersight_kubernetes_virtual_machine_instance_type.this_control.0.results.0.moid : module.control_instance_type.0.moid
   node_group_moid          = module.control_profile.node_group_profile_moid
   infra_config_policy_moid = var.infraConfigPolicy.use_existing == true ? data.intersight_kubernetes_virtual_machine_infra_config_policy.this.0.results.0.moid : module.infra_config_policy.0.infra_config_moid
   tags                     = var.tags
@@ -231,7 +245,7 @@ module "control_provider" {
 module "worker_provider" {
   source                   = "./modules/infra_provider"
   name                     = "${var.cluster.name}-worker_provider"
-  instance_type_moid       = var.instance_type.use_existing == true ? data.intersight_kubernetes_virtual_machine_instance_type.this.0.results.0.moid : module.instance_type.0.moid
+  instance_type_moid       = var.worker_instance_type.use_existing == true ? data.intersight_kubernetes_virtual_machine_instance_type.this_worker.0.results.0.moid : module.worker_instance_type.0.moid
   node_group_moid          = module.worker_profile.node_group_profile_moid
   infra_config_policy_moid = var.infraConfigPolicy.use_existing == true ? data.intersight_kubernetes_virtual_machine_infra_config_policy.this.0.results.0.moid : module.infra_config_policy.0.infra_config_moid
   tags                     = var.tags
