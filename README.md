@@ -2,7 +2,9 @@
 [![Developed by: Cisco](https://img.shields.io/badge/Developed%20by-Cisco-blue)](https://developer.cisco.com)
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/terraform-cisco-modules/terraform-intersight-iks)
 
-# Terraform Intersight Kubernetes Service Module
+# Terraform Intersight Kubernetes Service Module (Archived)
+
+## This repository has been archived as the Intersight Kubernetes Service (IKS) has been discontinued. Consequently, this module is no longer supported, and no further updates or maintenance will be provided.
 
 The Cisco Intersight Terraform Provider is available in the Terraform Registry at https://registry.terraform.io/providers/CiscoDevNet/intersight/latest.  This repository contains example modules that use the provider to create 
 
