@@ -97,7 +97,7 @@ module "iks_cluster" {
   versionPolicy = {
     useExisting    = false
     policyName     = "1.19.15"
-    iksVersionName = "1.19.15-iks.3"
+    versionName = "1.19.15-iks.3"
   }
 
   # Trusted Registry Policy (To create new change "use_existing" to 'false' and set "create_new' to 'true' uncomment variables and modify them to meet your needs.)
